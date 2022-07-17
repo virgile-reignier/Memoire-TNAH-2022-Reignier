@@ -1,5 +1,3 @@
-% PREAMBULE
-
 %package obligatoire : type de document
 \documentclass[a4paper,12pt,twoside]{book}
 
@@ -18,14 +16,12 @@
 \onehalfspacing % interligne de 1.5
 \setlength\parindent{1cm} % indentation des paragraphes à 1 cm
 
-\usepackage{lettrine} % lettrines (pas obligatoire)
+\usepackage{lettrine} % lettrines
 
-
-% bibliographie
-%\usepackage[backend=biber, sorting=nyt, style=enc,maxbibnames=10]{biblatex}
-%\addbibresource{biblio.bib}
-%\nocite{*}
-%si index, package pour index + makeindex
+\usepackage[backend=bibtex, sorting=nyt, style=enc]{biblatex}
+\FrenchFootnotes
+\AddThinSpaceBeforeFootnotes
+\addbibresource{Mémoire-TNAH-2022-Reignier.bib}
 
 \author{Virgile Reignier - M2 TNAH}
 \title{Vers l’indexation automatique du Trésor des chartes. Constitution, alignement et utilisation de référentiels d’entités nommées au sein du projet Himanis.}
@@ -101,25 +97,37 @@
 	
 	\lettrine{B}lablabla remerciements\dots
 	
-	%bibliographie ici
-	%\printbibliography
+		Faire une liste des abréviations avec : REN, TAL, HTR, IRHT
+	
+	\printbibliography
 	
 	\chapter{Introduction}
 	
-	Introduction en 3 parties :
+	\begin{quotation}
+		
+	A ce sujet papa avait une plaisanterie. (...) Il disait, quand il présentait maman, « je l’ai connue et épousée à Paris » et (...) il attendait avant de dire « Texas » que tout le monde ait cru, que tout le monde ait pensé qu’il parlait de Paris, France. Ça faisait tordre de rire toutes les fois.
 	
-	Il me manque : une accroche, présenter un cas où la désambiguisation de toponymes est vachement utile
+	\end{quotation}
+	\bigbreak
 	
-	1 - Présentation IRHT et la manière dont elle se place dans le développement de l'IA sur les manuscrits médiévaux
 	
-	2 - Le trésor des chartes au coeur de la recherche historique : les avancées de l'HTR
+	Si le mot "Paris" évoque en premier lieu la capitale française, il désigne également d'autres villes à travers le monde. C'est en exploitant l'homonymie entre cette première et une ville du Texas que la citation ci-dessus, extraite du film "Paris, Texas" (1984) de Wim Wenders, construit la plaisanterie. L'information "Paris" ne suffit en effet pas à identifier le lieu où lesdits parents se sont rencontrés. Utilisé seul, le mot renvoie naturellement vers la ville située en France. C'est seulement en précisant l'État dans lequel elle se situe que l'on peut identifier le lieu exact où les protagonistes se sont rencontrés et mariés. Ce jeu d'ambiguïté manifeste ainsi d'une difficulté rencontrée dans le langage naturel : l'identification des références utilisées. La connaissance lexicale ne suffit en effet pas à elle seule pour comprendre un discours, il faut également que les références renvoient vers une réalité qui soit clairement identifiée.
 	
-	3 - De la NER à l'identity linking
+	Cet enjeu est également présent au sein du Traitement Automatique des Langues à travers la notion d'Entité Nommée qui désigne une expression linguistique qui se réfère à une entité unique de façon autonome\footnote{Sur la définition des entités nommées, \textit{cf.} \cite{ehrmann_les_2008}, p. 167-170.}. L'analyse du contenu textuel a ainsi largement progressé ces dernières années autour de cette notion par le développement de deux techniques : la REN (Reconnaissance d'Entités Nommées) qui consiste à repérer ces objets textuels et à leur attribuer une catégorie et le liage d'entités qui permet d'associer ces objets textuels à un élément décrit par une ressource référentielle. Si un grand nombre de ces travaux concernent des corpus contemporains, quelques chercheurs s'intéressent également à leur application pour la lecture des archives anciennes et rencontrent ainsi les recherches menées par les spécialistes de ces corpus.
 	
-	Problématique + plan
+	\subsection*{Contexte scientifique de travail}
 	
-	A lire : tout le blog Himanis et biblio issue de ces projets
+	L'Institut de Recherche et d'Histoire des Textes (IRHT) est un laboratoire de recherche fondé en 1937 par Félix Grat et rattaché au CNRS dans le but de faciliter l'accès des chercheurs aux manuscrits et imprimés anciens\footnote{Sur la fondation de l'IRHT, \textit{cf.} \cite{holtz_les_2000}.}. Les recherches qui y sont menées portent également sur la transmission des textes et l'étude des écriture et connaissent à ce titre des développements récents à propos de la lecture automatique des documents anciens. Initiés par sa collaboration au sein du projet GRAPHEM, les travaux en "paléographie artificielle" développés par la section de paléographie latine sont menés conjointement avec des chercheurs en informatique spécialisés dans l'analyse de l'image. Les projets développés prennent deux directions principales : la caractérisations des écritures médiévales (Oriflamms, ECMEN, CrEMe) d'une part et la lecture automatique des archives (Himanis, HOME, HORAE) d'autre part. Pilotés par Dominique Stutzmann, ces recherches ont permis le développement d'outils informatiques et de modèles d'intelligence artificielle qui ont largement renouvelé l'accès aux textes anciens.
 	
+	Parmi les corpus étudiés par ces travaux, le Trésor des Chartes occupe une place centrale puisqu'il constitue le matériel source du projet Himanis et participe à celui du projet HOME. Conservé au sein de la série JJ des Archives Nationales, ce fonds se compose d'une immense collection de titres rassemblée par les rois de France. Il se présente sous la forme de registres contenant des actes organisés de manière plus ou moins systématique et linéaire\footnote{Sur la constitution du trésor des chartes, \textit{cf.} \cite{potin_mise_2007}}. Le projet Himanis (HIstorical MANuscript Indexing for user-controlled Search) a ainsi permis de numériser les registres et de convertir les inventaires et éditions disponibles afin de les structurer en un format homogène et unique\footnote{Les registres numérisés ont été intégrés à la Bibliothèque Virtuelle des Manuscrits Médiévaux \cite{noauthor_bvmm_nodate}. Tous les fichiers issus de ces travaux sont disponibles ici : \url{https://github.com/oriflamms/himanis}.}. Ces éléments ont ensuite servi de base au développement d'un modèle d'indexation automatique des mots présents dans le corpus\footnote{\cites{stutzmann_recherche_2017}. Les résultats sont disponibles dans l'interface \cite{noauthor_himanis_nodate}.}. Par la suite, le projet HOME (History of Medieval Europe) s'est proposé d'amplifier et généraliser ce travail en numérisant de nouveaux documents, en associant chaque texte aux données disponibles les concernant et en déposant les résultats dans une plateforme librement accessible \footnote{\url{https://github.com/oriflamms/Home}}.
+	
+	\subsection*{Problématique du stage}
+	
+	Ces différents travaux ont ainsi permis de diffuser largement les textes qui composent le Trésor des chartes et de progresser dans l'analyse automatique des écritures qu'ils contiennent. Il reste néanmoins une problématique à approfondir : l'identification des références utilisées au sein des documents. Si les travaux réalisés permettent de faciliter la lecture des textes, celle-ci se trouve encore freiné par la difficile compréhension des références utilisées. Après des travaux récents portant sur la REN dans les chartes médiévales \footcite{torres_aguilar_named_2021}, l'objectif poursuivi est de parvenir à développer un modèle de liage d'entités afin d'enrichir et désambiguïser les entités nommées reconnues dans les textes. 
+	
+	C'est dans ce contexte que mon stage, effectué dans le cadre du Master 2 Archives - Technologies Numériques Appliquées à l'Histoire de l'Ecole Nationale des Chartes, s'est donné pour objectif de rassembler les données disponibles au sein du corpus Himanis pour avancer sur la problématique de l'identification des entités nommées. A partir des inventaires déjà convertis, des registres numérisés et des travaux préliminaires en HTR et REN, nous avons ainsi travaillé sur la construction d'un référentiel et d'une méthode de travail pour lier les entités nommées reconnues en limitant au maximum les ambiguïtés possibles. Le présent mémoire se propose donc de décrire les travaux effectués et la manière dont ils s'insèrent dans un contexte de travail. Quels sont les apports des données fournies par le projets Himanis et HOME pour apprendre à désambiguïser automatiquement les entités nommées reconnues dans un texte médiéval ? Nous aborderons les différentes étapes de construction du référentiel ainsi que les difficultés rencontrées dans ce cadre et dans son utilisation.
+	
+	Dans cet objectif, nous exposerons dans une première partie le matériel disponible pour mettre en œuvre ce projet. Nous proposerons ainsi un état des lieux sur les recherches en cours à propos du liage d'entités, puis nous décrirons plus précisément les avancées permises par le projet Himanis dans l'accès au corpus du Trésor des Chartes, enfin nous analyserons l'apport des instruments de recherches convertis sous format numérique. Notre deuxième partie sera consacrée à la formalisation du référentiel. Nous développerons pour cela les différents enjeux liés à l'utilisation d'un instrument papier, puis nous proposerons une analyse du lien entre les entités décrites, enfin nous décrirons l'insertion des éléments dans une base de données relationnelle. Notre troisième et dernière partie se portera sur les différents traitements mis en œuvre afin de compléter et diffuser ce référentiel. Nous décrirons ainsi l'enrichissement des données à partir de référentiels externes, puis la mise à disposition du référentiel et enfin les premiers pas de son utilisation. 
 	
 	\thispagestyle{empty}
 	\cleardoublepage
@@ -127,13 +135,22 @@
 	\mainmatter
 	
 	% là, le corps du mémoire, généralement TROIS parties
-	\part{Une partie}
+	\part{De la legacy data à l’identity linking : quel matériel disponible pour entraîner un modèle ?}
 	
-	\chapter{Un chapitre}
+	\chapter{Etat des lieux de la recherche sur le liage d'entités}
 	
-	\section{Présentation matérielle du mémoire}
+	\section{Un enjeu actuel}
 	
-	Recto verso. Taille 12, en police Time New Roman ou équivalent. Le texte doit être justifié ; les marges sont de 2.5 cm. L'interligne doit être fixé à 1.5 ; les paragraphes indentés à 1 cm. Toute citation longue, de plus de trois lignes, doit apparaître en retrait, sans guillemet (environnement \texttt{quotation} en \LaTeX ).
+
+	Pour le premier chapitre : thèse Stern + https://hal.archives-ouvertes.fr/hal-03034492
+	
+	Faire le point sur la distinction liage - désambiguisation (je trouve que c'est pas si clair dans mon intro)
+	
+	Bilan journée Sorbonne
+	
+	\section{Les outils disponibles}
+	
+	\section{Des résultats ?}
 	
 	\chapter{Un autre chapitre}
 	
@@ -165,8 +182,6 @@
 	
 	\part{Une autre partie}
 	
-	%etc.
-	
 	
 	\chapter*{Conclusion}
 	\addcontentsline{toc}{chapter}{Conclusion}
@@ -176,18 +191,6 @@
 	\chapter{Première annexe}
 	
 	\backmatter
-	
-	% index à mettre ici si index	
-	%	\printindex
-	
-	%glossaire si glossaire
-	%	\printglossaries
-	
-	% si figures
-	%	\listoffigures
-	
-	%si tables
-	%	\listoftables
 	
 	\tableofcontents
 	
