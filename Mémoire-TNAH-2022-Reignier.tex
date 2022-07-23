@@ -1,5 +1,6 @@
 %package obligatoire : type de document
 \documentclass[a4paper,12pt,twoside]{book}
+\usepackage{lipsum}
 
 % encodage
 \usepackage{fontspec}
@@ -25,6 +26,31 @@
 
 \author{Virgile Reignier - M2 TNAH}
 \title{Vers l’indexation automatique du Trésor des chartes. Constitution, alignement et utilisation de référentiels d’entités nommées au sein du projet Himanis.}
+
+\makeatletter
+\newcommand{\parttext}[1]{\def\@parttext{#1}}
+\def\@endpart{\vskip 0pt plus 0.5fil
+	\begin{formatparttext}
+		\vspace*{\fill}
+		\@parttext % on imprime le texte spécifique à une partie
+		\gdef\@parttext{}% on vide le texte spécifique à une partie
+		\vspace*{\fill}
+	\end{formatparttext}
+	\vskip 0pt plus 0.5fil
+	\newpage
+	\if@twoside
+	\if@openright
+	\null
+	\thispagestyle{empty}%
+	\newpage
+	\fi
+	\fi
+	\if@tempswa
+	\twocolumn
+	\fi}
+\makeatother
+
+\newenvironment{formatparttext}{}{}
 
 % DOCUMENT
 \begin{document}
@@ -111,46 +137,139 @@
 	\bigbreak
 	
 	
-	Si le mot "Paris" évoque en premier lieu la capitale française, il désigne également d'autres villes à travers le monde. C'est en exploitant l'homonymie entre cette première et une ville du Texas que la citation ci-dessus, extraite du film "Paris, Texas" (1984) de Wim Wenders, construit la plaisanterie. L'information "Paris" ne suffit en effet pas à identifier le lieu où lesdits parents se sont rencontrés. Utilisé seul, le mot renvoie naturellement vers la ville située en France. C'est seulement en précisant l'État dans lequel elle se situe que l'on peut identifier le lieu exact où les protagonistes se sont rencontrés et mariés. Ce jeu d'ambiguïté manifeste ainsi d'une difficulté rencontrée dans le langage naturel : l'identification des références utilisées. La connaissance lexicale ne suffit en effet pas à elle seule pour comprendre un discours, il faut également que les références renvoient vers une réalité qui soit clairement identifiée.
+	Si le mot "Paris" évoque en premier lieu la capitale française, il désigne également d'autres villes à travers le monde. C'est en exploitant l'homonymie entre cette première et une ville du Texas que la citation ci-dessus, extraite du film "Paris, Texas" (1984) de Wim Wenders, construit la plaisanterie. L'information "Paris" ne suffit en effet pas à identifier le lieu où lesdits parents se sont rencontrés. Utilisé seul, le mot est naturellement associé à la France. C'est seulement en précisant l'État dans lequel elle se situe que l'on peut identifier le lieu exact où les protagonistes se sont rencontrés et mariés. Ce jeu d'ambiguïté manifeste ainsi d'une difficulté rencontrée dans le langage naturel : l'identification des références utilisées. La connaissance lexicale ne suffit en effet pas à elle seule pour comprendre un discours, il faut également que les références soit comprises et associées à une réalité clairement identifiée.
 	
 	Cet enjeu est également présent au sein du Traitement Automatique des Langues à travers la notion d'Entité Nommée qui désigne une expression linguistique qui se réfère à une entité unique de façon autonome\footnote{Sur la définition des entités nommées, \textit{cf.} \cite{ehrmann_les_2008}, p. 167-170.}. L'analyse du contenu textuel a ainsi largement progressé ces dernières années autour de cette notion par le développement de deux techniques : la REN (Reconnaissance d'Entités Nommées) qui consiste à repérer ces objets textuels et à leur attribuer une catégorie et le liage d'entités qui permet d'associer ces objets textuels à un élément décrit par une ressource référentielle. Si un grand nombre de ces travaux concernent des corpus contemporains, quelques chercheurs s'intéressent également à leur application pour la lecture des archives anciennes et rencontrent ainsi les recherches menées par les spécialistes de ces corpus.
 	
 	\subsection*{Contexte scientifique de travail}
 	
-	L'Institut de Recherche et d'Histoire des Textes (IRHT) est un laboratoire de recherche fondé en 1937 par Félix Grat et rattaché au CNRS dans le but de faciliter l'accès des chercheurs aux manuscrits et imprimés anciens\footnote{Sur la fondation de l'IRHT, \textit{cf.} \cite{holtz_les_2000}.}. Les recherches qui y sont menées portent également sur la transmission des textes et l'étude des écriture et connaissent à ce titre des développements récents à propos de la lecture automatique des documents anciens. Initiés par sa collaboration au sein du projet GRAPHEM, les travaux en "paléographie artificielle" développés par la section de paléographie latine sont menés conjointement avec des chercheurs en informatique spécialisés dans l'analyse de l'image. Les projets développés prennent deux directions principales : la caractérisations des écritures médiévales (Oriflamms, ECMEN, CrEMe) d'une part et la lecture automatique des archives (Himanis, HOME, HORAE) d'autre part. Pilotés par Dominique Stutzmann, ces recherches ont permis le développement d'outils informatiques et de modèles d'intelligence artificielle qui ont largement renouvelé l'accès aux textes anciens.
+	L'Institut de Recherche et d'Histoire des Textes (IRHT) est un laboratoire de recherche fondé en 1937 par Félix Grat et rattaché au CNRS dans le but de faciliter l'accès des chercheurs aux manuscrits et imprimés anciens\footnote{Sur la fondation de l'IRHT, \textit{cf.} \cite{holtz_les_2000}.}. Les recherches qui y sont menées portent également sur la transmission des textes et l'étude des écritures et connaissent à ce titre des développements récents à propos de la lecture automatique des documents anciens. Initiés par sa collaboration au sein du projet GRAPHEM, les travaux en "paléographie artificielle" développés par la section de paléographie latine sont menés conjointement avec des chercheurs en informatique spécialisés dans l'analyse de l'image. Les projets développés prennent deux directions principales : la caractérisations des écritures médiévales (Oriflamms, ECMEN, CrEMe) d'une part et la lecture automatique des archives (Himanis, HOME, HORAE) d'autre part. Pilotés par Dominique Stutzmann, ces recherches ont permis le développement d'outils informatiques et de modèles d'intelligence artificielle qui ont largement renouvelé l'accès aux textes anciens.
 	
-	Parmi les corpus étudiés par ces travaux, le Trésor des Chartes occupe une place centrale puisqu'il constitue le matériel source du projet Himanis et participe à celui du projet HOME. Conservé au sein de la série JJ des Archives Nationales, ce fonds se compose d'une immense collection de titres rassemblée par les rois de France. Il se présente sous la forme de registres contenant des actes organisés de manière plus ou moins systématique et linéaire\footnote{Sur la constitution du trésor des chartes, \textit{cf.} \cite{potin_mise_2007}}. Le projet Himanis (HIstorical MANuscript Indexing for user-controlled Search) a ainsi permis de numériser les registres et de convertir les inventaires et éditions disponibles afin de les structurer en un format homogène et unique\footnote{Les registres numérisés ont été intégrés à la Bibliothèque Virtuelle des Manuscrits Médiévaux \cite{noauthor_bvmm_nodate}. Tous les fichiers issus de ces travaux sont disponibles ici : \url{https://github.com/oriflamms/himanis}.}. Ces éléments ont ensuite servi de base au développement d'un modèle d'indexation automatique des mots présents dans le corpus\footnote{\cites{stutzmann_recherche_2017}. Les résultats sont disponibles dans l'interface \cite{noauthor_himanis_nodate}.}. Par la suite, le projet HOME (History of Medieval Europe) s'est proposé d'amplifier et généraliser ce travail en numérisant de nouveaux documents, en associant chaque texte aux données disponibles les concernant et en déposant les résultats dans une plateforme librement accessible \footnote{\url{https://github.com/oriflamms/Home}}.
+	Parmi les corpus étudiés par ces travaux, le Trésor des Chartes occupe une place centrale puisqu'il constitue le matériel source du projet Himanis et participe à celui du projet HOME. Conservé au sein de la série JJ des Archives Nationales, ce fonds se compose d'une immense collection de titres rassemblée par les rois de France. Il se présente sous la forme de registres contenant des actes organisés de manière plus ou moins systématique et linéaire\footnote{Sur la constitution du trésor des chartes, \textit{cf.} \cite{potin_mise_2007}}. Le projet Himanis (HIstorical MANuscript Indexing for user-controlled Search) a ainsi permis de numériser les registres et de convertir les inventaires et éditions disponibles afin de les structurer en un format homogène et unique\footnote{Les registres numérisés ont été intégrés à la Bibliothèque Virtuelle des Manuscrits Médiévaux \cite{noauthor_bvmm_nodate}. Tous les fichiers issus de ces travaux sont disponibles ici : \url{https://github.com/oriflamms/himanis}.}. Ces éléments ont ensuite servi de base au développement d'un modèle d'indexation automatique des mots présents dans le corpus\footnote{\cites{stutzmann_recherche_2017}. Les résultats sont disponibles dans l'interface \cite{noauthor_himanis_nodate}.}. Par la suite, le projet HOME (History of Medieval Europe) s'est proposé d'amplifier et de généraliser ce travail en numérisant de nouveaux documents, en associant chaque texte aux données disponibles les concernant et en déposant les résultats dans une plateforme librement accessible \footnote{\url{https://github.com/oriflamms/Home}}.
 	
 	\subsection*{Problématique du stage}
 	
-	Ces différents travaux ont ainsi permis de diffuser largement les textes qui composent le Trésor des chartes et de progresser dans l'analyse automatique des écritures qu'ils contiennent. Il reste néanmoins une problématique à approfondir : l'identification des références utilisées au sein des documents. Si les travaux réalisés permettent de faciliter la lecture des textes, celle-ci se trouve encore freiné par la difficile compréhension des références utilisées. Après des travaux récents portant sur la REN dans les chartes médiévales \footcite{torres_aguilar_named_2021}, l'objectif poursuivi est de parvenir à développer un modèle de liage d'entités afin d'enrichir et désambiguïser les entités nommées reconnues dans les textes. 
+	Ces différents travaux ont ainsi permis de diffuser largement les textes qui composent le Trésor des chartes et de progresser dans l'analyse automatique des écritures qu'ils contiennent. Il reste néanmoins une problématique à approfondir : l'identification des références utilisées au sein des documents. Si les travaux réalisés permettent de faciliter la lecture des textes, cette dernière se trouve encore freinée par la difficile compréhension des références utilisées. Après des travaux récents portant sur la REN dans les chartes médiévales \footcite{torres_aguilar_named_2021}, l'objectif poursuivi est de parvenir à développer un modèle de liage d'entités afin d'enrichir et de désambiguïser les entités nommées reconnues dans les textes. 
 	
-	C'est dans ce contexte que mon stage, effectué dans le cadre du Master 2 Archives - Technologies Numériques Appliquées à l'Histoire de l'Ecole Nationale des Chartes, s'est donné pour objectif de rassembler les données disponibles au sein du corpus Himanis pour avancer sur la problématique de l'identification des entités nommées. A partir des inventaires déjà convertis, des registres numérisés et des travaux préliminaires en HTR et REN, nous avons ainsi travaillé sur la construction d'un référentiel et d'une méthode de travail pour lier les entités nommées reconnues en limitant au maximum les ambiguïtés possibles. Le présent mémoire se propose donc de décrire les travaux effectués et la manière dont ils s'insèrent dans un contexte de travail. Quels sont les apports des données fournies par le projets Himanis et HOME pour apprendre à désambiguïser automatiquement les entités nommées reconnues dans un texte médiéval ? Nous aborderons les différentes étapes de construction du référentiel ainsi que les difficultés rencontrées dans ce cadre et dans son utilisation.
+	C'est dans ce contexte que mon stage, effectué dans le cadre du Master 2 Archives - Technologies Numériques Appliquées à l'Histoire de l'Ecole Nationale des Chartes, s'est donné pour mission de rassembler les éléments disponibles au sein du corpus Himanis pour avancer sur la problématique de l'identification des entités nommées. A partir des inventaires déjà convertis, des registres numérisés et des travaux préliminaires en HTR et REN, nous avons ainsi travaillé sur la construction d'un référentiel et d'une méthode de travail pour lier les entités nommées reconnues en limitant au maximum les ambiguïtés possibles. Le présent mémoire se propose donc de décrire les travaux effectués et la manière dont ils s'insèrent dans un contexte de travail. Quels sont les apports des données fournies par les projets Himanis et HOME pour apprendre à désambiguïser automatiquement les entités nommées reconnues dans un texte médiéval ? Nous aborderons les différentes étapes de construction du référentiel ainsi que les difficultés rencontrées dans ce cadre et dans son utilisation.
 	
-	Dans cet objectif, nous exposerons dans une première partie le matériel disponible pour mettre en œuvre ce projet. Nous proposerons ainsi un état des lieux sur les recherches en cours à propos du liage d'entités, puis nous décrirons plus précisément les avancées permises par le projet Himanis dans l'accès au corpus du Trésor des Chartes, enfin nous analyserons l'apport des instruments de recherches convertis sous format numérique. Notre deuxième partie sera consacrée à la formalisation du référentiel. Nous développerons pour cela les différents enjeux liés à l'utilisation d'un instrument papier, puis nous proposerons une analyse du lien entre les entités décrites, enfin nous décrirons l'insertion des éléments dans une base de données relationnelle. Notre troisième et dernière partie se portera sur les différents traitements mis en œuvre afin de compléter et diffuser ce référentiel. Nous décrirons ainsi l'enrichissement des données à partir de référentiels externes, puis la mise à disposition du référentiel et enfin les premiers pas de son utilisation. 
+	Dans cet objectif, nous exposerons dans une première partie le matériel disponible pour mettre en œuvre ce projet. Nous proposerons ainsi un état des lieux sur les recherches en cours à propos du liage d'entités, puis nous décrirons plus précisément les avancées permises par le projet Himanis dans l'accès au corpus du Trésor des Chartes, enfin nous analyserons l'apport des instruments de recherches convertis sous format numérique. Notre deuxième partie sera consacrée à la formalisation du référentiel. Nous développerons pour cela les différents enjeux liés à l'utilisation d'un instrument papier, puis nous proposerons une analyse du lien entre les entités décrites, enfin nous décrirons l'insertion des éléments dans une base de données relationnelle. Notre troisième et dernière partie se portera sur les différents traitements mis en œuvre afin de compléter et diffuser ce référentiel. Nous décrirons ainsi l'enrichissement des données à partir de référentiels externes, puis la mise à disposition du référentiel et enfin les premiers pas de son utilisation.
 	
 	\thispagestyle{empty}
 	\cleardoublepage
 	
 	\mainmatter
 	
-	% là, le corps du mémoire, généralement TROIS parties
-	\part{De la legacy data à l’identity linking : quel matériel disponible pour entraîner un modèle ?}
+	\parttext{Avant d'aborder plus précisément les actions menées au cours de ce stage, il convient d'exposer dans cette première partie les différents éléments contextuels dans lequel il s'inscrit. Nous consacrerons donc un premier chapitre à la description des enjeux scientifiques actuels autour de la problématique du liage d'entité afin de mieux appréhender les perspectives d'évolution. Un second chapitre permettra de résumer les différents résultats offerts par le projet Himanis et leur utilisation possible dans le cadre du stage. Enfin, un troisième chapitre permettra d'envisager les différents moyens possibles pour utiliser des instruments de recherches papier afin de construire un référentiel numérique.}
 	
-	\chapter{Etat des lieux de la recherche sur le liage d'entités}
+	\part{De la \textit{legacy data} au liage d'entité : quel matériel disponible pour entraîner un modèle ?}
 	
-	\section{Un enjeu actuel}
+	\chapter{État des lieux de la recherche sur le liage d'entités}
+	
+	Initiée par les \textit{Message Understanding Conferences} qui se réunissent entre 1987 et 1998, la REN est directement associée aux techniques d'extractions d'informations. L'objectif est en effet d'automatiser la lecture des textes afin d'en comprendre au mieux la substance. Reconnaître et classifier les références utilisées prend donc dans ce contexte une place centrale qui se perpétue par la suite dans de nombreuses recherches \footnote{\cite{ehrmann_les_2008}, p. 17-19}. Dans un objectif similaire, d'autres travaux portant sur l'annotation sémantique des textes, c'est à dire l'enrichissement des contenus textuels à partir de métadonnées, ont mis en valeur la nécessité de construire un lien entre les entités nommées reconnues dans le texte et un référentiel à disposition dans ce but\footnote{Sur les enjeux de l'Annotation Sémantique, lire \cite{stern_identification_2013}, p. 15-16. Sur sa mise en œuvre, \cite{stern_identification_2013}, p. 96-99.}.
+	
+	C'est dans ce contexte qu'est née le principe du Liage d'entité. Il se définit comme une technique permettant d'associer chaque élément reconnu comme devant être expliqué à un nœud d'une base de connaissances permettant la génération de ladite explication. La conception de cette technique procède donc de deux éléments : la construction d'une base de connaissances utilisée comme référence et la reconnaissance des entités à mettre en lien avec cette base. Son enjeu principal est de permettre la résolution des ambiguïtés qui peuvent exister entre les entités, soit parce qu'un même mot peut renvoyer vers plusieurs entrées (polysémie), soit au contraire parce qu'une même entité peut s'exprimer de plusieurs façon différentes (synonymie)\footnote{\cite{stern_identification_2013}, p. 110-114.}.
+	
+	Nous tenterons donc dans ce chapitre d'exposer succinctement l'état de l'art autour des  problématiques associées au liage d'entité. Pour cela, nous décrirons dans un premier temps son fonctionnement général puis son application aux sources historiques. Nous proposerons une analyse des différents outils disponibles et de leurs apports. Enfin, nous décrirons les différents travaux en cours et les perspectives d'amélioration.
+	
+	
+	\section{Mise en œuvre du liage d'entité}
+	
+	\subsection{Méthodologie}
+	
+	Une méthode utilisée naturellement pour résoudre les ambiguïtés est de considérer que ces entités se rapportent a priori à leur sens par défaut, défini généralement en fonction de sa fréquence d'apparition. Si on en revient à l'exemple utilisé en introduction, le fait de savoir qu'il existe plusieurs "Paris" à travers le monde ne dispense pas de penser que la phrase "je l’ai connue et épousée à Paris" renvoi par défaut vers la capitale française, et ce même lorsqu'elle est prononcée dans un pays au sein duquel se situe un grand nombre de villes homonymes. Pourtant cette méthode paraît ici très insatisfaisante puisqu'elle échoue à lier correctement la mention "Paris" vers l'entité qui lui correspond, à savoir "Paris, Texas". Les chercheurs ont donc établis une chaîne de traitement plus complexe en générant et sélectionnant les candidats susceptibles de correspondre à l'entité recherchée\footnote{\cite{stern_identification_2013}, p. 117-125.}.
+	
+	La première étape consiste à construire un sous-ensemble de la base de connaissances composé des entités susceptibles de correspondre à la mention. Elle est nécessaire car elle permet d'éviter de travailler avec l'ensemble d'une base de connaissances qui peut compter plusieurs milliers ou millions d'entrées. Mais la sélection doit aussi être effectivement large pour s'assurer que l'entité recherchée est bien dans cette sous-base. Il faut donc établir des critères de sélection basés sur la relation supposée entre la mention et sa correspondance dans la base de connaissances. La méthode d'usage consiste à se baser sur les variantes lexicales des entités : est considéré comme candidat toute entité qui dispose d'une variante lexicale correspondante à la mention recherchée. Cette étape peut également s'accompagner d'un pré-ordonnancement \textit{a priori} des candidats en fonction de critères comme la popularité par exemple. On peut ainsi considérer par défaut que la mention "Paris" a plus de chance d'être un renvoi vers l'entité "Paris, France" que vers "Paris, Texas".
+	
+	Cet ordonnancement \textit{a priori} ne peut cependant être considéré comme suffisant pour réaliser le liage. Pour être juste, il faut également comparer le contexte d'apparition de la mention avec les métadonnées associées à chaque entité candidate. L'objectif est d'ordonner les entités en fonction de leur proximité avec le contexte de la mention afin de sélectionner celle qui a le plus de chance d'être celle qui lui correspond. Cette proximité peut s'établir en fonction de plusieurs critères comme la co-occurrence de certaines entités par exemple. Il faut également envisager la possibilité que cette mention ne soit pas disponible au sein de la base de connaissances, ou parce que le référentiel est lacunaire ou parce qu'il s'agit d'une variante lexicale qui n'a pas encore été référencée. Ces cas doivent être clairement identifiés car ils représentent autant de potentiels ajouts à la base de connaissances.
+	
+	Cette base de connaissances constitue donc ici la clé du processus. Elle se présente comme un ensemble d'entrées associées à des informations dont la structure est systématisée. Similaire à une ontologie, elle peut comme cette dernière se construire de deux façons : elle peut répondre à une logique de mise en place d'un ensemble général de connaissances sur un domaine et se forger dans un contexte industrielle ou participatif. Elle peut au contraire être contextuelle au corpus et se nourrir d'un repérage préalable - manuel ou automatique - des concepts pertinents et des relations qui les caractérisent\footnote{\cite{stern_identification_2013}, p. 33}. Dans les deux cas, cette base de connaissances peut être emmenée à évoluer au cour du travail de liage par l'intégration de nouvelles entités qui ne correspondent à aucune entité de la base de connaissances.
+	
+	\subsection{Un enjeu pour les sources historiques}
+	
+	Le développement des techniques de liage d'entité est apparu dans un contexte d'étude de textes contemporains, mais il rencontre aussi le contexte propre aux recherches historiques. L'appropriation des outils numériques par les acteurs de la recherche en histoire et du patrimoine a permis d'accroitre largement la disponibilité des textes et de faciliter l'extraction d'information via des techniques d'OCR ou HTR et d'études statistiques. L'accès au contenu des textes est cependant freinée par des problématiques propres à ces documents. Tout d'abord, le passage par un processus d'OCR peut altérer pour partie le texte. De plus, les conventions orthographiques peuvent varier largement eb fonction des lieux et époques, ce qui rend la reconnaissance de certains mots encore plus délicate.
+	
+	Le cas de confusion le plus courant se place entre le \textit{f} et le \textit{s} long présent dans de nombreux textes manuscrits et imprimés. D'autres cas de confusion portent sur le mélange des langues (par exemple un nom de lieu en français dans un texte en latin) ou sur des variations orthographiques d'un même mot qui peuvent exister au sein d'un même document. Tous ces éléments rendent d'autant plus complexe la tâche de reconnaissance d'entités nommées et d'extraction pour liage avec une base de connaissances. Pourtant, cette tâche est particulièrement pertinente dans ce contexte ou de nombreuses ambiguïtés existent, notamment pour identifier les personnes et lieux qui sont mentionnés par les documents.
+	
+	\section{Un axe de recherche en pleine évolution}
+	
+	\subsection{Mise en application du liage d'entités à partir d'archives historiques}
+	
+	Plusieurs travaux de recherches ont donc été menés ces dernières années afin de pallier ces difficultés et améliorer les techniques de liage d'entités pour les adapter au contexte des documents historiques. Ces travaux se sont souvent nourris d'autres recherches parallèles portant sur des problématiques proches. C'est le cas par exemple des recherches sur le liage d'entités multi-langue, c'est à dire un modèle dans lequel la langue des données sources n'est pas la même que celle de la base de connaissances. Des chercheurs ont proposés des modèles spécifiques développés à partir de l'incorporation de mots étrangers dans le corpus\footcite{linhares_pontes_linking_2020} ou, s'il existe quelques éléments pour produire une base de connaissances dans la langue source, à partir du mélange entre ces derniers et un modèle de liage issu d'une langue disposant d'une base de connaissances plus large\footcite{zhou_towards_2019}. Une dernière méthode consiste à construire un modèle se passant de toute ressource bilingue par l'utilisation d'une langue pivot suffisamment proche pour qu'il soit pertinent de construire un modèle dessus puis de l'utiliser sur la source\footcite{rijhwani_zero-shot_2019}.
+	
+	Une des problématiques rencontrées par les chercheurs est le choix de la base de connaissances à utiliser au moment du processus. Un certain nombre de travaux ont ainsi procédé au liage des entités nommées présents dans leur corpus avec des ontologies web pré-existantes (Wikidata, DBpedia, ...). Celles-ci ont l'avantage d'être très fournies, ce qui est particulièrement utile dans le cadre de données qui n'ont pas de contexte chronologique ou géographique précis. Mais cette situation comporte aussi des inconvénients : ces ontologies sont porteuses de nombreuses ambiguïtés, notamment liées à un grand nombre d'homonymies. Ces caractéristiques ont par exemple été décrites pour Wikipedia au moment de la création d'un algorithme de liage d'entités depuis la base Europeana\footcite{agirre_matching_2012}. D'autres travaux se sont également portés sur la comparaison entre les principales ontologies disponibles en fonction du résultat obtenu pour des corpus précis\footcite{soudani_adaptation_2018}.
+	
+	Il existe cependant un certain nombre de corpus qui ne disposent pas de base de connaissances préétablies, que ce soit pour parce qu'il s'agit d'une langue rare\footnote{Pour ce cas précis, \textit{cf.} plus haut.} ou parce que les entités reconnues dans le corpus sont associées à un contexte précis et peu connu du grand public.
+	
 	
 
-	Pour le premier chapitre : thèse Stern + https://hal.archives-ouvertes.fr/hal-03034492
+	Les deux derniers à utiliser pour dire un peu où on en est avec ça + sans doute des parties à utiliser pour parler de résultats :
 	
-	Faire le point sur la distinction liage - désambiguisation (je trouve que c'est pas si clair dans mon intro)
+	Desambiguisation : https://aclanthology.org/K18-1050.pdf
 	
-	Bilan journée Sorbonne
+	Résumé de la vie =	https://hal.archives-ouvertes.fr/hal-03034492
+	Le problème de la compréhension des sources et de l'absence de base ?
 	
-	\section{Les outils disponibles}
+	Peut-être ici réutiliser l'article sur la SGM ?
+
+	\subsection{Les perspectives actuelles (ou les applications possibles ?)}
 	
-	\section{Des résultats ?}
+	Sur le lien avec la TEI : https://hal.archives-ouvertes.fr/hal-01363709/document
+	
+	Sur l'état de l'art dans la recherche en France : https://hal.inria.fr/hal-02617950v2/document et https://hal.archives-ouvertes.fr/hal-01925816/document
+	Dans l'article résumé super cool j'ai : "Regarding the application of end-to-end EL in Digital Humanities, some
+	works have focused on using available EL approaches to analyse historical data
+	[16,23,28]"
+	
+	Sur la question spécifique des noms de lieux : https\url{://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.7.8475&rep=rep1&type=pdf}
+	\url{http://link.springer.com/10.1007/3-540-44796-2_12}
+	
+	et https://hal.archives-ouvertes.fr/hal-01619600
+	
+	Sur l'utilisation dans les archives : \url{https://hal.archives-ouvertes.fr/hal-03625734/file/Atelier_Culture_Inria_NER4Archives_slides.pdf}
+	
+	https://hal.archives-ouvertes.fr/hal-02187283/document
+	
+	Il y a deux articles de Caroline Parfait sur l'influence de l'OCR dans la NER
+	
+	Article sur l'influence de la qualité d'OCR dans l'entity linking : 
+	https://hal.archives-ouvertes.fr/hal-02557116/document"
+	
+	Thèse Yoann Dupont parle de la structure des entités nommées et de du modèle en relation des entités (intéressant par rapport à ce qu'on a fait avec Heurist)
+	
+	\section{Les perspectives d'amélioration}
+	
+	Aussi : \url{https://www.researchgate.net/profile/Kasra-Hosseini-3/publication/345849651_DeezyMatch_A_Flexible_Deep_Learning_Approach_to_Fuzzy_String_Matching/links/5fafc469299bf10c367c6b2b/DeezyMatch-A-Flexible-Deep-Learning-Approach-to-Fuzzy-String-Matching.pdf?origin=publication_detail}
+	
+	https://obtic.sorbonne-universite.fr/tanagra/home
+	
+	\url{https://bnf.hypotheses.org/files/2018/07/Reden-_-pr%C3%A9sentation-atelier-Corpus-BNF.pdf}
+	
+	Nom de personnes : https://hal.archives-ouvertes.fr/hal-01203784
+	et https://hal.sorbonne-universite.fr/hal-01396037
+	
+	Des propositions de visualisation des entités de lieu : https://hal.archives-ouvertes.fr/hal-01925816/document
+	
+	\subsection{Les outils disponibles}
+	
+	Parler de Spacy + autres ?
+	Parler de dbpedia spotlight !
+	DizzyMatch : https://github.com/Living-with-machines/DeezyMatch
+	DBPedia Spotlight : https://hal.archives-ouvertes.fr/hal-01915730
+	
+	Un framework fait pour l'annotation de textes historiques : \url{https://www.researchgate.net/profile/Rainer-Simon-4/publication/220727253_Augmenting_Europeana_content_with_linked_data_resources/links/00b495174f471206ee000000/Augmenting-Europeana-content-with-linked-data-resources.pdf?origin=publication_detail}
+	
+	\subsection{Des résultats ?}
+	
+	Sur les données un peu complexes : \url{https://helda.helsinki.fi/bitstream/handle/10138/310657/heino_et_al_nel_2017.pdf?sequence=1}
+	
+	Repartir de 	https://hal.archives-ouvertes.fr/hal-03034492 + du bilan de la journée à la Sorbonne et dire ce qu'il reste à améliorer
+	
+	\chapter{Les avancées du projet Himanis}
+	
+	Article Teklia sur les outils de la NER-HTR : \url{https://teklia.com/publications/DAS2022_NER.pdf}
+	
+	\chapter{Legacy Metadata : Des instruments de recherche précis mais incomplets}
 	
 	\chapter{Un autre chapitre}
 	
