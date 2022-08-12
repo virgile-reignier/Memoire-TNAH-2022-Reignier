@@ -25,12 +25,12 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{chngcntr}
-\counterwithout{figure}{chapter}
+\counterwithout{figure}{chapter} % Pour que les images ne soient pas comptées en fonction des chapitres
 \DeclareCaptionFormat{custom}
 {%
 	\textbf{#1#2}\textit{\small #3}
 }
-\captionsetup{format=custom}
+\captionsetup{format=custom} % Améliore le format de légende des images
 
 \pagestyle{plain} % Pour une numérotation des pages sobre
 
@@ -418,7 +418,7 @@
 	
 	\chapter{\textit{Legacy Metadata} : numérisation et exploitation des instruments de recherche}
 	
-	Comme nous l'avons vu, le projet Himanis s'est appuyé à plusieurs reprises sur les instruments de recherche qui concernent le Trésor des Chartes, que ce soit pour la construction du modèle de REM à partir des édition de Paul Guérin ou pour la description du contenu des registres à partir des inventaires systématiques. Ces instruments de recherche sont autant de données disponibles pour appréhender le contenu des registres. Conçus selon une structure logique facilement identifiable, ces outils de travail se prêtent à la numérisation pour être utilisés dans le cadre de traitements numériques de la donnée. Ces \textit{legacy data} fournissent ainsi toute une série de métadonnée clé-en-main pour entraîner des modèles de lecture automatique des registres.
+	Comme nous l'avons vu, le projet Himanis s'est appuyé à plusieurs reprises sur les instruments de recherche qui concernent le Trésor des Chartes, que ce soit pour la construction du modèle de REM à partir des éditions de Paul Guérin ou pour la description du contenu des registres à partir des inventaires systématiques. Ces instruments de recherche sont autant de données disponibles pour appréhender le contenu des registres. Conçus selon une structure logique facilement identifiable, ces outils de travail se prêtent à la numérisation pour être utilisés dans le cadre de traitements numériques de la donnée. Ces \textit{legacy data} fournissent ainsi toute une série de métadonnée clé-en-main pour entraîner des modèles de lecture automatique des registres.
 	
 	Ce chapitre sera donc consacré à l'utilisation des instruments de recherche du Trésor des Chartes dans le cadre du projet Himanis. Nous présenterons dans un premier temps les différents outils disponibles et leurs lacunes. Puis nous exposerons les transformations réalisées à partir de ces ouvrages afin de structurer leur contenu sous format numérique. Pour finir, nous décrirons le projet de structuration de l'index dans lequel notre stage s'est inséré.
 	
@@ -439,9 +439,9 @@
 	
 	\subsection{Documentation complémentaire : inventaires papier, éditions et indexations}
 	
-	Un autre moyen de compléter ces lacunes est d'utiliser les instruments de recherche anciens dressés au XVIII\ieme\ siècle et complétés au XIX\ieme. Leur consistance est cependant assez faible puisqu'ils se contentent de compiler les tables des actes contenues dans les registres\footnote{Inv. ms. de JJ 1 à JJ 264, dressé au début du XVIIIe s., révisé et complété par A. Longnon et A. couLon, 1880-1900, copie en quatre vol., IR421-IR424 et IR 429 ; Acta omissa. Inv. somm. ms. de la série JJ, actes non mentionnés dans	l’inv. de A. Longnon et A. Coulon, 1898-1900, IR33-IR34.}. On retrouve également des informations précieuses dans les éditions partielles des actes du Trésor des Chartes. Outre celle de Guérin que nous avons déjà citée, il en existe 4 autres consacrées à Amiens, Paris pendant le règne de Philippe VI et la Normandie et Paris pendant l'occupation anglaise au début du XV\ieme\ siècle\footcite{guerin_actes_1881, viard_documents_1899, longnon_paris_1878, le_cacheux_actes_1907, maugis_documents_1908}. Un autre moyen d'accéder au contenu des registres est d'utiliser un index des sujets, noms de personnes et noms de lieux. La plupart des ouvrages que nous venons de citer en contiennent, à l'exception notable du tome II de l'inventaire analytique des registres du Trésor des Chartes pour lequel un index des noms de lieux est en préparation. Enfin, deux instruments permettent d'aborder les actes des registres à partir des noms de lieux, personnes et sujets pour les registres de Charles VI et Henri VI\footnote{Archives Nationales, IR 1810 et Projet d'inventaire par C. Gut, 2010}. Ils sont disponibles respectivement sous forme de fiches papiers et d'un fichier texte. 
+	Un autre moyen de compléter ces lacunes est d'utiliser les instruments de recherche anciens dressés au XVIII\ieme\ siècle et complétés au XIX\ieme. Leur consistance est cependant assez faible puisqu'ils se contentent de compiler les tables des actes contenues dans les registres\footnote{Inv. ms. de JJ 1 à JJ 264, dressé au début du XVIIIe s., révisé et complété par A. Longnon et A. Coulon, 1880-1900, copie en quatre vol., IR421-IR424 et IR 429 ; Acta omissa. Inv. somm. ms. de la série JJ, actes non mentionnés dans	l’inv. de A. Longnon et A. Coulon, 1898-1900, IR33-IR34.}. On retrouve également des informations précieuses dans les éditions partielles des actes du Trésor des Chartes. Outre celle de Guérin que nous avons déjà citée, il en existe 4 autres consacrées à Amiens, Paris pendant le règne de Philippe VI et la Normandie et Paris pendant l'occupation anglaise au début du XV\ieme\ siècle\footcite{guerin_actes_1881, viard_documents_1899, longnon_paris_1878, le_cacheux_actes_1907, maugis_documents_1908}. Un autre moyen d'accéder au contenu des registres est d'utiliser un index des sujets, noms de personnes et noms de lieux. La plupart des ouvrages que nous venons de citer en contiennent, à l'exception notable du tome II de l'inventaire analytique des registres du Trésor des Chartes pour lequel un index des noms de lieux est en préparation. Enfin, deux instruments permettent d'aborder les actes des registres à partir des noms de lieux, personnes et sujets pour les registres de Charles VI et Henri VI\footnote{Archives Nationales, IR 1810 et Projet d'inventaire par C. Gut, 2010.}. Ils sont disponibles respectivement sous forme de fiches papiers et d'un fichier texte. 
 	
-	Ainsi donc, le matériel disponible pour étudier ce corpus est à la fois très complet et très lacunaire. Alors que des pans entiers sont connus de manière précise grâce aux inventaires systématiques et géographiques, un grand nombre de registres ne disposent que d'instruments très primaires pour repérer le contenu qui intéresse le chercheur et éviter un dépouillement systématique de ces archives. L'automatisation de l'analyse archivistique est donc un enjeu essentiel pour faire progresser la recherche sur le pouvoir du roi de France en facilitant la lecture des registres et les dépouillements ponctuels et précis.
+	Ainsi donc, le matériel disponible pour étudier ce corpus est à la fois conséquent et très lacunaire. Alors que des pans entiers sont connus de manière précise grâce aux inventaires systématiques et géographiques, un grand nombre de registres ne disposent que d'instruments très primaires pour repérer le contenu qui intéresse le chercheur et éviter un dépouillement systématique de ces archives. L'automatisation de l'analyse archivistique est donc un enjeu essentiel pour faire progresser la recherche sur le pouvoir du roi de France en facilitant la lecture des registres et les dépouillements ponctuels et précis.
 
 	\section{Formats de l’information}
 	
@@ -456,7 +456,7 @@
 		\label{inventaire_TEI}
 	\end{figure} 
 	
-	Comme présenté par la Figure \ref{inventaire_TEI}, chaque acte y es encodé au sein d'un élément <text> disposant d'un attribut @xml:id permettant de lui associer un identifiant unique. Les balises enfants contiennent ensuite le rang de l'acte dans l'inventaire, les dates de lieu et de temps, l'analyse du texte et sa manifestation physique dans les registres du Trésor des Chartes. Les fichiers ont par la suite été mis en ligne dans le répertoire Github du projet\footnote{\url{https://github.com/oriflamms/himanis/tree/master/Inventories}.} et leur contenu a servi à la constitution d'un fichier sous format JSON décrivant le contenu des registres inventoriés\footnote{\textit{Cf}. Chapitre 2.}.
+	Comme présenté par la Figure \ref{inventaire_TEI}, chaque acte y est encodé au sein d'un élément <text> disposant d'un attribut @xml:id permettant de lui associer un identifiant unique. Les balises enfants contiennent ensuite le rang de l'acte dans l'inventaire, les dates de lieu et de temps, l'analyse du texte et sa manifestation physique dans les registres du Trésor des Chartes. Les fichiers ont par la suite été mis en ligne dans le répertoire Github du projet\footnote{\url{https://github.com/oriflamms/himanis/tree/master/Inventories}.} et leur contenu a servi à la constitution d'un fichier sous format JSON décrivant les actes des registres inventoriés\footnote{\textit{Cf}. Chapitre 2.}.
 	
 	\subsection{Numérisation de l’index}
 
@@ -481,7 +481,7 @@
 		des droits royaux
 	\end{quotation}
 
-	\noindent Cette dernière n'a pas de sens prise isolément, il faut donc ici reconstituer la notion dans son ensemble : "Récupérations des droits royaux". Ce travail de reconstitution a été réalisé en s'appuyant autant que possible sur la structure de l'index : les ":" servent ici de séparateur entre l'entrée principale et les sous-entrées, tandis que ces dernières sont systématiquement séparées par un "; — ". Le travail réalisé a donc consisté à éliminer le premier séparateur et à transformer le second en " , — " afin de bien marquer les entrées dont le corps dépend de celui d'une entrée générale. Pour les cas exposé, la segmentation en TEI donne le résultat suivant :
+	\noindent Cette dernière n'a pas de sens prise isolément, il faut donc ici reconstituer la notion dans son ensemble : "Récupérations des droits royaux". Ce travail de reconstitution a été réalisé en s'appuyant autant que possible sur la structure de l'index : les ":" servent ici de séparateur entre l'entrée principale et les sous-entrées, tandis que ces dernières sont systématiquement séparées par un "; — ". Le travail réalisé a donc consisté à éliminer le premier séparateur et à transformer le second en " , — " afin de bien marquer les entrées dont le corps dépend de celui d'une entrée générale. Pour les cas exposés, la segmentation en TEI donne le résultat suivant :
 	
 	\begin{quotation}
 		<term>Récupérations des arrérages de bois</term>
@@ -495,7 +495,7 @@
 
 	\subsection{Le projet : mettre à plat les entrées d’index}
 	
-	L'objectif de ce travail était ainsi de faciliter l'association de chaque entrée d'index aux entrées d'inventaire qui lui correspondent. En effet, le but du processus était d'utiliser cet index comme vérité terrain pour développer l'apprentissage du liage d'entités. L'index a donc été mis à plat en fonction de cette logique : toutes les balises <idno> contenues dans les entrées d'index ont été utilisées pour identifier l'entrée d'inventaire contenant la notion décrite par cette entrée. Afin que le lien soit bien manifeste, les entrées d'inventaires décrites en TEI ont été enrichies d'une balise <index> contenant l'ensemble des entrées d'index renvoyant vers l'acte en question. La Figure \ref{index_in_inventaire} donne un exemple de ces entrées d'index encapsulées dans des éléments <term> et disposant d'un attribut @type dont la valeur est "place", "person" ou "subject" en fonction du type d'entrée dont il s'agit\footnote{A propos de la typologie des entrées, \textit{cf}. Chapitre 4.}.
+	L'objectif de ce travail était ainsi de faciliter l'association de chaque entrée d'index aux entrées d'inventaire qui lui correspondent. En effet, le but du processus était d'utiliser cet index comme vérité terrain pour développer l'apprentissage du liage d'entités. L'index a donc été mis à plat en fonction de cette logique : toutes les balises <idno> dans les entrées d'index ont été utilisées pour identifier l'entrée d'inventaire contenant la notion décrite par cette entrée. Afin que le lien soit bien manifeste, les entrées d'inventaires décrites en TEI ont été enrichies d'une balise <index> contenant l'ensemble des entrées d'index renvoyant vers l'acte en question. La Figure \ref{index_in_inventaire} donne un exemple de ces entrées d'index encapsulées dans des éléments <term> et disposant d'un attribut @type dont la valeur est "place", "person" ou "subject" en fonction du type d'entrée dont il s'agit\footnote{A propos de la typologie des entrées, \textit{cf}. Chapitre 4.}.
 	
 	\begin{figure}
 		\centering
@@ -508,19 +508,19 @@
 	
 	\subsection{Perte de qualité et de complexité dans les données}
 	
-	Cette vision des choses n'est cependant pas sans poser quelques problèmes dans la mise en œuvre du liage d'entités. L'index ainsi mis à plat correspond en effet moins à une base de connaissances proprement dite qu'à un ensemble d'entités nommées associées au texte. Elle ne permet pas l'apprentissage du liage puisqu'elle ne se fonde pas sur un référentiel en tant qu'entité autonome du texte. Les entités nommées sont ici simplement répétées au lieu où elles ont été reconnues et ne disposent pas de métadonnées pour les décrire (définition du concept, homonymes, coordonnées géographiques, ...). L'absence de référentiel unique et autonome ne permet donc pas le traitement a posteriori des entrées pour les segmenter en différentes parties ou les enrichir par alignement avec d'autres référentiels. C'est ainsi que l'absence d'identifiant unique pour les entrées d'index condamne le travail à rester dans l'état où il est au moment de la mise à plat alors que le liage d'entités peut aussi conduire à augmenter le nombre d'entités nommées identifiées dans les textes.
+	Cette vision des choses n'est cependant pas sans poser quelques problèmes dans la mise en œuvre du liage d'entités. L'index ainsi mis à plat correspond en effet moins à une base de connaissances proprement dite qu'à un ensemble d'entités nommées associées au texte. Elle ne permet pas l'apprentissage du liage puisqu'elle ne se fonde pas sur un référentiel en tant qu'entité autonome du texte. Les entités nommées sont ici simplement répétées au lieu où elles ont été reconnues et ne disposent pas de métadonnées pour les décrire (définition du concept, synonymes, coordonnées géographiques, ...). L'absence de référentiel unique et autonome ne permet donc pas le traitement a posteriori des entrées pour les segmenter en différentes parties ou les enrichir par alignement avec d'autres référentiels. C'est ainsi que l'absence d'identifiant unique pour les entrées d'index condamne le travail à rester dans l'état où il est au moment de la mise à plat alors que le liage d'entités peut aussi conduire à augmenter le nombre d'entités nommées identifiées dans les textes.
 	
-	De plus, l'index se caractérise par un ensemble de relations entre les entrées : associations entre entrées générales et sous-entrées, renvois contenus dans les données, ou encore entrées rejetées vers une autre entrée. Or ces relations, qui ne peuvent être reportées par la mise à plat de l'index, sont essentielles à plusieurs titres pour construire le travail de liage d'entités.  Par exemple, les entrées rejetées ne contenant pas d'entrées d'inventaire mais uniquement un renvoi vers une autre entrée d'index sont complètement invisibilisées lors de ce travail de mise à plat alors qu'elles fournissent autant d'alias d'une même notion mobilisables au moment de la construction de la base de connaissances. De même les renvois contenus dans les entrées et les relations entre entrées générales et sous-entrées permettent d'appréhender l'association entre les entités et les possibles homonymies ou co-occurences de celles-ci, elles sont donc nécessaires à la bonne réalisation du liage. Il apparaît donc que le fait d'appréhender l'index comme un ensemble de métadonnées associées aux actes ne fournit pas un cadre optimal à la mise en œuvre du liage d'entités. La bonne compréhension du projet initial en vue duquel les données ont été manipulées est cependant essentielle pour saisir l'enjeu des étapes déjà réalisées et aborder celles que nous avons menées pour tenter d'avancer dans une direction plus propice à la constitution d'un référentiel.
+	De plus, l'index se caractérise par un ensemble de relations entre les entrées : associations entre entrées générales et sous-entrées, renvois contenus dans les données, ou encore entrées rejetées vers une autre entrée. Or ces relations, qui ne peuvent être reportées par la mise à plat de l'index, sont essentielles à plusieurs titres pour construire le travail de liage d'entités.  Par exemple, les entrées rejetées ne contenant pas de renvois vers l'inventaire mais uniquement un renvoi vers une autre entrée d'index sont complètement invisibilisées lors de ce travail de mise à plat alors qu'elles fournissent autant d'alias d'une même notion mobilisables au moment de la construction de la base de connaissances. De même les renvois contenus dans les entrées et les relations entre entrées générales et sous-entrées permettent d'appréhender l'association entre les entités et les possibles synonymies ou co-occurences de celles-ci, elles sont donc nécessaires à la bonne réalisation du liage. Il apparaît donc que le fait d'appréhender l'index comme un ensemble de métadonnées associées aux actes ne fournit pas un cadre optimal à la mise en œuvre du liage d'entités. La bonne compréhension du projet initial en vue duquel les données ont été manipulées est cependant essentielle pour saisir l'enjeu des étapes déjà réalisées et aborder celles que nous avons menées pour tenter d'avancer dans une direction plus propice à la constitution d'un référentiel.
 	
 	\section*{Conclusion}
 	
-	En conséquence, nous avons vu que le Trésor des Chartes dispose d'un certain nombre d'instruments de travail permettant d'appréhender les actes contenus dans les registres. Ces ouvrages sont une mine d'information pour développer la lecture automatique des textes puisqu'ils fournissent un grand nombre de métadonnées permettant de les décrire. Les membres du projet Himanis ont donc travaillé à leur numérisation et leur segmentation pour les inclure dans un modèle sous format XML-TEI. Cette transformation a donc placé l'acte comme élément central de description du corpus, chacun d'entre eux étant associé à l'ensemble des métadonnées disponibles pour le décrire. Ce travail a cependant trouvé sa limite au moment de la mise à plat de l'index comme devant accompagner l'ensemble de métadonnées. Les entrées d'index ne peuvent en effet pas se réduire à un ensemble d'entités nommées reconnues dans un texte et doivent constituer un référentiel propre afin de modéliser la complexité de leur définition et de leurs relations entre elles et avec les textes, puis assurer l'entraînement du liage d'entités à partir de données d'entraînement. Nous avons donc consacré un temps conséquent du stage à travailler sur ces entrées d'index pour comprendre leur complexité et la meilleure manière de la prendre en compte pour leur utilisation future.
+	En conséquence, nous avons vu que le Trésor des Chartes dispose d'un certain nombre d'instruments de travail permettant d'appréhender les actes contenus dans les registres. Ces ouvrages sont une mine d'information pour développer la lecture automatique des textes puisqu'ils fournissent un grand nombre de métadonnées permettant de les décrire. Les membres du projet Himanis ont donc travaillé à leur numérisation et leur segmentation pour les inclure dans un modèle sous format XML-TEI. Cette transformation a placé l'acte comme élément central de description du corpus, chacun d'entre eux étant associé à l'ensemble des métadonnées disponibles pour le décrire. Ce travail a cependant trouvé sa limite au moment de la mise à plat de l'index comme devant accompagner l'ensemble de métadonnées. Les entrées d'index ne peuvent en effet pas se réduire à un ensemble d'entités nommées reconnues dans un texte et doivent constituer un référentiel propre afin de modéliser la complexité de leur définition et de leurs relations entre elles et avec les textes, puis assurer l'entraînement du liage d'entités à partir de données d'entraînement. Nous avons donc consacré un temps conséquent du stage à travailler sur ces entrées d'index pour comprendre leur complexité et la meilleure manière de la prendre en compte pour leur utilisation future.
 	
 	\chapter*{Conclusion partielle}
 	
-	Cette première partie nous a donc permis d'exposer dans son ensemble le contexte de travail dans lequel nous avons réalisé notre stage. Notre développement a commencé par un premier chapitre consacré à l'état de l'art sur le liage d'entités et son utilisation dans l'étude des documents patrimoniaux. Ensuite, nous avons dédié un second chapitre à la description des différentes étapes du projet Himanis et des résultats disponibles pour poursuivre le travail sur le liage d'entités. Nous avons enfin terminé cet exposé par un troisième chapitre portant sur l'utilisation des instruments de recherche disponibles comme \textit{legacy metadata} permettant de décrire le contenu des registres ainsi que les limites de cette logique.
+	Cette première partie nous a permis d'exposer dans son ensemble le contexte de travail dans lequel nous avons réalisé notre stage. Notre développement a commencé par un premier chapitre consacré à l'état de l'art sur le liage d'entités et son utilisation dans l'étude des documents patrimoniaux. Ensuite, nous avons dédié un second chapitre à la description des différentes étapes du projet Himanis et des résultats disponibles pour poursuivre le travail sur le liage d'entités. Nous avons enfin terminé cet exposé par un troisième chapitre portant sur l'utilisation des instruments de recherche disponibles comme \textit{legacy metadata} permettant de décrire le contenu des registres ainsi que les limites de cette logique.
 	
-	Tout cela nous a permis de voir à quel point le projet Himanis fourni un terreau favorable au développement du liage d'entités. Cette technique est en effet difficile à mettre ne œuvre pour des documents anciens car elle nécessite une base de connaissances dédiée. Or les instruments de recherches déjà numérisées par les acteurs du projet Himanis facilitent largement la constitution de cette base de connaissances. Les index disponibles se prêtent à la constitution d'un référentiel vers lequel pointer au moment de la réalisation du liage. En plus de fournir un matériel idéal pour l'entraînement d'un modèle, le Trésor des Chartes fournir également tout un ensemble de textes non-indexés qui se prête à la mise en œuvre et à l'évaluation de ce modèle.
+	Tout cela nous a permis de voir à quel point le projet Himanis fournit un terreau favorable au développement du liage d'entités. Cette technique est en effet difficile à mettre ne œuvre pour des documents anciens car elle nécessite une base de connaissances dédiée. Or les instruments de recherches déjà numérisées par les acteurs du projet Himanis facilitent largement la constitution de cette base de connaissances. Les index disponibles se prêtent à la constitution d'un référentiel vers lequel pointer au moment de la réalisation du liage. En plus de fournir un matériel idéal pour l'entraînement d'un modèle, le Trésor des Chartes dispose également de tout un ensemble de textes non-indexés qui se prêtent à la mise en œuvre et à l'évaluation de ce modèle.
 	
 	\parttext{Le stage que nous avons réalisé s'est principalement concentré sur la constitution d'un référentiel pouvant servir de base de connaissances pour la mise en œuvre du liage d'entités. Nous consacrerons donc cette deuxième partie au travail de modélisation et de formalisation du référentiel à partir d'un index papier, activité qui a occupé la majeure partie de notre stage. Nous nous sommes concentrés ici sur l'index du premier volume de l'inventaire analytique des registres du Trésor des Chartes portant sur les registres JJ 37 à JJ 50 et paru en 1958. Pour rendre compte de ce travail, nous décrirons dans un premier chapitre les différentes difficultés rencontrées pour comprendre et manipuler cet instrument de recherche. Puis nous dédierons un second chapitre à l'analyse des relations entre les entités. Nous consacrerons enfin un troisième chapitre à la transformation de l'index en une base de données relationnelle.}
 	
@@ -529,17 +529,102 @@
 	
 	\chapter{Appréhender les \textit{legacy data}}
 	
+	La mobilisation d'un instrument de travail papier pour construire un référentiel numérique implique de bien prendre le temps d'appréhender les données que l'on utilise. Leur structuration peut en effet suivre une logique complexe, passant de l'utilisation de caractères séparateurs à un grand nombre de renvois implicites. Or cette utilisation n'est pas toujours systématique et la quête de la perfection peut parfois demander un temps de relecture très conséquent pour repérer toutes les erreurs et incohérences qui peuvent se glisser dans les données de manière plus ou moins systématique. Dans le cadre de ce travail, l'index que nous avons manipulé est un ouvrage imprimé qui a été numérisé, transcrit par OCR et déjà préalablement structuré sous la forme d'un fichier au format XML-TEI. Nous avons donc consacré un temps conséquent à comprendre les différentes étapes de ce travail\footnote{\textit{Cf}. Chapitre 3.} et leur influence sur l'état des données. Ce temps est nécessaire pour faire le lien entre le fichier que nous avons manipulé et le contenu intellectuel de l'index que nous voulons reporter dans le référentiel.
+	
+	Ce chapitre sera donc consacré aux différentes difficultés auxquels nous avons été confrontés dans l'analyse de ces \textit{legacy data} et aux solutions mises en œuvre pour y faire face. Pour cela, nous décrirons dans un premier temps les différents type de contenus présents dans les entrées. Puis nous reporterons les différentes exceptions qu'il nous a fallu traiter tout au long de notre travail. Enfin, nous nous intéresserons aux différentes erreurs qui ont pu être mis au jour tout au long de cette chaîne de traitement.
+	
 	\section{Des entrées composées de différents éléments}
 	
 	\subsection{Reconnaître la typologie}
 	
-	\subsection{Segmentation des différentes partie}
+	Au début de notre stage, le fichier contient 20136 balises <term> correspondant à tous les éléments contenus dans l'index. Ces éléments se répartissent en plusieurs catégories. On retrouve tout d'abord quelques éléments titres qui sont nécessaires à l'organisation de l'index mais qui n'appartiennent pas au contenu :
 	
-	\section{Comment utiliser des semi-structured data ?}
+	\begin{quotation}
+		<term>INDEX DES MATIÈRES</term>
+	\end{quotation}
+
+	\begin{quotation}
+		<term>A</term>
+	\end{quotation}
+
+	\noindent Nous avons ici profité de l'étape de création d'identifiants uniques pour éliminer ces éléments de la suite du processus\footnote{Nous traiterons cette étape plus précisément au Chapitre 5.}. Nous avons cependant profité auparavant de l'indication offerte par ces titres au sujet de la séparation entre les deux contenus de l'index. Celui-ci est en effet constitué d'abord d'un index des matières qui recense tous les sujets mentionnés dans les actes, puis d'un index des noms de personnes et de lieux. 
+	
+	Cette séparation a servi de base à l'établissement d'une typologie des entrées. Toutes les entrées présentes dans l'index des matières ont été associées au type "subject" tandis que les entrées de l'index des noms de personnes et de lieux ont dû être analysés pour discriminer celles qui relèvent du type "person" et celles qui relèvent du type "place". Cette dernière étape avait déjà été anticipée avant le début de mon stage à partir d'un principe simple : les entrées disposant de crochets ont été marquées comme des "place" et celles n'en disposant pas comme des "person". Cela donne ainsi le résultat suivant : 
+	
+	\begin{quotation}
+		<term type="place">Montreuil [Pas-de-Calais]</term>
+	\end{quotation}
+
+	\begin{quotation}
+		<term type="person">Montreuil (Pierre de)</term>
+	\end{quotation}
+
+	\noindent Si cette séparation est pertinente dans la plupart des cas, il arrive cependant que cela conduise à un certain nombre d'erreurs :
+	
+	\begin{quotation}
+		<term type="place">Dreux (Jean) [à Orléans]</term>
+	\end{quotation}
+	
+	\begin{quotation}
+		<term type="person">Agulhou (pièce de terre dite), dans le territoire de
+			Béziers</term>
+	\end{quotation}
+	
+	\noindent Nous avons donc tenté de repérer les erreurs systématiques qui peuvent exister dans ces données. Pour cela, nous avons cherché toutes les occurrences de "terre", "bien", "bois", "près", ... pour rétablir la valeur de l'attribut @type vers "place". Un autre problème systématique concerne les personnes dont le nom renvoi vers un toponyme :
+	
+	\begin{quotation}
+		<term type="place">Aigues-Vives [Lot-et-Garonne, con Monclar, cne Saint-Pastour?]
+			(Bérenger d')</term>
+	\end{quotation}
+
+	\noindent Nous avons ici fait le choix de considérer ces noms comme relevant du type "person"\footnote{Sur les différentes formes de noms de personnes, \textit{cf}. Chapitre 5.}. Nous avons utilisé l'expression régulière "[A-Z].* de$\backslash$)" (et ses déclinaisons avec "d'", "des", ...) pour les repérer et avons procédé par une méthode semi-automatisée pour les transformer une à une tout en gardant un regard sur cette transformation afin d'éviter les effets de bords pouvant toucher les quelques exceptions de nom de lieux correspondant à ce modèle, comme par exemple :
+	
+	\begin{quotation}
+    	<term type="place">Bannes (mas de) [Aveyron, ar. et con Villefranche-de-Rouergue,
+			cne Morlhon-le-Haut]</term>
+	\end{quotation}
+	
+	\noindent Les autres erreurs repérées ont été corrigées ponctuellement au fur et à mesure de leur identification au cours de notre travail. Il est possible qu'il en existe encore.
+	
+	\subsection{Segmentation des entrées}
+	
+	Une fois ce travail réalisé et l'index mis sous forme de tableau\footnote{Nous décrirons plus précisément les différentes étapes de traitement de l'index au Chapitre 6.}, nous avons pu repérer le contenu des entrées pour en segmenter les différentes parties en fonction du type de données. Nous avons donc rédigé un script python permettant de réaliser cette étape de manière automatisée\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/simplification_entrées.py}.}. Les éléments mis entre crochets ont ainsi été ajoutés dans une colonne "Détails" et ceux qui sont précédés d'une virgule dans la colonne "Supplément". Cette étape a également permis de construire une colonne "Entrée\_simplifiée" construite à partir de l'entrée originelle après extraction des éléments utilisés pour les autres colonnes. L'entrée 
+	
+	\begin{quotation}
+		Chambre aux Deniers, Camera Denariorum [terme encore employé à cette époque pour 	désigner la Chambre des Comptes]
+	\end{quotation}
+
+	\noindent a été transformée sous la forme suivante :
+
+	\begin{quotation}
+		\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+			\hline
+			Entrée\_simplifiée & Détails & Supplément \\ \hline
+			Chambre aux Deniers & aux Deniers	terme encore employé à cette époque pour désigner la Chambre des Comptes & Camera Denariorum \\ \hline
+		\end{tabular}
+	\end{quotation}
+	
+	\noindent Cette étape a également été accompagnée d'une rationalisation des sous-entrées afin d'éviter la répétition inutile des éléments contenus dans les entrées génériques. L'entrée
+	
+	\begin{quotation}
+		Cens cotage [acquitté pour un tènement en roture] , — morts [ne comportant pas de lods et ventes]
+	\end{quotation}
+
+	\noindent a ainsi été simplifiée afin que la colonne "Entrée\_simplifiée" devienne
+	
+	\begin{quotation}
+		Cens cotage , — morts
+	\end{quotation}
+
+	\noindent Les données ainsi segmentées sont disponibles dans le tableau contenant les données de l'index et mis en ligne sur le Github du projet Himanis\footnote{\url{https://github.com/oriflamms/himanis/blob/master/Inventories/Systematic/Paris_AN_JJ_inventaire_JJ37-50_index.xlsx}.}.
+	
+	\section{Comment utiliser des \textit{semi-structured data} ?}
 	
 	\subsection{Des cas spécifiques tout au long de la chaîne de traitement}
 	
-	\subsection{Analyse fine de tous les caractères}
+	\subsection{Analyse fine des caractères}
+	
+	On a déjà parlé de structure au chapitre 3
 	
 	\section{Multiplication des erreurs avec l’allongement de la chaîne de traitement}
 	
@@ -562,11 +647,17 @@
 	
 	\chapter{Analyser le lien entre les entités}
 	
-	\chapter{Transformer l’index en une base de données relationnelle}	
+	Ici il faut parler de l'étape de création des identifiants qui a éliminé certaines données (cf début chapitre 4 et les entrées de noms avec un renvoi implicite.)
+	
+	\chapter{Transformer l’index en une base de données relationnelle}
+	
+	Il faut ici parler des différentes étapes et de la mise en table du modèle avant le passage par la BD relationnelle.
 	
 	\part{Alignement, diffusion et utilisation du référentiel}
 	
 	\chapter{Enrichir les données à l’aide d’un référentiel externe}
+	
+	On parlera ici de la segmentation des toponymes pour en extraire les différentes parties comme on a segmenté les entrées.
 	
 	\chapter{Mise à disposition d'un nouveau référentiel ?}
 	
