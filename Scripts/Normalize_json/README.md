@@ -1,4 +1,4 @@
-#Normalisation des méta-données
+# Normalisation des méta-données
 
 Ce dossier contient les scripts python utilisés afin de normaliser les méta-données extraites des inventaires des registres de la chambre des comptes et permettant de décrire les actes des registres du Trésor des Chartes.
 
