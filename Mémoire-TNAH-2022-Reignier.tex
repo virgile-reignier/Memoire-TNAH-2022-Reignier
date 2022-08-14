@@ -40,7 +40,7 @@
 \addbibresource{Mémoire-TNAH-2022-Reignier.bib}
 
 \author{Virgile Reignier - M2 TNAH}
-\title{Vers l’indexation automatique du Trésor des chartes. Constitution, alignement et utilisation de référentiels d’entités nommées au sein du projet Himanis.}
+\title{Vers l’indexation automatique du Trésor des chartes. Constitution, alignement et utilisation d'un référentiel d’entités nommées au sein du projet Himanis.}
 
 \makeatletter
 \newcommand{\parttext}[1]{\def\@parttext{#1}}
@@ -101,7 +101,7 @@
 			\bigskip
 			\bigskip
 			\begin{LARGE}
-				\textbf{Constitution, alignement et utilisation de référentiels d’entités nommées au sein du projet Himanis}\\
+				\textbf{Constitution, alignement et utilisation d'un référentiel d’entités nommées au sein du projet Himanis}\\
 			\end{LARGE}
 			
 			\bigskip
@@ -132,7 +132,7 @@
 	
 	\textbf{Mots-clés~:} TNAH, IRHT, Himanis, Trésor des Chartes, Archives Nationales, ROC, Numérisation d'instruments de recherche, Alignement de référentiels, REM, REN, Machine learning, Intelligence artificielle, Reconnaissance d'écritures manuscrites, identity linking.
 	
-	\textbf{Informations bibliographiques~:} Reignier Virgile, \textit{Vers l’indexation automatique du Trésor des chartes. Constitution, alignement et utilisation de référentiels d’entités nommées au sein du projet Himanis.}, mémoire de master \og{}Technologies numériques appliquées à l'histoire\fg{}, dir. Dominique Stutzmann et Thibault Clérice, École nationale des chartes, 2022.
+	\textbf{Informations bibliographiques~:} Reignier Virgile, \textit{Vers l’indexation automatique du Trésor des chartes. Constitution, alignement et utilisation d'un référentiel d’entités nommées au sein du projet Himanis.}, mémoire de master \og{}Technologies numériques appliquées à l'histoire\fg{}, dir. Dominique Stutzmann et Thibault Clérice, École nationale des chartes, 2022.
 	
 	\chapter{Remerciements}
 	
@@ -204,7 +204,7 @@
 	
 	Le développement des techniques de liage d'entités est apparu dans un contexte d'étude de textes contemporains, mais il peut aussi s'appliquer dans le cadre de documents historiques. L'appropriation des outils numériques par les acteurs de la recherche en histoire et du patrimoine a permis d'accroître largement la disponibilité des textes et de faciliter l'extraction d'information via des techniques de ROC (Reconnaissance Optique de Caractères) ou REM et d'études statistiques. L'accès au contenu des textes est cependant freiné par des problématiques propres à ces documents. Tout d'abord, le passage par un processus de ROC peut altérer pour partie le texte. De plus, les conventions orthographiques peuvent varier largement en fonction des lieux et époques, ce qui rend la reconnaissance de certains mots encore plus délicate.
 	
-	Le cas de confusion le plus courant se place entre le \textit{f} et le \textit{s} long présent dans de nombreux textes manuscrits et imprimés. D'autres cas de confusion portent sur le mélange des langues (par exemple un nom de lieu en français dans un texte en latin) ou sur des variations orthographiques d'un même mot qui peuvent exister au sein d'un même document. Tous ces éléments rendent d'autant plus complexe la tâche de reconnaissance d'entités nommées et de liage avec une base de connaissances\footnote{Sur les enjeux du liage d'entités pour les documents historiques et les différentes propositions pour y répondre, \textit{cf}. \cite{pontes_entity_2020}.}. Pourtant, ces techniques sont particulièrement pertinentes dans ce contexte où de nombreuses ambiguïtés existent, notamment pour identifier les personnes et lieux qui sont mentionnés par les documents.
+	Le cas de confusion le plus courant se place entre le \textit{f} et le \textit{s} long présent dans de nombreux textes manuscrits et imprimés. D'autres cas de confusion portent sur le mélange des langues (par exemple un nom de lieu en français dans un texte en latin) ou sur des variations orthographiques d'un même mot qui peuvent exister au sein d'un même document. Tous ces éléments rendent d'autant plus complexe la tâche de reconnaissance d'entités nommées et de liage avec une base de connaissances\footnote{Sur les enjeux du liage d'entités pour les documents historiques et les différentes propositions pour y répondre, \textit{cf}. \cite{linhares_pontes_entity_2020}.}. Pourtant, ces techniques sont particulièrement pertinentes dans ce contexte où de nombreuses ambiguïtés existent, notamment pour identifier les personnes et lieux qui sont mentionnés par les documents.
 	
 	\section{Les pistes pour l'application sur des corpus patrimoniaux}
 	
@@ -226,7 +226,7 @@
 	
 	A partir des éléments que nous avons présentés, plusieurs travaux ont ainsi mis en œuvre des techniques de liage d'entités sur des sources historiques et proposent une évaluation des résultats obtenus. C'est le cas par exemple d'une étude basée sur un corpus de textes littéraires français du XIX\ieme\ siècle, qui obtient un taux de rappel des candidats - c'est-à-dire la proportion des ensembles de candidats contenant la bonne référence par rapport au nombre de mentions lesquelles il existe une référence dans la base de connaissances - entre 0,63 et 0,83 en fonction de l'ontologie utilisée. Quant à la précision des candidats - c'est-à-dire la proportion des ensembles de candidats contenant la bonne référence par rapport au nombre d'ensembles de candidats -, elle atteint même 1 en utilisant DBpedia. La mesure de l'exactitude globale - c'est-à-dire la proportion de références correctement assignée pour chaque mention d'entité nommée disposant d'une référence pertinente dans la base de connaissances - est située entre 0,7 et 0,85 en fonction de l'ontologie utilisée\footnote{\cite{soudani_adaptation_2018}. A propos des critères d'évaluation des modèles, \textit{cf}. \cite{abadie_evaluation_2017}.}. Une autre étude basée sur les champs descriptifs du Smithsonian Cooper-Hewitt National Design Museum à New York parvient à un taux de rappel entre 0,08 et 0,44 et une précision entre 0,24 et 0,80 en fonction de l'application utilisée. Cette étude a également permis de mesurer la complémentarité entre ces ressources : si DBpedia Spotlight produit des score très bas, seules 4\% des entités trouvées l'ont été communément par les 3 applications utilisées. De plus, 54\% des entités trouvées l'ont été uniquement par l'un des autres outils (34\% par Zemanta et 20\% par Alchemy API), ce qui manifeste d'une bonne complémentarité entre ces services\footcite{van_hooland_exploring_2015}.
 	
-	Ces résultats peuvent également varier en fonction des cas particuliers que nous avons évoqués plus haut. Par exemple l'étude sur les témoignages irlandais permet de mettre en valeur un outil (AGDISTIS) qui se caractérise par d'excellents résultats globaux pour le liage d'entités. Cependant, si on sépare les entités liées à des éléments de la base de connaissances des entités reconnues à juste titre comme absents de cette base, on observe que c'est pour la reconnaissance de ces dernières que le programme est particulièrement pertinent. Or ils forment ici 77\% du corpus. Pour ce qui est de la première tâche, son efficacité est largement supplantée par celle de deux autres programmes - Dexter et Kea - qui ne savent pas reconnaître les entités absentes de la base de connaissances\footcite{munnelly_investigating_2018}. Une autre étude basée sur un corpus composé de cinq langues a permis de mettre en œuvre plusieurs approches pour compléter le travail de liage d'entités au moment de l'entrainement du modèle : exploration des résultats pour différentes variations orthographique et linguistique d'un même mot puis filtrage des candidats obtenus en fonction de critères comme le type d'entité ou des métadonnées qui lui sont associées (par exemple la date de naissance pour les personnes). Ces différents tests ont permis de largement augmenter la précision des candidats et le taux de rappel lorsque ces approches sont ajoutées au modèle entraîné avec des variations en fonction de la langue et du scénario choisi\footcite{pontes_entity_2020}. Pour finir, une dernière étude utilisant REDEN a permis de montrer la variation de la correction des résultats en fonction de l'ajout d'un poids aux relations entre les entités. Cette opération permet de modifier les caractéristiques du graphe calculé pour opérer le liage d'entités et améliore dans certains cas le résultat obtenu\footcite{morzy_disambiguation_2015}.
+	Ces résultats peuvent également varier en fonction des cas particuliers que nous avons évoqués plus haut. Par exemple l'étude sur les témoignages irlandais permet de mettre en valeur un outil (AGDISTIS) qui se caractérise par d'excellents résultats globaux pour le liage d'entités. Cependant, si on sépare les entités liées à des éléments de la base de connaissances des entités reconnues à juste titre comme absents de cette base, on observe que c'est pour la reconnaissance de ces dernières que le programme est particulièrement pertinent. Or ils forment ici 77\% du corpus. Pour ce qui est de la première tâche, son efficacité est largement supplantée par celle de deux autres programmes - Dexter et Kea - qui ne savent pas reconnaître les entités absentes de la base de connaissances\footcite{munnelly_investigating_2018}. Une autre étude basée sur un corpus composé de cinq langues a permis de mettre en œuvre plusieurs approches pour compléter le travail de liage d'entités au moment de l'entrainement du modèle : exploration des résultats pour différentes variations orthographique et linguistique d'un même mot puis filtrage des candidats obtenus en fonction de critères comme le type d'entité ou des métadonnées qui lui sont associées (par exemple la date de naissance pour les personnes). Ces différents tests ont permis de largement augmenter la précision des candidats et le taux de rappel lorsque ces approches sont ajoutées au modèle entraîné avec des variations en fonction de la langue et du scénario choisi\footcite{linhares_pontes_entity_2020}. Pour finir, une dernière étude utilisant REDEN a permis de montrer la variation de la correction des résultats en fonction de l'ajout d'un poids aux relations entre les entités. Cette opération permet de modifier les caractéristiques du graphe calculé pour opérer le liage d'entités et améliore dans certains cas le résultat obtenu\footcite{morzy_disambiguation_2015}.
 	
 	\subsection{De nouvelles perspectives pour la recherche historique}
 	
@@ -529,15 +529,15 @@
 	
 	\chapter{Appréhender les \textit{legacy data}}
 	
-	La mobilisation d'un instrument de travail papier pour construire un référentiel numérique implique de bien prendre le temps d'appréhender les données que l'on utilise. Leur structuration peut en effet suivre une logique complexe, passant de l'utilisation de caractères séparateurs à un grand nombre de renvois implicites. Or cette utilisation n'est pas toujours systématique et la quête de la perfection peut parfois demander un temps de relecture très conséquent pour repérer toutes les erreurs et incohérences qui peuvent se glisser dans les données de manière plus ou moins systématique. Dans le cadre de ce travail, l'index que nous avons manipulé est un ouvrage imprimé qui a été numérisé, transcrit par OCR et déjà préalablement structuré sous la forme d'un fichier au format XML-TEI. Nous avons donc consacré un temps conséquent à comprendre les différentes étapes de ce travail\footnote{\textit{Cf}. Chapitre 3.} et leur influence sur l'état des données. Ce temps est nécessaire pour faire le lien entre le fichier que nous avons manipulé et le contenu intellectuel de l'index que nous voulons reporter dans le référentiel.
+	La mobilisation d'un instrument de travail papier pour construire un référentiel numérique implique de prendre le temps d'appréhender les données que l'on utilise. Leur structuration peut en effet suivre une logique complexe, passant de l'utilisation de caractères séparateurs à un grand nombre de renvois implicites. Or cette utilisation n'est pas toujours systématique et la quête de la perfection peut parfois demander un temps de relecture très conséquent pour repérer toutes les erreurs et incohérences qui peuvent se glisser dans les données de manière plus ou moins systématique. Dans le cadre de ce travail, l'index que nous avons manipulé est un ouvrage imprimé qui a été numérisé, transcrit par OCR et préalablement structuré sous la forme d'un fichier au format XML-TEI. Il nous a donc fallu prendre le temps de saisir le projet qui a guidé les différentes étapes de ce travail\footnote{\textit{Cf}. Chapitre 3.} et son influence sur l'état des données. Ce temps est nécessaire pour faire le lien entre le fichier que nous avons manipulé et le contenu intellectuel de l'index que nous voulons reporter dans le référentiel.
 	
-	Ce chapitre sera donc consacré aux différentes difficultés auxquels nous avons été confrontés dans l'analyse de ces \textit{legacy data} et aux solutions mises en œuvre pour y faire face. Pour cela, nous décrirons dans un premier temps les différents type de contenus présents dans les entrées. Puis nous reporterons les différentes exceptions qu'il nous a fallu traiter tout au long de notre travail. Enfin, nous nous intéresserons aux différentes erreurs qui ont pu être mis au jour tout au long de cette chaîne de traitement.
+	Ce chapitre sera donc consacré aux différentes difficultés auxquels nous avons été confrontés dans l'analyse de ces \textit{legacy data} et aux solutions mises en œuvre pour y faire face. Pour cela, nous décrirons dans un premier temps les différents type de contenus présents dans les entrées. Puis nous reporterons les différentes exceptions qu'il nous a fallu traiter pendant notre travail. Enfin, nous nous intéresserons aux différentes erreurs qui ont pu être mis au jour tout au long de cette chaîne de traitement.
 	
 	\section{Des entrées composées de différents éléments}
 	
 	\subsection{Reconnaître la typologie}
 	
-	Au début de notre stage, le fichier contient 20136 balises <term> correspondant à tous les éléments contenus dans l'index. Ces éléments se répartissent en plusieurs catégories. On retrouve tout d'abord quelques éléments titres qui sont nécessaires à l'organisation de l'index mais qui n'appartiennent pas au contenu :
+	Au début de notre stage, le fichier contenait 20136 balises <term> correspondant à tous les éléments contenus dans l'index. Ces éléments se répartissent en plusieurs catégories. On retrouve tout d'abord quelques éléments titres qui sont nécessaires à l'organisation de l'index mais qui n'appartiennent pas au contenu :
 	
 	\begin{quotation}
 		<term>INDEX DES MATIÈRES</term>
@@ -547,7 +547,7 @@
 		<term>A</term>
 	\end{quotation}
 
-	\noindent Nous avons ici profité de l'étape de création d'identifiants uniques pour éliminer ces éléments de la suite du processus\footnote{Nous traiterons cette étape plus précisément au Chapitre 5.}. Nous avons cependant profité auparavant de l'indication offerte par ces titres au sujet de la séparation entre les deux contenus de l'index. Celui-ci est en effet constitué d'abord d'un index des matières qui recense tous les sujets mentionnés dans les actes, puis d'un index des noms de personnes et de lieux. 
+	\noindent Nous avons ici profité de l'étape de création d'identifiants uniques pour éliminer ces éléments de la suite du processus\footnote{Nous traiterons plus précisément toutes les étapes associées à la gestion des liens entre les entrées au Chapitre 5.}. Nous avons cependant profité auparavant de l'indication offerte par ces titres au sujet de la séparation entre les deux contenus de l'index. Celui-ci est en effet constitué d'abord d'un index des matières qui recense tous les sujets mentionnés dans les actes, puis d'un index des noms de personnes et de lieux. 
 	
 	Cette séparation a servi de base à l'établissement d'une typologie des entrées. Toutes les entrées présentes dans l'index des matières ont été associées au type "subject" tandis que les entrées de l'index des noms de personnes et de lieux ont dû être analysés pour discriminer celles qui relèvent du type "person" et celles qui relèvent du type "place". Cette dernière étape avait déjà été anticipée avant le début de mon stage à partir d'un principe simple : les entrées disposant de crochets ont été marquées comme des "place" et celles n'en disposant pas comme des "person". Cela donne ainsi le résultat suivant : 
 	
@@ -570,14 +570,14 @@
 			Béziers</term>
 	\end{quotation}
 	
-	\noindent Nous avons donc tenté de repérer les erreurs systématiques qui peuvent exister dans ces données. Pour cela, nous avons cherché toutes les occurrences de "terre", "bien", "bois", "près", ... pour rétablir la valeur de l'attribut @type vers "place". Un autre problème systématique concerne les personnes dont le nom renvoi vers un toponyme :
+	\noindent Nous avons donc tenté de repérer les erreurs systématiques qui peuvent exister dans ces données. Pour cela, nous avons notamment cherché toutes les occurrences de "terre", "bien", "bois", "près", ... pour rétablir la valeur de l'attribut @type vers "place". Un autre problème systématique concerne les personnes dont le nom renvoi vers un toponyme :
 	
 	\begin{quotation}
 		<term type="place">Aigues-Vives [Lot-et-Garonne, con Monclar, cne Saint-Pastour?]
 			(Bérenger d')</term>
 	\end{quotation}
 
-	\noindent Nous avons ici fait le choix de considérer ces noms comme relevant du type "person"\footnote{Sur les différentes formes de noms de personnes, \textit{cf}. Chapitre 5.}. Nous avons utilisé l'expression régulière "[A-Z].* de$\backslash$)" (et ses déclinaisons avec "d'", "des", ...) pour les repérer et avons procédé par une méthode semi-automatisée pour les transformer une à une tout en gardant un regard sur cette transformation afin d'éviter les effets de bords pouvant toucher les quelques exceptions de nom de lieux correspondant à ce modèle, comme par exemple :
+	\noindent Nous avons ici fait le choix de considérer ces noms comme relevant du type "person"\footnote{Sur les différentes formes de noms de personnes, \textit{cf}. Chapitre 5.}. Nous avons utilisé l'expression régulière "[A-Z].* de$\backslash$)" (et ses déclinaisons avec "d'", "des", ...) pour les repérer et avons procédé par une méthode semi-automatisée pour les transformer une à une tout en gardant un regard sur la réalisation afin d'éviter les effets de bords pouvant toucher les quelques exceptions de noms de lieu correspondant à ce modèle, comme par exemple :
 	
 	\begin{quotation}
     	<term type="place">Bannes (mas de) [Aveyron, ar. et con Villefranche-de-Rouergue,
@@ -588,7 +588,7 @@
 	
 	\subsection{Segmentation des entrées}
 	
-	Une fois ce travail réalisé et l'index mis sous forme de tableau\footnote{Nous décrirons plus précisément les différentes étapes de traitement de l'index au Chapitre 6.}, nous avons pu repérer le contenu des entrées pour en segmenter les différentes parties en fonction du type de données. Nous avons donc rédigé un script python permettant de réaliser cette étape de manière automatisée\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/simplification_entrées.py}.}. Les éléments mis entre crochets ont ainsi été ajoutés dans une colonne "Détails" et ceux qui sont précédés d'une virgule dans la colonne "Supplément". Cette étape a également permis de construire une colonne "Entrée\_simplifiée" construite à partir de l'entrée originelle après extraction des éléments utilisés pour les autres colonnes. L'entrée 
+	Une fois ce travail réalisé et l'index mis sous forme d'une table\footnote{Nous décrirons plus précisément cette étape au Chapitre 6.}, nous avons pu repérer le contenu des entrées pour en segmenter les différentes parties en fonction du type de données. Nous avons donc rédigé un script python permettant de réaliser cette étape de manière automatisée\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/simplification_entrees.py}.}. Les éléments mis entre crochets ont ainsi été ajoutés dans une colonne "Détails" et ceux qui sont précédés d'une virgule dans la colonne "Supplément". Cette étape a également permis de construire une colonne "Entrée\_simplifiée" construite à partir de l'entrée originelle après extraction des éléments utilisés pour les autres colonnes. L'entrée 
 	
 	\begin{quotation}
 		Chambre aux Deniers, Camera Denariorum [terme encore employé à cette époque pour 	désigner la Chambre des Comptes]
@@ -622,32 +622,244 @@
 	
 	\subsection{Des cas spécifiques tout au long de la chaîne de traitement}
 	
+	Le travail d'analyse et de traitement des entrées d'index nous a donc confronté quelques difficultés dans l'appréhension des données. Les entrées bénéficient en effet d'une structure sensible et très utile pour comprendre les différents éléments qu'elles contiennent, mais celle-ci n'est jamais pleinement systématique. Nous avons donc fait face à plusieurs surprises tout au long de ce travail. Par exemple, les renvois explicites sont généralement séparés par des virgules lorsqu'ils sont plusieurs :
+	
+	\begin{quotation}
+		Abandons, v. donations, renonciations, remises
+	\end{quotation}
+
+	\noindent Mais il arrive que la virgule située après un "v." ne sépare pas deux renvois mais soit au contraire une partie de la définition de l'entrée vers laquelle la chaîne de caractère renvoie :
+	
+	\begin{quotation}
+		France , — v. Jeanne, reine de France et de Navarre
+	\end{quotation}
+
+	\noindent Cette situation a donc créé quelques erreurs dans le travail de segmentation automatique des renvois internes aux entrées. Il arrive également que ces derniers soient factorisés :
+	
+	\begin{quotation}
+		Lettres , — de grâce, v. lettres d'abolition, de rappel de
+			ban et de rémission
+	\end{quotation}
+
+	\begin{quotation}
+		Ambianensis (ballivia, ballivus), v. Amiens (bailli, bailliage)
+	\end{quotation}
+
+	\noindent Il faut alors développer manuellement ces éléments pour que les liens se réalisent selon le schéma voulu.
+	
+	Nous avons aussi repéré quelques incohérences orthographiques qui ont perturbé la bonne compréhension des renvois. Par exemple "v. main-morte" peut faire référence à la même notion mais orthographiée "mainmorte". On peut également remarquer quelques variantes dans les accords comme par exemple "v. demeure épiscopale" qui correspond à l'entrée "demeures épiscopales". Ou encore des raccourcis comme pour l'entrée "Passy (Marie de)" qui constitue un renvoi implicite vers l'entrée "Marie, femme de Jean de Passy". 
+	
+	On peut noter pour finir un certain nombre d'exceptions dans la formalisation des données comme par exemple l'entrée "Coutumes [droits et redevances]" dont les sous-entrées sont les seules à disposer de numéros :
+	
+	\begin{quotation}
+		Coutumes [droits et redevances coutumiers , — 1. droits de péage levés sur
+			les bateaux]
+	\end{quotation}
+
+	\begin{quotation}
+		Coutumes [droits et redevances coutumiers , — 2. redevances ou exactions]
+	\end{quotation}
+	
+	\begin{quotation}
+		Coutumes [droits et redevances coutumiers , — 3. revenus des taxes sur les denrées mises en vente dans les foires et marchés]
+	\end{quotation}
+
+	\noindent L'une de ces sous-entrées numérotées dispose même à son tour de sous-sous-entrées. On retrouve le même type d'exceptions pour l'entrée "Paris" qui contient un nombre conséquent de sous-entrées. C'est pourquoi certains renvois souhaitant faire référence directement à celles-ci peuvent prendre la forme "v. Paris (évêché)". Or l'entrée correspondante ne prend pas cette forme ni dans l'inventaire ni dans le fichier TEI, mais plutôt "Paris , — évêché". Pour finir, quelques renvois sont agrémentés d'une précision sur le positionnement de l'entité correspondante : "v. dans l’index des matières" ou "v. plus bas".
+	
 	\subsection{Analyse fine des caractères}
 	
-	On a déjà parlé de structure au chapitre 3
+	La compréhension du contenu des donnée nécessite donc ici d'étudier finement les différents séparateurs utilisés entre les éléments et de comprendre les différentes significations qu'ils peuvent prendre. Par exemple, les éléments entre crochets peuvent à la fois servir à définir une notion :
+	
+	\begin{quotation}
+		Acaptes [droits de mutation acquittés au seigneur par le successeur d'un
+			tenancier défunt (dans le midi)]
+	\end{quotation}
+
+	\noindent à détailler sa situation :
+
+	\begin{quotation}
+		Montferrier [Aveyron, con Laissac, cne Bertholène]
+	\end{quotation}
+
+	\noindent ou à désambiguïser deux entités homonymes :
+
+	\begin{quotation}
+		Droit [ensemble des lois et des règlements]
+	\end{quotation}
+
+	\begin{quotation}
+		Droit [impositions ou taxes]
+	\end{quotation}
+
+	\begin{quotation}
+		Droit [privilèges, pouvoirs]
+	\end{quotation}
+	
+	De la même manière, un renvoi vers une entrée peut être signifié par plusieurs séparateurs sans que cela n'ait une réelle signification sur le lien entre les entités :
+	
+	\begin{quotation}
+		Élargissements de prisonniers, v. liberté, relâchements
+	\end{quotation}
+
+	\begin{quotation}
+		Envoyés, v. aussi ambassadeurs
+	\end{quotation}
+
+	\begin{quotation}
+		Recours , — au roi, cf. recours à l'arbitrage
+	\end{quotation}
+	
+	On trouve également quelques entrées tellement conséquentes qu'elles peuvent contenir plusieurs niveau de détail. Il faut alors dans ce cas savoir faire la part entre les blocs qui sont uniquement des sous-entrées successives et ceux qui constituent un niveau de détail supplémentaire dépendant directement d'une sous-entrée. [\textbf{Exemple de Paris, photos à réaliser}]. De même, certains renvois vers l'inventaire sont présents sous formes factorisée, par exemple "1852-1854". Il faut alors développer ce renvoi pour permettre la réalisation des liens entre l'entrée d'index et les entrées d'inventaire "1852", "1853" et "1854".
+	
+	Pour finir, on compte quelques éléments de simplification systématique des données au sein des entrées qu'il nous a fallu rétablir pour permettre au mieux l'automatisation de la création de lien entre les entités. Par exemple l'entrée
+	
+	\begin{quotation}
+		Acy, v. J. d', Isabelle d'
+	\end{quotation}
+
+	\noindent comporte deux renvois vers "J. d'Acy" et "Isabelle d'Acy". Si l'humain peut facilement comprendre qu'il y a une lacune à compléter lorsqu'il réalise sa recherche, l'automatisation de la procédure nécessite que le renvoi corresponde exactement à l'entrée vers laquelle il pointe. Nous avons donc pour cela identifié toutes les entrées de cette forme avec l'expression régulière ">([\,\^\,,$\backslash$s]*)(.*[\,$\hat{}$\,o]v. [A-Z].*)$\backslash$s(d[\,$\hat{}$\,$\backslash$)]{1,3})($\backslash$)?)</term>" et nous les avons transformées pour qu'elles prennent la forme
+	
+	\begin{quotation}
+		Acy, v. J. d'Acy, Isabelle d'Acy
+	\end{quotation}
+
+	\noindent Nous avons ici aussi réalisé cette étape de manière semi-automatisée pour éviter les éventuels effets de bord.
 	
 	\section{Multiplication des erreurs avec l’allongement de la chaîne de traitement}
 	
-	\subsection{Erreurs originelle, erreurs d’OCR}
+	\subsection{Erreurs de ROC et erreurs originelles}
 	
-	\subsection{Erreurs manuelles, erreurs automatiques}
+	Les éléments que nous venons d'aborder sont autant de frein à la réutilisation des données contenues dans l'index, mais ils sont tous issus de la mise en forme de l'ouvrage par l'auteur. Cependant, cette complexité n'est pas la seule que nous avons du affronter au cours de notre stage. Nous avons aussi été confronté à un certain nombre d'erreurs au sein des entrées qui ont également freiné notre action. Les plus fréquentes sont celles issues de la transcription du texte par ROC : confusion "l" et "i", "]" et "l" ou "]" et ")". La première erreur peut nuire notamment dans la bonne réalisation des renvois, les deux suivantes sont plus gênantes encore car elles nuisent à la segmentation des données. Nous avons donc repéré systématiquement toutes les entrées qui possèdent un crochet ouvrant sans crochet fermant ou le contraire afin de rétablir l'état originel des données et permettre la réalisation automatique de l'étape de segmentation que nous avons décrite plus haut. Ces erreurs s'accompagnent également de quelques erreurs natives de l'index comme l'utilisation de parenthèses à la place de crochets, l'oubli de crochets fermants, le rangement alphabétique des mots ou encore dans leur orthographe [\textbf{Mettre les exemples en annexe + penser à Étrépagny dans l'index papier}]
 	
+	Quelques erreurs se sont également glissées dans la séparation entre les entrées :
 	
-		Il y a deux articles de Caroline Parfait sur l'influence de l'OCR dans la NER
+	\begin{quotation}
+               	<seg>\\
+					\indent\indent<term>Fondations pieuses de Philippe le Bel :</term>\\
+					\indent\indent<num>\\
+						\indent\indent\indent<idno>181</idno>, <idno>253</idno>, <idno>262</idno>, <idno>284</idno>,
+						\indent\indent\indent<idno>293</idno>, <idno>317</idno>, <idno>343</idno>, <idno>344</idno>,
+						\indent\indent\indent<idno>414</idno>, <idno>433</idno>, <idno>450</idno>, <idno>491</idno>,
+						\indent\indent\indent<idno>562</idno>, <idno>579</idno>, <idno>618</idno>, <idno>637</idno>,
+						\indent\indent\indent<idno>672</idno>, <idno>689</idno>, <idno>708</idno>, <idno>919</idno>,
+						\indent\indent\indent<idno>1003</idno>, <idno>1098</idno>, <idno>1117</idno>, 
+						\indent\indent\indent <idno>1118</idno>, 
+						<idno>1170</idno>, <idno>1215</idno>, 
+						\indent\indent\indent <idno>1279</idno>, <idno>1349</idno>, 
+						<idno>1393</idno>, 
+						\indent\indent\indent <idno>1436</idno>, <idno>1547</idno>, <idno>1659</idno>,
+						\indent\indent\indent <idno>1744</idno>, <idno>1790</idno>, <idno>1814</idno>, 
+						\indent\indent\indent <idno>1839</idno>, 
+						<idno>2113</idno>, <idno>2148</idno>, 
+						\indent\indent\indent<idno>2153</idno>, <idno>2257</idno>, 
+						<idno>2285</idno>,
+						 \indent\indent\indent — de ses prédécesseurs : <idno>1151</idno>, <idno>2210</idno>, 
+						 \indent\indent\indent — de la reine-mère : <idno>1321</idno>, <idno>1565</idno>, \indent\indent\indent<idno>1939</idno>\\
+					\indent\indent</num>\\
+				\indent</seg>
+	\end{quotation}
 	
-	Article sur l'influence de la qualité d'OCR dans l'entity linking : 
-	https://hal.archives-ouvertes.fr/hal-02557116/document
+	\noindent Leur identification nous a permis de rétablir un certain nombre d'entrées qui étaient soit cachées au sein de la balise "term" (elles sont dans ce cas difficile à repérer car il n'y a pas de séparation systématique entre les deux entrées) soit à la fin de la balise "num" (nous les avons dans ce cas trouvées avec l'expression régulière "[A-Za-z]" appliquée à la forumule xpath "num/text()"). 
 	
-	Thèse Yoann Dupont parle de la structure des entités nommées et de du modèle en relation des entités (intéressant par rapport à ce qu'on a fait avec Heurist)
+	\subsection{Erreurs automatiques et erreurs manuelles}
 	
-	Je sais plus si j'en parle ailleurs dans mon plan, mais pour la notion de legacy data, il faut aussi voir Scheitauer (aussi pour la REN d'ailleurs)
+	Ces erreurs dans le découpage des données s'accompagnent également d'erreurs dans leur traitement automatique. Le travail de reconstitution des sous-entrées que nous avons décrit au chapitre 3 s'est accompagné d'une génération importante d'incohérences que nous avons dû appréhender et corriger. Celles-ci se présentent notamment dans le choix de la chaîne de caractère qui fonde le morceau d'entrée générale à répéter pour former la sous-entrée :
 	
-	Pour la suite, sur le chapitre sur l'alignement d'entités géographiques avec Geonames et DicoTopo, ça peut être intéressant et sur le parsing des noms de lieux : https://hal.archives-ouvertes.fr/hal-02141257
-	-> + ça parle aussi du lien noms personnes / lieux et des difficultés avec les lieux non-anglais et non-modernes
+	\begin{quotation}
+		Autorisation par le roi de France , — par le roi d’Angleterre
+	\end{quotation}
+	
+	\noindent La répétition de "par le roi de France" est ici inutile, et la chaîne doit être simplifiée en :
+	
+	\begin{quotation}
+		Autorisation , — par le roi d’Angleterre
+	\end{quotation}
+
+	\noindent Il est également arrivé que l'erreur concerne le choix du mot à répéter, ce qui a par exemple formé l'entrée
+
+	\begin{quotation}
+		Aumônes du roi de France ou à son nom , — v. confirmations par Philippe le
+	Bel
+	\end{quotation}
+	
+	\noindent à la place de
+	
+	\begin{quotation}
+		Autorisations du roi de France ou à son nom , — v. confirmations par Philippe le	Bel
+	\end{quotation}
+
+	Des erreurs se sont également glissées dans la création des liens au moment du choix de l'entité vers laquelle pointer. La méthode utilisée consiste en effet à trouver dans l'index la première chaîne de caractère correspondant à l'élément recherché afin d'éviter les ambiguïtés provoquées par la répétition des entrées générales dans le corps des sous-entrées. Or ce processus a généré quelques incohérences : par exemple le renvoi "v. Agen" pointait dans un premier temps vers l'entrée "Agent" de la table des matière car c'était la première dans l'ordre du fichier à commencer par la chaîne de caractère "Agen".
+	
+	Ces erreurs automatiques se sont également accompagnées d'erreurs manuelles issues d'une mauvaise compréhension de certaines situations. Par exemple, dans l'entrée
+	
+	\begin{quotation}
+		<term type="place">Fontaine-le-Port [Seine-et-Marne, con Le Châtelet-en-Brie] , —
+			v. Port (Le) [2037]</term>
+	\end{quotation}
+	
+	\noindent la référence "2037" a dans un premier temps été compris comme un renvoi vers l'inventaire qui aurait été indiqué d'une manière inhabituelle. Nous l'avons donc rétabli sous la même forme que les autres :
+	
+	\begin{quotation}
+		<num>\\
+		\indent\indent<idno>2037</idno>\\
+		\indent</num>
+	\end{quotation}
+
+	\noindent Or ce renvoi a ici une toute autre signification. La chaîne "Port (Le)" peut renvoyer vers pas moins de quatre entrées différentes et l'indication "[2037]" permet de désambiguïser la situation en précisant l'entrée vers laquelle pointe ce renvoi, ici :
+	
+	\begin{quotation}
+            <p>\\
+				\indent\indent<seg>\\
+				\indent\indent\indent<term type="place">Port (Le) [Port de l'abbaye de Barbeau à Fontaine-le-Port,
+				Seine-et-Marne, con Le Châtelet-en-Brie]</term>\\
+				\indent\indent\indent<num>\\
+				\indent\indent\indent\indent<idno>2037</idno>.\\
+				\indent\indent\indent</num>\\
+				\indent\indent</seg>\\
+				\indent</p>
+	\end{quotation}
+	
+	\section*{Conclusion}
+	
+	En conséquence, nous avons vu que la compréhension d'un instrument de travail papier n'est pas un processus évident. Le traitement numérique de l'index nous a ici permis d'aborder les différents problèmes liés à l'analyse et la segmentation des entrées. Nous avons tout d'abord travaillé à la reconnaissance de la typologie, puis à celle des différentes parties qui les composent. Nous avons ensuite abordé les différents cas spécifiques qui se sont présentés à nous ainsi que les problèmes liés à la compréhension des caractères utilisés. Nous avons enfin traité les cas d'erreurs repérées au cours du processus, qu'elles soient issues du document originel, de la transcription par OCR, des traitements automatiques antérieurs ou mêmes de nos propres manipulations.
+	
+	Ces différents éléments nous ont permis de voir que les \textit{legacy data} peuvent être complexes à appréhender lorsque leur forme n'est pas pleinement systématisée. L'édition repose ici sur une forte économie de caractères qui tend à accroître les cas de polysémie. Si les recherches récentes ont permis de montrer que les modèles d'apprentissage de liage d'entités disposent d'une forme de plasticité qui leur permet de rester efficaces malgré la présence de bruit dans les données\footcite{linhares_pontes_impact_2019, koudoro-parfait_reconnaissance_2022}, notre travail de constitution d'un référentiel a largement été impacté par ces difficultés. Nous avons exposés ici celles qui sont le plus marquantes pour comprendre le travail que nous avons effectué, mais nous aurons l'occasion d'en présenter d'autres tout au long de nos explications sur le processus de travail.
 	
 	\chapter{Analyser le lien entre les entités}
 	
+	Au cours du Chapitre précédent consacré aux difficultés associées à la segmentation et au traitement des données de l'index, nous avons eu l'occasion d'aborder à plusieurs reprises des problématiques liées directement à la restitution automatique des liens entre les entités. Ces liens sont en effet une composante essentielle de cet instrument de travail et permettent de transformer une simple liste d'entités nommées repérées dans les texte en une réelle ontologie sous forme papier. Leur en compte est donc un enjeu essentiel pour développer la tâche du liage d'entités et représente la principale valeur ajoutée de notre travail au projet Himanis. Nous avons déjà décris au Chapitre 3 le projet originel qui a guidé les premiers traitements numériques de l'index, ce chapitre sera donc consacré à la prise en compte des relations entre les entrées de l'index dans le cadre de leur transformation en un référentiel mobilisable pour le liage d'entités.
+	
+	Nous retracerons les différentes étapes de compréhension et d'utilisation de ces liens. Pour cela, nous décrirons dans un premier temps le processus de transformation utilisé pour manifester le lien entre les entités. Ensuite, nous proposerons une description des différentes manifestations possibles de ces liens. Enfin, nous nous intéresserons à leur caractérisation en vue de la création d'une base de données relationnelle.
+	
+	
+	\section{Numériser les liens entre les entrées d’index}
+	
+	On va peut-être déjà commencer par décrire ce que fait la première feuille XSL non ?
+	
 	Ici il faut parler de l'étape de création des identifiants qui a éliminé certaines données (cf début chapitre 4 et les entrées de noms avec un renvoi implicite.)
+	
+	\subsection{Des entrées hiérarchisées ?}
+	\subsection{De nombreux renvois à interpréter}
+	\section{Des liens implicites à prendre en compte}
+	\subsection{Différentes classifications de référentiels anthroponymiques}
+	
+	Jean de, v. Jean de, Jean André ou André Jean, ...
+	
+	\subsection{Les marqueurs de ponctuation}
+	
+	Pas oublier les ":" pour la séparation entre les entrées et certains renvois, on a mis longtemps à le comprendre
+	
+	\section{Une caractérisation complexe}
+	\subsection{Différentes formes de « sous-entrées »}
+	
+	Ici on peut parler des différentes caractérisations en fonction du type (sujet, personne, lieu)
+	
+	\subsection{Retracer le lien entre les entrées d’index et les entrées d’inventaire}
+	
+	
+	Attention à bien reprendre le chapitre 4, notamment au niveau des annexes à réaliser et de la segmentation des exemples qui en résulte !
+	
+	Thèse Yoann Dupont parle de la structure des entités nommées et de du modèle en relation des entités (intéressant par rapport à ce qu'on a fait avec Heurist)
 	
 	\chapter{Transformer l’index en une base de données relationnelle}
 	
@@ -657,7 +869,10 @@
 	
 	\chapter{Enrichir les données à l’aide d’un référentiel externe}
 	
-	On parlera ici de la segmentation des toponymes pour en extraire les différentes parties comme on a segmenté les entrées.
+	On parlera ici de la segmentation des toponymes pour en extraire les différentes parties comme on a segmenté les entrées. + du problèmes des tirets pour les noms composés.
+	
+		Pour la suite, sur le chapitre sur l'alignement d'entités géographiques avec Geonames et DicoTopo, ça peut être intéressant et sur le parsing des noms de lieux : https://hal.archives-ouvertes.fr/hal-02141257
+	-> + ça parle aussi du lien noms personnes / lieux et des difficultés avec les lieux non-anglais et non-modernes
 	
 	\chapter{Mise à disposition d'un nouveau référentiel ?}
 	
@@ -669,6 +884,8 @@
 		\caption{Visualisation d'un élément "Act" dans Arkindex. Cet élément est le parent de plusieurs éléments "Text zone" qui représentent chacun une portion du texte décrit par l'élément "Act".}
 		\label{Act_on_Arkindex}
 	\end{figure}
+	
+	\chapter{Résultats du modèle développé}
 	
 	\chapter*{Conclusion générale}
 	
@@ -701,6 +918,8 @@
 	Ces données doivent être ordonnées et accompagnées d'un fichier \texttt{lisezMoi} (format \texttt{.txt} ou \texttt{.md}), présent à la racine du dossier contenant les données. Ce fichier doit décrire l'arborescence des fichiers et dossiers et la fonction de chacun des fichiers.
 	
 	Le principe important à retenir est celui de la \textbf{reproductibilité} du travail.
+	
+	Référentiel au singulier ou au pluriel ?
 	
 	\part{Une autre partie}
 	
