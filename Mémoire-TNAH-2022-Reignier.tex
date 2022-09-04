@@ -21,6 +21,7 @@
 
 \usepackage{lettrine} % lettrines
 \usepackage{listings}
+\urlstyle{same} % Pour des url soient dans le même style que le reste
 
 %Pour importer des images
 \usepackage{subcaption}
@@ -134,13 +135,13 @@
 	
 	\textbf{Mots-clés~:} TNAH, IRHT, Himanis, Trésor des chartes, Archives Nationales, ROC, Numérisation d'instruments de recherche, Alignement de référentiels, REM, REN, Machine learning, Intelligence artificielle, Reconnaissance d'écritures manuscrites, identity linking.
 	
-	\textbf{Informations bibliographiques~:} Reignier Virgile, \textit{Vers l’indexation automatique du Trésor des chartes. Constitution, alignement et utilisation d'un référentiel d’entités nommées au sein du projet Himanis.}, mémoire de master \og{}Technologies numériques appliquées à l'histoire\fg{}, dir. Dominique Stutzmann et Thibault Clérice, École nationale des chartes, 2022.
+	\textbf{Informations bibliographiques~:} Reignier Virgile, \textit{Vers l’indexation automatique du Trésor des chartes. Constitution, alignement et utilisation d'un référentiel d’entités nommées au sein du projet Himanis}, mémoire de master \og{}Technologies numériques appliquées à l'histoire\fg{}, dir. Dominique Stutzmann et Thibault Clérice, École nationale des chartes, 2022.
 	
 	\chapter{Remerciements}
 	
 	\lettrine{B}lablabla remerciements\dots
 	
-		Faire une liste des abréviations avec : REN, TAL, REM, IRHT, BVMM, EAD, TEI, XML, XSL, CNRS
+		Faire une liste des abréviations avec : REN, TAL, REM, IRHT, BVMM, EAD, TEI, XML, XSL, CNRS, CTHS, API
 		
 		Utiliser package %\\usepackage{acro}
 		%\DeclareAcronym{api}{short = API, long = Application Programming Interface}
@@ -273,7 +274,7 @@
 	
 	Arkindex est une interface créée par l'entreprise Teklia dans le but de gérer le traitement automatique d'un grand nombre de documents numérisés. Elle permet l'import d'images via des manifestes sous format IIIF (International Image Interoperability Framework), leur annotation manuelle et leur analyse automatique (structure et composition de l'image, reconnaissance de caractères et d'écritures manuscrites, extraction d'entités nommées)\footcite{noauthor_teklia_nodate}. Dans le cadre de notre travail, nous avons principalement utilisé l'API d'Arkindex pour importer les données nécessaires à la mise en place du liage d'entités. La documentation associée à cette API est disponible ici : \url{https://arkindex.teklia.com/api-docs/}.
 	
-	Pour faciliter la navigation dans les documents, le corpus du Trésor des chartes a été chargé au sein de l'interface pour former la collection \og Himanis | TEKLIA processing\fg{} contenant 200 registres numérisés. Les images ont ensuite été segmentées en fonction des zones de texte sous forme d'éléments \og Paragraph\fg{} et \og Text Line\fg{} comme présenté dans la Figure \ref{Page_Initiale_Arkindex}. Par la suite, des techniques de lecture automatique ont été utilisées pour lire le texte contenu dans ces éléments via un modèle de REM.
+	Pour faciliter la navigation dans les documents, le corpus du Trésor des chartes a été chargé au sein de l'interface pour former la collection \og Himanis | TEKLIA processing\fg{} contenant 200 registres numérisés. Les images ont ensuite été segmentées en fonction des zones de texte sous forme d'éléments \og Paragraph\fg{} et \og Text Line\fg{} comme présenté dans la figure \ref{Page_Initiale_Arkindex}. Par la suite, des techniques de lecture automatique ont été utilisées pour lire le texte contenu dans ces éléments via un modèle de REM.
 	
 	\begin{figure}
 		\centering
@@ -302,11 +303,11 @@
 		\label{json_initial}
 	\end{figure}
 	
-	Les actes se présentent sous la forme d'un élément dictionnaire (\textit{cf}. Figure \ref{json_initial}) dont les clefs sont le numéro du volume, le numéro de l'acte dans le volume, le folio de début de l'acte, le folio de fin de l'acte, la langue, la référence de l'inventaire, le numéro de l'acte dans cet inventaire, le nom de l'image dans la BVMM, la date, la description de l'acte par l'inventaire et plusieurs numérotations provisoires utilisées au cours de ce travail. Une dernière clef contient sous forme d'une liste de dictionnaires l'ensemble des données sur les zones de texte qui forment ces actes. Ces données sont issues de la segmentation en acte de la transcription automatique des images des manuscrits\footnote{Il s'agit ici d'une transcription inédite réalisée à l'aide du logiciel Transkribus.}. Chaque zone de texte est composée de la transcription ligne à ligne, de la référence de l'image, des coordonnées de la zone dans l'image, de l'url correspondant à ces coordonnées et de la partie de l'acte que représente cette zone. Cette dernière métadonnée peut prendre plusieurs formes : \og AC\fg{} pour les actes composés d'une seule zone de texte, \og AI\fg{}, \og AM\fg{} et \og AF\fg{} pour les actes composés de plusieurs zones de textes successives ou \og AS\fg{} pour les zones de textes qui ne sont pas à la suite des zones précédentes.
+	Les actes se présentent sous la forme d'un élément dictionnaire (\textit{cf}. figure \ref{json_initial}) dont les clefs sont le numéro du volume, le numéro de l'acte dans le volume, le folio de début de l'acte, le folio de fin de l'acte, la langue, la référence de l'inventaire, le numéro de l'acte dans cet inventaire, le nom de l'image dans la BVMM, la date, la description de l'acte par l'inventaire et plusieurs numérotations provisoires utilisées au cours de ce travail. Une dernière clef contient sous forme d'une liste de dictionnaires l'ensemble des données sur les zones de texte qui forment ces actes. Ces données sont issues de la segmentation en acte de la transcription automatique des images des manuscrits\footnote{Il s'agit ici d'une transcription inédite réalisée à l'aide du logiciel Transkribus.}. Chaque zone de texte est composée de la transcription ligne à ligne, de la référence de l'image, des coordonnées de la zone dans l'image, de l'url correspondant à ces coordonnées et de la partie de l'acte que représente cette zone. Cette dernière métadonnée peut prendre plusieurs formes : \og AC\fg{} pour les actes composés d'une seule zone de texte, \og AI\fg{}, \og AM\fg{} et \og AF\fg{} pour les actes composés de plusieurs zones de textes successives ou \og AS\fg{} pour les zones de textes qui ne sont pas à la suite des zones précédentes.
 	
 	\subsection{Normalisation des éléments}
 	
-	Afin d'envisager l'import de toutes ces données au sein d'Arkindex\footnote{Nous décrirons plus précisément ce travail au chapitre 8}, nous avons été confrontés au problème de la normalisation des données. Par exemple, les dates peuvent se présenter sous différentes formes :
+	Afin d'envisager l'import de toutes ces données au sein d'Arkindex\footnote{Nous décrirons plus précisément ce travail au chapitre 8.}, nous avons été confrontés au problème de la normalisation des données. Par exemple, les dates peuvent se présenter sous différentes formes :
 	
 	\begin{quotation}
 		\textquotesingle Date\textquotesingle : \textquotesingle 1317, 16 février\textquotesingle 
@@ -320,7 +321,7 @@
 		\textquotesingle Date\textquotesingle : \textquotesingle 1304-1305\textquotesingle
 	\end{quotation}
 	
-	\noindent Nous avons donc écrit un script python contenant un arbre de décision pour transformer ces dates en fonction de la manière dont elles se présentent\footnote{	\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Normalize_json/Normalize_date.py}.}. Une fois normalisée, la date prend la forme d'une liste contenant soit un élément dictionnaire unique dans le cas d'une date précise :
+	\noindent Nous avons donc écrit un script python contenant un arbre de décision pour transformer ces dates en fonction de la manière dont elles se présentent\footnote{	\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Normalize_json/normalize_date.py}.}. Une fois normalisée, la date prend la forme d'une liste contenant soit un élément dictionnaire unique dans le cas d'une date précise :
 
 	\begin{quotation}
 		\textquotesingle Date-normalisee\textquotesingle: [\\
@@ -372,7 +373,7 @@
 	
 	\pagebreak
 	
-	\noindent Nous avons ici aussi rédigé un script python pour normaliser ces données sous une forme unique\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Normalize_json/Normalize_language.py}.}. Le résultat se présente donc sous la forme d'un élément dictionnaire contenant la norme utilisée\footnote{Pour la liste des codes décrits par la norme iso-639-3, \textit{cf}. \url{https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-2}.} et la liste des langues reconnues encodées en fonction de cette norme :
+	\noindent Nous avons ici aussi rédigé un script python pour normaliser ces données sous une forme unique\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Normalize_json/normalize_language.py}.}. Le résultat se présente donc sous la forme d'un élément dictionnaire contenant la norme utilisée\footnote{Pour la liste des codes décrits par la norme iso-639-3, \textit{cf}. \url{https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-2}.} et la liste des langues reconnues encodées en fonction de cette norme :
 	
 	\begin{quotation}
 				\textquotesingle normalized\_language\textquotesingle : \{\\
@@ -422,7 +423,7 @@
 	
 	\section*{Conclusion}
 	
-	Ce chapitre nous a permis d'aborder les différents éléments disponibles grâce aux recherches réalisées au sein du projet Himanis et dans les opérations qui lui ont succédés. Ces recherches ont abouti au développement de modèles de REM et de REN applicables aux textes médiévaux. Par la suite, ces travaux ont permis de proposer une transcription automatique des registres du Trésor des chartes et un travail de transformation a été réalisé pour associer la structure physique à la structure logique des textes et permettre un alignement de cette transcription avec les données présentes dans les inventaires. Après quelques modifications réalisées pendant le stage, nous disposons maintenant d'un fichier complet décrivant l'ensemble du contenu des registres JJ 35 à JJ 91. La Figure \ref{json_final} présente un exemple du format final des actes décris dans ce fichier.
+	Ce chapitre nous a permis d'aborder les différents éléments disponibles grâce aux recherches réalisées au sein du projet Himanis et dans les opérations qui lui ont succédés. Ces recherches ont abouti au développement de modèles de REM et de REN applicables aux textes médiévaux. Par la suite, ces travaux ont permis de proposer une transcription automatique des registres du Trésor des chartes et un travail de transformation a été réalisé pour associer la structure physique à la structure logique des textes et permettre un alignement de cette transcription avec les données présentes dans les inventaires. Après quelques modifications réalisées pendant le stage, nous disposons maintenant d'un fichier complet décrivant l'ensemble du contenu des registres JJ 35 à JJ 91. La figure \ref{json_final} présente un exemple du format final des actes décris dans ce fichier.
 	
 	
 	\chapter{\textit{Legacy Metadata} : numérisation et exploitation des instruments de recherche}
@@ -435,7 +436,7 @@
 	
 	\subsection{Inventaires systématiques et géographiques}
 	
-	Corpus incontournable pour étudier le pouvoir des rois de France à la fin du Moyen Âge, le Trésor des chartes a été l'objet de nombreuses études qui ont permis d'en diffuser largement le contenu. Ces travaux ont été complétés par plusieurs projets archivistique de description systématique des registres pour faciliter l'accès au contenu de ce fonds\footcite{stutzmann_recherche_2017}. L'outil le plus complet et le plus précis est l'inventaire analytique des registres du Trésor des chartes publié par les Archives Nationales entre 1958 et 1999\footcite{glenisson_registres_1958}. Il propose une analyse systématique des actes contenus dans les registres JJ 37 à JJ 79B avec le rang de l'acte dans l'inventaire, les dates de temps et de lieu, un résumé de l'acte, le numéro de l'acte dans le volume, le folio de début (et parfois de fin) et de potentiels renvois (\textit{cf}. Figure \ref{inventaire_papier}).
+	Corpus incontournable pour étudier le pouvoir des rois de France à la fin du Moyen Âge, le Trésor des chartes a été l'objet de nombreuses études qui ont permis d'en diffuser largement le contenu. Ces travaux ont été complétés par plusieurs projets archivistique de description systématique des registres pour faciliter l'accès au contenu de ce fonds\footcite{stutzmann_recherche_2017}. L'outil le plus complet et le plus précis est l'inventaire analytique des registres du Trésor des chartes publié par les Archives Nationales entre 1958 et 1999\footcite{glenisson_registres_1958}. Il propose une analyse systématique des actes contenus dans les registres JJ 37 à JJ 79B avec le rang de l'acte dans l'inventaire, les dates de temps et de lieu, un résumé de l'acte, le numéro de l'acte dans le volume, le folio de début (et parfois de fin) et de potentiels renvois (\textit{cf}. figure \ref{inventaire_papier}).
 	
 	\begin{figure}
 		\centering
@@ -465,11 +466,11 @@
 		\label{inventaire_TEI}
 	\end{figure} 
 	
-	Comme présenté par la Figure \ref{inventaire_TEI}, chaque acte y est encodé au sein d'un élément <text> disposant d'un attribut @xml:id permettant de lui associer un identifiant unique. Les balises enfants contiennent ensuite le rang de l'acte dans l'inventaire, les dates de lieu et de temps, l'analyse du texte et sa manifestation physique dans les registres du Trésor des chartes. Les fichiers ont par la suite été mis en ligne dans le répertoire Github du projet\footnote{\url{https://github.com/oriflamms/himanis/tree/master/Inventories}.} et leur contenu a servi à la constitution d'un fichier sous format JSON décrivant les actes des registres inventoriés\footnote{\textit{Cf}. chapitre 2.}.
+	Comme présenté par la figure \ref{inventaire_TEI}, chaque acte y est encodé au sein d'un élément <text> disposant d'un attribut @xml:id permettant de lui associer un identifiant unique. Les balises enfants contiennent ensuite le rang de l'acte dans l'inventaire, les dates de lieu et de temps, l'analyse du texte et sa manifestation physique dans les registres du Trésor des chartes. Les fichiers ont par la suite été mis en ligne dans le répertoire Github du projet\footnote{\url{https://github.com/oriflamms/himanis/tree/master/Inventories}.} et leur contenu a servi à la constitution d'un fichier sous format JSON décrivant les actes des registres inventoriés\footnote{\textit{Cf}. chapitre 2.}.
 	
 	\subsection{Numérisation de l’index}
 
-	Ce travail de segmentation du contenu des instruments de recherche pour l'organiser sous le format XML-TEI a également été réalisé pour les différents index qui accompagnent ces ouvrages. Chaque entrée est insérée dans une balise <p> qui peut contenir une ou plusieurs balises <seg> en fonction du nombre de sous-entrées présentes. L'entité et sa description sont ensuite insérées dans une balise <term> et les renvois vers les actes décrits par l'index sont rassemblés dans une balise <num>. Chaque renvoi est ensuite inséré dans une balise <idno> (\textit{cf}. Figure \ref{index_TEI}).
+	Ce travail de segmentation du contenu des instruments de recherche pour l'organiser sous le format XML-TEI a également été réalisé pour les différents index qui accompagnent ces ouvrages. Chaque entrée est insérée dans une balise <p> qui peut contenir une ou plusieurs balises <seg> en fonction du nombre de sous-entrées présentes. L'entité et sa description sont ensuite insérées dans une balise <term> et les renvois vers les actes décrits par l'index sont rassemblés dans une balise <num>. Chaque renvoi est ensuite inséré dans une balise <idno> (\textit{cf}. figure \ref{index_TEI}).
 	
 	\begin{figure}
 		\centering
@@ -478,13 +479,13 @@
 		\label{index_TEI}
 	\end{figure} 
 	
-	Une des difficultés de ce travail a été de reconstituer les sous-entrées de l'index. Le corps de certaines est en effet directement dépendant de celui de l'entrée principale, ce qui rend délicat sa manipulation comme une entité isolée. Par exemple l'entrée
+	Une des difficultés de ce travail a été de reconstituer les sous-entrées de l'index. Le corps de certaines est en effet directement dépendant de celui de l'entrée principale, ce qui rend délicat sa manipulation comme une entité isolée. Par exemple l'entrée :
 	
 	\begin{quotation}
 		Récupérations : des arrérages de bois
 	\end{quotation}
 
-	\noindent est suivie de la sous-entrée
+	\noindent est suivie de la sous-entrée :
 	
 	\begin{quotation}
 		des droits royaux
@@ -504,7 +505,7 @@
 
 	\subsection{Le projet : mettre à plat les entrées d’index}
 	
-	L'objectif de ce travail était ainsi de faciliter l'association de chaque entrée d'index aux entrées d'inventaire qui lui correspondent. En effet, le but du processus était d'utiliser cet index comme vérité terrain pour développer l'apprentissage du liage d'entités. L'index a donc été mis à plat en fonction de cette logique : toutes les balises <idno> dans les entrées d'index ont été utilisées pour identifier l'entrée d'inventaire contenant la notion décrite par cette entrée. Afin que le lien soit bien manifeste, les entrées d'inventaires décrites en TEI ont été enrichies d'une balise <index> contenant l'ensemble des entrées d'index renvoyant vers l'acte en question. La Figure \ref{index_in_inventaire} donne un exemple de ces entrées d'index encapsulées dans des éléments <term> et disposant d'un attribut @type dont la valeur est \og place\fg{}, \og person\fg{} ou \og subject\fg{} en fonction du type d'entrée dont il s'agit\footnote{A propos de la typologie des entrées, \textit{cf}. chapitre 4.}.
+	L'objectif de ce travail était ainsi de faciliter l'association de chaque entrée d'index aux entrées d'inventaire qui lui correspondent. En effet, le but du processus était d'utiliser cet index comme vérité terrain pour développer l'apprentissage du liage d'entités. L'index a donc été mis à plat en fonction de cette logique : toutes les balises <idno> dans les entrées d'index ont été utilisées pour identifier l'entrée d'inventaire contenant la notion décrite par cette entrée. Afin que le lien soit bien manifeste, les entrées d'inventaires décrites en TEI ont été enrichies d'une balise <index> contenant l'ensemble des entrées d'index renvoyant vers l'acte en question. La figure \ref{index_in_inventaire} donne un exemple de ces entrées d'index encapsulées dans des éléments <term> et disposant d'un attribut @type dont la valeur est \og place\fg{}, \og person\fg{} ou \og subject\fg{} en fonction du type d'entrée dont il s'agit\footnote{A propos de la typologie des entrées, \textit{cf}. chapitre 4.}.
 	
 	\begin{figure}
 		\centering
@@ -553,12 +554,12 @@
 	\end{quotation}
 
 	\begin{quotation}
-		<term>A</term>
+		<term>T</term>
 	\end{quotation}
 
-	\noindent Nous avons ici profité de l'étape de création d'identifiants uniques pour éliminer ces éléments de la suite du processus\footnote{Nous traiterons plus précisément toutes les étapes associées à la gestion des liens entre les entrées au chapitre 5.}. Nous avons cependant utilisé l'indication offerte par ces titres sur la séparation entre les deux parties l'index. Celui-ci est en effet constitué d'abord d'un index des matières qui recense tous les sujets mentionnés dans les actes, puis d'un index des noms de personnes et de lieux. 
+	\noindent Nous avons ici profité de l'étape de création d'identifiants uniques pour éliminer ces éléments de la suite du processus\footnote{Nous traiterons plus précisément toutes les étapes associées à la gestion des liens entre les entrées au chapitre 5.}. Nous avons cependant utilisé l'indication offerte par ces titres sur la séparation entre les deux parties de l'index. Celui-ci est en effet constitué d'abord d'un index des matières qui recense tous les sujets mentionnés dans les actes, puis d'un index des noms de personnes et de lieux. 
 	
-	Cette séparation a servi de base à l'établissement d'une typologie des entrées. Toutes les entrées présentes dans l'index des matières ont été associées au type \og subject\fg{} tandis que les entrées de l'index des noms de personnes et de lieux ont dû être analysées pour discriminer celles qui relèvent du type \og person\fg{} et celles qui relèvent du type \og place\fg{}. Cette dernière étape avait déjà été anticipée avant le début de mon stage à partir d'un principe simple : les entrées disposant de crochets ont été marquées comme des \og place\fg{} et celles n'en disposant pas comme des \og person\fg{}. Cela donne ainsi le résultat suivant : 
+	Cette séparation a servi de base à l'établissement d'une typologie des entrées. Toutes les entrées présentes dans l'index des matières ont été associées au type \og subject\fg{} tandis que les entrées de l'index des noms de personnes et de lieux ont dû être analysées pour discriminer celles qui relèvent du type \og person\fg{} et celles qui relèvent du type \og place\fg{}. Cette étape avait déjà été anticipée avant le début de mon stage à partir d'un principe simple : les entrées disposant de crochets ont été marquées comme des \og place\fg{} et celles n'en disposant pas comme des \og person\fg{}. Cela donne ainsi le résultat suivant : 
 	
 	\begin{quotation}
 		<term type=\textquotesingle place\textquotesingle >Montreuil [Pas-de-Calais]</term>
@@ -597,7 +598,7 @@
 	
 	\subsection{Segmentation des entrées}
 	
-	Une fois ce travail réalisé et l'index mis sous forme d'une table\footnote{Nous décrirons plus précisément cette étape au chapitre 6.}, nous avons pu repérer le contenu des entrées pour en segmenter les différentes parties en fonction du type de données. Nous avons donc rédigé un script python permettant de réaliser cette étape de manière automatisée\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/simplification_entrees.py}.}. Les éléments mis entre crochets ont ainsi été ajoutés dans une colonne \og Détails\fg{} et ceux qui sont précédés d'une virgule dans la colonne \og Supplément\fg{}. Cette étape a également permis de construire une colonne \og Entrée\_simplifiée\fg{} construite à partir de l'entrée originelle après extraction des éléments utilisés pour les autres colonnes. L'entrée 
+	Une fois ce travail réalisé et l'index mis sous forme d'une table\footnote{Nous décrirons plus précisément cette étape au chapitre 6.}, nous avons pu repérer le contenu des entrées pour en segmenter les différentes parties en fonction du type de données. Nous avons donc rédigé un script python permettant de réaliser cette étape de manière automatisée\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/simplification_entrees.py}.}. Les éléments mis entre crochets ont ainsi été ajoutés dans une colonne \og Détails\fg{} et ceux qui sont précédés d'une virgule dans la colonne \og Supplément\fg{}. Cette étape a également permis de construire une colonne \og Entrée\_simplifiée\fg{} construite à partir de l'entrée originelle après extraction des éléments utilisés pour les autres colonnes. L'entrée :
 	
 	\begin{quotation}
 		Chambre aux Deniers, Camera Denariorum [terme encore employé à cette époque pour 	désigner la Chambre des Comptes]
@@ -637,7 +638,7 @@
 		Abandons, v. donations, renonciations, remises
 	\end{quotation}
 
-	\noindent Mais il arrive que la virgule située après un \og v.\fg{} ne sépare pas deux renvois mais soit au contraire une partie de la définition de l'entrée à laquelle la chaîne de caractère fait référence :
+	\noindent Il arrive toutefois que la virgule située après un \og v.\fg{} ne sépare pas deux renvois mais soit au contraire une partie de la définition de l'entrée à laquelle la chaîne de caractère fait référence :
 	
 	\begin{quotation}
 		France , — v. Jeanne, reine de France et de Navarre
@@ -656,7 +657,7 @@
 
 	\noindent Il faut alors développer manuellement ces éléments pour que les liens se réalisent selon le schéma voulu.
 	
-	Nous avons aussi repéré quelques incohérences orthographiques qui ont perturbé la bonne compréhension des renvois. Par exemple \og v. main-morte\fg{} peut faire référence à la même notion mais orthographiée \og mainmorte\fg{}. On peut également remarquer quelques variantes dans les accords comme par exemple \og v. demeure épiscopale\fg{} qui correspond à l'entrée \og demeures épiscopales\fg{}. Ou encore des raccourcis comme pour l'entrée \og Passy (Marie de)\fg{} qui constitue un renvoi implicite vers l'entrée \og Marie, femme de Jean de Passy\fg{}. 
+	Nous avons aussi repéré quelques incohérences orthographiques qui ont perturbé la bonne compréhension des renvois. Par exemple \og v. main-morte\fg{} peut faire référence à une entrée contenant le même mot, mais orthographié \og mainmorte\fg{}. On peut également remarquer quelques variantes dans les accords comme par exemple \og v. demeure épiscopale\fg{} qui correspond à l'entrée \og demeures épiscopales\fg{}. Ou encore des raccourcis comme pour l'entrée \og Passy (Marie de)\fg{} qui constitue un renvoi implicite vers l'entrée \og Marie, femme de Jean de Passy\fg{}. 
 	
 	On peut noter pour finir un certain nombre d'exceptions dans la formalisation des données comme par exemple l'entrée \og Coutumes [droits et redevances]\fg{} dont les sous-entrées sont les seules à disposer de numéros :
 	
@@ -677,7 +678,7 @@
 	
 	\subsection{Analyse fine des caractères}
 	
-	La compréhension du contenu des données nécessite donc ici d'étudier finement les différents séparateurs utilisés entre les éléments et de comprendre les différentes significations qu'ils peuvent prendre. Par exemple, les éléments entre crochets peuvent à la fois servir à définir une notion :
+	La compréhension du contenu des données nécessite donc d'étudier finement les différents séparateurs utilisés entre les éléments et de comprendre les différentes significations qu'ils peuvent prendre. Par exemple, les éléments entre crochets peuvent à la fois servir à définir une notion :
 	
 	\begin{quotation}
 		Acaptes [droits de mutation acquittés au seigneur par le successeur d'un
@@ -720,13 +721,13 @@
 	
 	On trouve également quelques entrées tellement conséquentes qu'elles peuvent contenir plusieurs niveaux de détail. Il faut alors dans ce cas savoir faire la différence entre les blocs qui sont uniquement des sous-entrées successives et ceux qui constituent un niveau de détail supplémentaire dépendant d'une même sous-entrée (\textit{Cf}. Annexe A). De même, certains renvois vers l'inventaire sont présents sous forme factorisée, par exemple \og 1852-1854\fg{}. Il faut alors développer ce renvoi pour permettre la réalisation des liens entre l'entrée d'index et les entrées d'inventaire \og 1852\fg{}, \og 1853\fg{} et \og 1854\fg{}.
 	
-	Pour finir, on compte quelques éléments de simplification systématique des données au sein des entrées qu'il nous a fallu rétablir pour faciliter au mieux l'automatisation de la création des liens entre les entités. Par exemple l'entrée
+	Pour finir, on compte quelques éléments de simplification systématique des données au sein des entrées qu'il nous a fallu rétablir pour faciliter au mieux l'automatisation de la création des liens entre les entités. Par exemple l'entrée :
 	
 	\begin{quotation}
 		Acy, v. J. d', Isabelle d'
 	\end{quotation}
 
-	\noindent comporte deux renvois vers \og J. d'Acy\fg{} et \og Isabelle d'Acy\fg{}. Si le lecteur peut facilement comprendre qu'il y a une lacune à compléter lorsqu'il réalise sa recherche, l'automatisation de la procédure nécessite que le renvoi corresponde exactement à l'entrée vers laquelle il pointe. Nous avons donc pour cela identifié toutes les entrées de cette forme avec l'expression régulière \og >([\,\^\,,$\backslash$s]*)(.*[\,$\hat{}$\,o]v. [A-Z].*)$\backslash$s(d[\,$\hat{}$\,$\backslash$)]{1,3})($\backslash$)?)</term>\fg{} et nous les avons transformées pour qu'elles prennent la forme
+	\noindent comporte deux renvois vers \og J. d'Acy\fg{} et \og Isabelle d'Acy\fg{}. Si le lecteur peut facilement comprendre qu'il y a une lacune à compléter lorsqu'il réalise sa recherche, l'automatisation de la procédure nécessite que le renvoi corresponde exactement à l'entrée vers laquelle il pointe. Nous avons donc pour cela identifié toutes les entrées de cette forme avec l'expression régulière \og >([\,\^\,,$\backslash$s]*)(.*[\,$\hat{}$\,o]v. [A-Z].*)$\backslash$s(d[\,$\hat{}$\,$\backslash$)]{1,3})($\backslash$)?)</term>\fg{} et nous les avons transformées pour qu'elles prennent la forme :
 	
 	\begin{quotation}
 		Acy, v. J. d'Acy, Isabelle d'Acy
@@ -738,7 +739,7 @@
 	
 	\subsection{Erreurs de ROC et erreurs originelles}
 	
-	Les éléments que nous venons d'aborder sont autant de frein à la réutilisation des données contenues dans l'index, mais ils sont tous issus de la mise en forme de l'ouvrage par l'auteur. Cette complexité n'est cependant pas la seule que nous avons du affronter au cours de notre stage. Nous avons aussi été confrontés à un certain nombre d'erreurs au sein des entrées qui ont également freiné notre action. Les plus fréquentes sont celles issues de la transcription du texte par ROC : confusion \og l\fg{} et \og i\fg{}, \og ]\fg{} et \og l\fg{} ou \og ]\fg{} et \og )\fg{}. La première erreur peut nuire notamment dans la bonne réalisation des renvois, les deux suivantes sont plus gênantes encore car elles nuisent à la segmentation des données. Nous avons donc repéré systématiquement toutes les entrées qui possèdent un crochet ouvrant sans crochet fermant ou le contraire afin de rétablir l'état originel des données et permettre la réalisation automatique de l'étape de segmentation que nous avons décrite plus haut. Ces erreurs s'accompagnent également de quelques erreurs natives de l'index comme l'utilisation de parenthèses à la place de crochets, l'oubli de crochets fermants ou encore le mauvais rangement alphabétique des mots (\textit{Cf}. Annexe B)
+	Les éléments que nous venons d'aborder sont autant de frein à la réutilisation des données contenues dans l'index, mais ils sont tous issus de la mise en forme de l'ouvrage par l'auteur. Cette complexité n'est cependant pas la seule que nous avons dû affronter au cours de notre stage. Nous avons aussi été confrontés à un certain nombre d'erreurs au sein des entrées qui ont également freiné notre action. Les plus fréquentes sont celles issues de la transcription du texte par ROC : confusion \og l\fg{} et \og i\fg{}, \og ]\fg{} et \og l\fg{} ou \og ]\fg{} et \og )\fg{}. La première erreur peut nuire notamment dans la bonne réalisation des renvois, les deux suivantes sont plus gênantes encore car elles nuisent à la segmentation des données. Nous avons donc repéré systématiquement toutes les entrées qui possèdent un crochet ouvrant sans crochet fermant ou le contraire afin de rétablir l'état originel des données et permettre la réalisation automatique de l'étape de segmentation que nous avons décrite plus haut. Ces erreurs s'accompagnent également de quelques erreurs natives de l'index comme l'utilisation de parenthèses à la place de crochets, l'oubli de crochets fermants ou encore le mauvais rangement alphabétique des mots (\textit{Cf}. Annexe B)
 	
 	Quelques erreurs se sont également glissées dans la séparation entre les entrées :
 	
@@ -774,20 +775,20 @@
 		Autorisation par le roi de France , — par le roi d’Angleterre
 	\end{quotation}
 	
-	\noindent La répétition de \og par le roi de France\fg{} est ici inutile, et la chaîne doit être simplifiée en
+	\noindent La répétition de \og par le roi de France\fg{} est ici inutile, et la chaîne doit être simplifiée en :
 	
 	\begin{quotation}
 		Autorisation , — par le roi d’Angleterre
 	\end{quotation}
 
-	\noindent Il est également arrivé que l'erreur concerne le choix du mot à répéter, ce qui a par exemple formé l'entrée
+	\noindent Il est également arrivé que l'erreur concerne le choix du mot à répéter, ce qui a par exemple formé l'entrée :
 
 	\begin{quotation}
 		Aumônes du roi de France ou à son nom , — v. confirmations par Philippe le
 	Bel
 	\end{quotation}
 	
-	\noindent à la place de
+	\noindent à la place de :
 	
 	\begin{quotation}
 		Autorisations du roi de France ou à son nom , — v. confirmations par Philippe le	Bel
@@ -795,7 +796,7 @@
 
 	Des erreurs se sont également glissées dans la création des liens au moment du choix de l'entité vers laquelle pointer. La méthode utilisée consiste en effet à trouver dans l'index la première chaîne de caractère correspondant à l'élément recherché afin d'éviter les ambiguïtés provoquées par la répétition des entrées générales dans le corps des sous-entrées. Or ce processus a généré quelques incohérences : par exemple le renvoi \og v. Agen\fg{} pointait dans un premier temps vers l'entrée \og Agent\fg{} de la table des matières car c'était la première dans l'ordre du fichier à commencer par la chaîne de caractère \og Agen\fg{}.
 	
-	Ces erreurs automatiques sont accompagnées d'erreurs manuelles issues d'une mauvaise compréhension de certaines situations. Par exemple, dans l'entrée
+	Ces erreurs automatiques sont accompagnées d'erreurs manuelles issues d'une mauvaise compréhension de certaines situations. Par exemple, dans l'entrée :
 	
 	\begin{quotation}
 		<term type=\textquotesingle place\textquotesingle >Fontaine-le-Port [Seine-et-Marne, con Le Châtelet-en-Brie] , —
@@ -810,7 +811,7 @@
 		\indent</num>
 	\end{quotation}
 
-	\noindent Or ce renvoi a ici une toute autre signification. La chaîne \og Port (Le)\fg{} peut renvoyer vers pas moins de quatre entrées différentes et l'indication \og [2037]\fg{} permet de désambiguïser la situation en précisant l'entrée vers laquelle pointe ce renvoi, ici
+	\noindent Or ce renvoi a ici une toute autre signification. La chaîne \og Port (Le)\fg{} peut renvoyer vers pas moins de quatre entrées différentes et l'indication \og [2037]\fg{} permet de désambiguïser la situation en précisant l'entrée vers laquelle pointe ce renvoi, ici :
 	
 	\begin{quotation}
             <p>\\
@@ -826,7 +827,7 @@
 	
 	\section*{Conclusion}
 	
-	Nous avons vu que la compréhension d'un instrument de travail papier n'est pas un processus évident. Le traitement numérique de l'index nous a ici permis d'aborder les différents problèmes liés à l'analyse et la segmentation des entrées. Nous avons tout d'abord travaillé à la reconnaissance de la typologie, puis à celle des différentes parties qui les composent. Nous avons ensuite décris les différents cas spécifiques qui se sont présentés à nous ainsi que les problèmes liés à la compréhension des caractères utilisés. Nous avons enfin traité les cas d'erreurs repérées au cours du processus, qu'elles soient issues du document originel, de la transcription par OCR, des traitements automatiques antérieurs ou même de nos propres manipulations.
+	Nous avons vu que la compréhension d'un instrument de travail papier n'est pas un processus évident. Le traitement numérique de l'index nous a ici permis d'aborder les différents problèmes liés à l'analyse et à la segmentation des entrées. Nous avons tout d'abord travaillé à la reconnaissance de la typologie, puis à celle des différentes parties qui les composent. Nous avons ensuite décrit les différents cas spécifiques qui se sont présentés à nous ainsi que les problèmes liés à la compréhension des caractères utilisés. Nous avons enfin traité les cas d'erreurs repérées au cours du processus, qu'elles soient issues du document originel, de la transcription par OCR, des traitements automatiques antérieurs ou même de nos propres manipulations.
 	
 	Ces différents éléments nous ont permis de voir que les \textit{legacy data} peuvent être complexes à appréhender lorsque leur forme n'est pas pleinement systématisée. L'édition repose ici sur une forte économie de caractères qui tend à accroître les cas de polysémie. Si les recherches récentes ont permis de montrer que les modèles d'apprentissage de liage d'entités disposent d'une forme de plasticité qui leur permet de rester efficaces malgré la présence de bruit dans les données\footcite{linhares_pontes_impact_2019, koudoro-parfait_reconnaissance_2022}, notre travail de constitution d'un référentiel a largement été impacté par ces difficultés. Nous avons exposés ici celles qui sont le plus marquantes pour comprendre le travail que nous avons effectué, mais nous aurons l'occasion d'en présenter d'autres tout au long de nos explications sur le processus de travail.
 	
@@ -840,7 +841,7 @@
 	
 	\subsection{Travail préparatoire}
 	
-	La première étape de notre travail de stage s'est concentrée sur la rédaction d'une feuille de style XSL permettant de transformer les liens décrits par des chaînes de caractères en des liens manifestés par des attributs insérés dans les données\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/Ajout_id.xsl}.}. Nous avons dans un premier temps utilisé la fonction \og generate-id()\fg{} afin d'insérer dans chaque balise <seg> un attribut @xml:id contenant un identifiant unique et normalisé :
+	La première étape de notre travail de stage s'est concentrée sur la rédaction d'une feuille de style XSL permettant de transformer les liens décrits par des chaînes de caractères en des liens manifestés par des attributs insérés dans les données\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/ajout_id.xsl}.}. Nous avons dans un premier temps utilisé la fonction \og generate-id()\fg{} afin d'insérer dans chaque balise <seg> un attribut @xml:id contenant un identifiant unique et normalisé :
 	
 	\begin{quotation}
 		<p>\\
@@ -923,11 +924,12 @@
 	
 	\noindent Pour maintenir la cohérence des données, nous avons donc rétabli tous les cas de \og{} , — v. \fg{} comme une entrée supplémentaire contenant uniquement la relation entre l'entrée précédente et l'entrée associée. 
 	
-	Cette étape nous a permis d'observer que la séparation entre relations depuis une entrée rejetée vers une entrée retenue et relations depuis une entrée vers une entrée associée n'est pas vraiment pertinente dans le cadre de la construction du référentiel (de plus ces derniers sont très peu nombreux : après réalisation de la tâche précédente, nous n'en comptons que 12). Si nous avons laissé les deux types de relations dans des attributs séparés, nous les avons traités indifféremment dans la suite de notre travail. Nous avons également été confrontés à un certain nombre d'imbrications, que ce soit des sous-entrées disposant elles-mêmes de sous-sous-entrées, des renvois contenus dans les entrées générales et répétées dans le corps de la sous-entrée\footnote{Nous avons travailler sur la rationalisation de ces situations à l'aide de la feuille de style : \url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/Correction_inventaire.xsl}.} ou encore des renvois dans les sous-entrées. Nous avons donc adapté les scénarios de notre feuille de style en fonction de ces situations\footnote{A ce propos, v. aussi \textbf{le billet de blog ou annexe}.} et corrigé certains éléments \textit{a posteriori} lorsque cela s'est avéré nécessaire.
+	Cette étape nous a permis d'observer que la séparation entre relations depuis une entrée rejetée vers une entrée retenue et relations depuis une entrée vers une entrée associée n'est pas vraiment pertinente dans le cadre de la construction du référentiel (de plus ces derniers sont très peu nombreux : après réalisation de la tâche précédente, nous n'en comptons que 12). Si nous avons laissé les deux types de relations dans des attributs séparés, nous les avons traités indifféremment dans la suite de notre travail. Nous avons également été confrontés à un certain nombre d'imbrications, que ce soit des sous-entrées disposant elles-mêmes de sous-sous-entrées, des renvois contenus dans les entrées générales et répétées dans le corps de la sous-entrée\footnote{Nous avons travailler sur la rationalisation de ces situations à l'aide de la feuille de style : \url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/correction_inventaire.xsl}.} ou encore des renvois dans les sous-entrées. Nous avons donc adapté les scénarios de notre feuille de style en fonction de ces situations\footnote{A ce propos, v. aussi \cite{reignier_lindex_2022}.} et corrigé certains éléments \textit{a posteriori} lorsque cela s'est avéré nécessaire.
 	
 	\subsection{Réalisation de la relation}
 	
-	Une fois les balises contenant les entrées de l'index pourvues d'un identifiant et d'attributs contenants ses relations avec les autres entrées, il nous reste encore à récupérer les identifiants de chacune des entrées correspondantes à ces relations. Cette étape a été réalisée à l'aide de la fonction XSL \og \$doc//div[@n=\$type\_index]//p[child::seg[starts-with(lower-case(replace(term, ' , — ', ' ')), lower-case(\$token))]][1]/seg[starts-with(replace(lower-case(term), ' , — ', ' '), lower-case(\$token))][1]/@xml:id\fg{} dans lequel \$doc correspond à l'ensemble du fichier TEI, \$type\_index la portion de ce fichier dans laquelle l'entrée à l'origine du lien se situe (index des sujets ou des noms de personnes et de lieux) et \$token la chaîne de caractère recherchée. Afin d'éviter au maximum les ambiguïtés, la fonction contient deux filtres : un premier qui sélectionne le premier ensemble d'entrées contenant la chaîne recherchée et un second qui sélectionne la première entrée correspondante au sein de cet ensemble. L'objectif de ces filtres est d'éviter au maximum la sélection accidentelle d'une sous-entrée au lieu d'une entrée générale parce qu'elle commencerait par la même chaîne de caractère.
+	Une fois les balises contenant les entrées de l'index pourvues d'un identifiant et d'attributs contenants ses relations avec les autres entrées, il nous reste encore à récupérer les identifiants de chacune des entrées correspondantes à ces relations. Cette étape a été réalisée à l'aide de la fonction XSL \og \$doc//div[@n=\$type\_index]//p[child::seg[starts-with(lower-case(replace(term, ' , — ', ' ')), lower-case(\$token))]][1]/seg[starts-with(replac
+	e (lower-case(term), ' , — ', ' '), lower-case(\$token))][1]/@xml:id\fg{} dans lequel \$doc correspond à l'ensemble du fichier TEI, \$type\_index la portion de ce fichier dans laquelle l'entrée à l'origine du lien se situe (index des sujets ou des noms de personnes et de lieux) et \$token la chaîne de caractère recherchée. Afin d'éviter au maximum les ambiguïtés, la fonction contient deux filtres : un premier qui sélectionne le premier ensemble d'entrées contenant la chaîne recherchée et un second qui sélectionne la première entrée correspondante au sein de cet ensemble. L'objectif de ces filtres est d'éviter au maximum la sélection accidentelle d'une sous-entrée au lieu d'une entrée générale parce qu'elle commencerait par la même chaîne de caractère.
 	
 	Nous avons également tiré parti d'une incohérence décrite au chapitre 4 (sélection de l'entrée \og Agent\fg{} à la place de \og Agen\fg{}) pour ajouter un autre filtre dans la sélection de l'entrée vers laquelle pointe la relation : il faut qu'il soit dans la même partie de l'index que l'entrée depuis laquelle part la relation. Les renvois ne permettant pas de trouver un @xml:id correspondant à la chaîne de caractère ont été marqués par \og Not Found\fg{}, puis résolus manuellement\footnote{Il y en avait 740 dont 275 dans des entrées lieux, 275 dans les personnes, 159 dans les sujets. A la fin de notre travail, il reste encore trois renvois pour lesquels nous n'avons pas pu retrouver l'entrée correspondante.}. Les identifiants trouvés sont ensuite ajoutés dans un attribut @corresp pour les relations depuis une entrée rejetée vers une entrée retenue et dans un attribut @rendition pour les relations depuis une entrée vers une entrée associée. Les relations depuis une sous-entrée vers une entrée générale sont ici un peu différentes puisque chaque entrée n'en dispose toujours que d'une et qu'elle ne nécessite pas l'élimination des séparateurs ' , — ' dans la fonction de recherche. Les identifiants trouvés sont cette fois ajoutés dans un attribut @prev. Cette opération aboutit ainsi au résultat suivant :
 	
@@ -967,8 +969,6 @@
 	\subsection{Une chaîne de traitement complexifiée}
 	
 	Ces liens implicites forment autant de relations à numériser dans notre travail. Cependant, les traitements antérieurs sur les données avaient déjà commencé à les prendre en compte en vue de la mise à plat de l'index. L'objectif étant d'insérer toutes les entités nommées repérées par l'index dans les méta-données des actes, le choix avait été fait de recopier les renvois vers les entrées d'inventaire dans les entrées contenant ces renvois implicites :
-	
-	\pagebreak
 	
 	\begin{quotation}
                <seg xml:id=\textquotesingle d1e392309\textquotesingle >\\
@@ -1097,7 +1097,7 @@
 	
 	La première étape la mise en place de la base de données est de transformer le fichier TEI pour construire une table à partir des entrées de l'index. L'objectif de ce travail est à la fois de préparer l'import dans la base de données et de fournir un cadre qui se prête plus facilement à la manipulation des entrées pour en corriger certains éléments. Nous avons donc rédigé une feuille de style XSL afin de construire un fichier au format CSV qui rassemble toutes les entrées d'index\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/index_to_csv.xsl}.}. Outre la colonne \og entrée\fg{}, la table dispose de 3 colonnes par type de relation (ces types ont été nommés \og terme retenu\fg{} pour les relations depuis une entrée rejetée vers une entrée retenue, \og terme générique\fg{} pour une relation depuis une sous-entrée vers une entrée générale et \og terme associé\fg{} pour une relation depuis une entrée vers une entrée associée) : une pour la chaîne de caractère qui forme le renvoi, une pour l'identifiant de l'entrée correspondant à cette chaîne de caractère et une pour le contenu de cette entrée. Ce dernier élément permet ainsi de comparer visuellement le contenu avec celui de la chaîne de caractère qui forme le renvoi pour vérifier la bonne correspondance entre les deux et l'absence d'erreur dans le processus. Une dernière colonne contient l'ensemble du contenu des balises <idno> de l'entrée, séparées par un \og | \fg{}
 	
-	Nous avons dans un premier temps créé deux tables pour les deux parties de l'index (sujets et noms de personnes et de lieux) accompagnées d'une table supplémentaire contenant toutes les entrées avec leur id et leur type. Cette table supplémentaire a été utilisée pour réaliser un certain nombre de corrections que nous avons évoquées dans les chapitres 4 et 5 à propos de la forme des données ou des renvois. Par la suite, nous nous sommes rendu compte que le fichier CSV dispose d'une limite dans le nombre de caractère compris dans un champ. Les champs de la colonne \og idno\fg{} pouvant être très long lorsqu'une entrée dispose d'un grand nombre de renvois vers l'inventaire, certains n'ont pas été reportés dans les tables. Nous avons donc changé de format de fichier et utilisé Excel pour la suite des opérations\footnote{Ce changement a aussi entraîné un changement dans la librairie python utilisée pour manipuler les données. Nous avons utilisé la librairie Pandas pour la suite de notre travail.}. Les éléments de la colonne \og idno\fg{} qui ont été perdus ont pu être restitués depuis le fichier TEI en opérant une transformation via le site \url{https://regex101.com/} et les expressions régulières \og <idno>([$\hat{}$<]*)<$\backslash$/idno> ( )*(,)?( )*($\backslash$n)?( )* \fg{} et \og \$1|\fg{}. Après le travail de segmentation des entrées que nous avons décrit au chapitre 4, le résultat de ce travail forme le fichier Excel déposé sur le Github du projet Himanis\footnote{\url{https://github.com/oriflamms/himanis/blob/master/Inventories/Systematic/Paris_AN_JJ_inventaire_JJ37-50_index.xlsx}.}.
+	Nous avons dans un premier temps créé deux tables pour les deux parties de l'index (sujets et noms de personnes et de lieux) accompagnées d'une table supplémentaire contenant toutes les entrées avec leur id et leur type. Cette table supplémentaire a été utilisée pour réaliser un certain nombre de corrections que nous avons évoquées dans les chapitres 4 et 5 à propos de la forme des données ou des renvois. Par la suite, nous nous sommes rendus compte que le fichier CSV dispose d'une limite dans le nombre de caractères compris dans un champ. Les champs de la colonne \og idno\fg{} pouvant être très long lorsqu'une entrée dispose d'un grand nombre de renvois vers l'inventaire, certains n'ont pas été reportés dans les tables. Nous avons donc changé de format de fichier et utilisé Excel pour la suite des opérations\footnote{Ce changement a aussi entraîné un changement dans la librairie python utilisée pour manipuler les données. Nous avons utilisé la librairie Pandas pour la suite de notre travail.}. Les éléments de la colonne \og idno\fg{} qui ont été perdus ont pu être restitués depuis le fichier TEI en opérant une transformation via le site \url{https://regex101.com/} et les expressions régulières \og <idno>([$\hat{}$<]*)<$\backslash$/idno> ( )*(,)?( )*($\backslash$n)?( )* \fg{} et \og \$1|\fg{}. Après le travail de segmentation des entrées que nous avons décrit au chapitre 4, le résultat de ce travail forme le fichier Excel déposé sur le Github du projet Himanis\footnote{\url{https://github.com/oriflamms/himanis/blob/master/Inventories/Systematic/Paris_AN_JJ_inventaire_JJ37-50_index.xlsx}.}.
 	
 	\subsection{Un lieu unique pour rassembler les données}
 	
@@ -1145,26 +1145,26 @@
 	\end{center}
 
 
-	Un dernier attribut a été ajouté aux zones d'image pour indiquer le folio sur lequel se situe la zone. Cette donnée n'était pas présent en l'état dans les données décrites par le fichier JSON, sa récupération a nécessité la construction d'une table de concordance entre les folios et les images. Pour cela, nous avons rédigé un script python afin de chercher tous les éléments \og page\fg{} dans le corpus \og Himanis | TEKLIA processing\fg{} d'Arkindex et en extraire une table contenant le nom de l'élément (qui correspond au numéro de folio) et l'url de l'image dans la BVMM \footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/Table_concordance_image_folio.py}}. Cette étape nous a également permis de mettre au jour un certains nombre d'erreurs dans les url des images indiquées dans le fichier JSON. Nous avons corrigé celles qui ont pu l'être et fait remonter celles qui concernent directement la BVMM.
+	Un dernier attribut a été ajouté aux zones d'image pour indiquer le folio sur lequel se situe la zone. Cette donnée n'était pas présente en l'état dans les données décrites par le fichier JSON, sa récupération a nécessité la construction d'une table de concordance entre les folios et les images. Pour cela, nous avons rédigé un script python afin de chercher tous les éléments \og page\fg{} dans le corpus \og Himanis | TEKLIA processing\fg{} d'Arkindex et en extraire une table contenant le nom de l'élément (qui correspond au numéro de folio) et l'url de l'image dans la BVMM \footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/table_concordance_image_folio.py}.}. Cette étape nous a également permis de mettre au jour un certain nombre d'erreurs dans les url des images indiquées dans le fichier JSON. Nous avons corrigé celles qui ont pu l'être et fait remonter celles qui concernent directement la BVMM.
 	
 	\section{Mise en place de la base}
 	
 	\subsection{Un modèle relationnel}
 
-	Une fois les tables définies, il faut aussi prendre en compte l'ensemble des relations qui peuvent exister entre ces tables. Les tables sujets, personnes et lieux disposent ainsi chacune des relations les liant à la table des actes, mais aussi de relations entre elles. Ces relations correspondent au lien entre les entrées de l'index et peuvent se construire soit d'une table vers une autre soit d'une table à elle-même. Les différents types de relations que nous avons décris précédemment sont ici indifférenciées, à l'exception des relations depuis une sous-entrée vers une entrée générale au sein de la table des sujets qui disposent d'une qualification spécifique\footnote{\textit{Cf}. chapitre 5.}. Comme certaines entrées contiennent plusieurs entités, nous avons longuement hésité sur la possibilité de créer une table dédiée aux entrées de l'index et qui permettrait de faire le lien entre les entités contenues dans ces entrées et les actes décrits par l'inventaire, mais il a finalement été convenu que cette table était superflue et que nous pouvons lier directement les entités aux actes. La Figure \ref{Modele_bd} représente le modèle utilisé pour générer la base de données.
+	Une fois les tables définies, il faut aussi prendre en compte l'ensemble des relations qui peuvent exister entre ces tables. Les tables sujets, personnes et lieux disposent ainsi chacune des relations les liant à la table des actes, mais aussi de relations entre elles. Ces relations correspondent au lien entre les entrées de l'index et peuvent se construire soit d'une table vers une autre soit d'une table à elle-même. Les différents types de relations que nous avons décris précédemment sont ici indifférenciées, à l'exception des relations depuis une sous-entrée vers une entrée générale au sein de la table des sujets qui disposent d'une qualification spécifique\footnote{\textit{Cf}. chapitre 5.}. Comme certaines entrées contiennent plusieurs entités, nous avons longuement hésité sur la possibilité de créer une table dédiée aux entrées de l'index et qui permettrait de faire le lien entre les entités contenues dans ces entrées et les actes décrits par l'inventaire, mais il a finalement été convenu que cette table était superflue et que nous pouvons lier directement les entités aux actes. La figure \ref{Modele_bd} représente le modèle utilisé pour générer la base de données.
 	
 	\begin{figure}
 		\centering
 		\includegraphics[width=\textwidth]{Images/modele_bd.png}
-		\caption{Modèle de la base de donnée relationnelle permettant de décrire les registres du Trésor des chartes avec les zones d'images, les actes et les entités contenus dans les actes.}
+		\caption{Modèle de la base de données relationnelle permettant de décrire les registres du Trésor des chartes avec les zones d'images, les actes et les entités contenus dans les actes.}
 		\label{Modele_bd}
 	\end{figure}
 	
 	\subsection{L'import des données}
 	
-	Nous avons donc créé une base de données au sein de la plateforme Heurist\footnote{\url{https://heuristnetwork.org/}.} permettant la gestion de données issues de corpus en sciences humaine, leur diffusion et leur enrichissement collaboratif. La plateforme dispose d'un certain nombre de modèles de données déjà intégrés et personnalisables en fonction des besoins (Nous avons ici utilisé les entités \og Person\fg{} et \og Place\fg{}) et propose également d'en créer de nouveaux (Nous avons créé les entités \og Subject\fg{}, \og Act\fg{} et \og Image zone\fg{}). Elle propose aussi un modèle de relation N-N à partir de l'entité \og Record relationship\fg{}. Ces relations peuvent être qualifiées à l'aide d'un \og Relationship type\fg{} personnalisable et disposer d'attributs descriptifs.
+	Nous avons donc créé une base de données au sein de la plateforme Heurist\footnote{\url{https://heuristnetwork.org/}.} permettant la gestion de données issues de corpus en sciences humaine, leur diffusion et leur enrichissement collaboratif. La plateforme dispose d'un certain nombre de modèles de données déjà intégrés et personnalisables en fonction des besoins (Nous avons ici utilisé les entités \og Person\fg{} et \og Place\fg{}) et propose également d'en créer de nouveaux (Nous avons créé les entités \og Subject\fg{}, \og Act\fg{} et \og Image zone\fg{}). Elle propose aussi un modèle de relation N-N à partir de l'entité \og Record relationship\fg{}. Ces relations peuvent être qualifiées à l'aide d'un \og Relationship type\fg{} personnalisable et peuvent disposer d'attributs descriptifs.
 	
-	La préparation des données pour l'import a été réalisé en plusieurs étapes à l'aide d'un script python\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/upload_heurist.py}.}. La première étape consiste à créer à partir du fichier Excel les tables Person, Place et Subject et les importer dans Heurist. Il est alors possible de les exporter avec leurs identifiants local H-ID nécessaires à la construction des tables de relations. Elles sont au nombre de 6 : Person-Person, Person-Subject, Person-Place, Place-Subject, Place-Place, Subject-Subject. L'étape suivante consiste à utiliser le fichier JSON pour créer la table Act et l'importer dans Heurist. Les enregistrements de cette table sont ensuite exportés avec ses H-ID nécessaires pour construire la table Image zone et les tables de relation Act-Person, Act-Subject et Act-Place.
+	La préparation des données pour l'import a été réalisée en plusieurs étapes à l'aide d'un script python\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/upload_heurist.py}.}. La première étape consiste à créer à partir du fichier Excel les tables Person, Place et Subject et les importer dans Heurist. Il est alors possible de les exporter avec leurs identifiants local H-ID nécessaires à la construction des tables de relations. Elles sont au nombre de 6 : Person-Person, Person-Subject, Person-Place, Place-Subject, Place-Place, Subject-Subject. L'étape suivante consiste à utiliser le fichier JSON pour créer la table Act et l'importer dans Heurist. Les enregistrements de cette table sont ensuite exportés avec ses H-ID nécessaires pour construire la table Image zone et les tables de relation Act-Person, Act-Subject et Act-Place.
 	
 	\section{Le cas particulier des noms de lieu}
 	
@@ -1179,7 +1179,7 @@
 	
 	\noindent La segmentation de ces éléments permet dans un premier temps de les intégrer parmi les attributs de la table. Il devient alors possible de filtrer les recherche en fonction de ces attributs. Cette segmentation est également un travail nécessaire pour aligner ces entités avec d'autres référentiels afin de les enrichir de coordonnées\footnote{Nous décrirons ce travail plus précisément au chapitre 7.}.
 	
-	Cette étape a été réalisée à partir du fichier CSV contenant les entrées d'index. Nous avons rédigé un script python afin de sélectionner automatiquement les entrées toponymiques et constituer un autre fichier au même format pour les traiter à part\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/toponymes.py}.}. Ce script permet ensuite de segmenter automatiquement les éléments qui composent l'entrée. La première étape de ce travail a été de former un élément \og entrée\fg{} permettant de simplifier son contenu et de faciliter l'alignement avec les autres référentiels. Cette forme simplifiée a été constituée par l'élimination des éléments de l'entrée situés entre crochets, puis par l'élimination des éléments restants placés après une virgule. Par exemple l'entrée 
+	Cette étape a été réalisée à partir du fichier CSV contenant les entrées d'index. Nous avons rédigé un script python afin de sélectionner automatiquement les entrées toponymiques et constituer un autre fichier au même format pour les traiter à part\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/toponymes.py}.}. Ce script permet ensuite de segmenter automatiquement les éléments qui composent l'entrée. La première étape de ce travail a été de former un élément \og entrée\fg{} permettant de simplifier son contenu et de faciliter l'alignement avec les autres référentiels. Cette forme simplifiée a été constituée par l'élimination des éléments de l'entrée situés entre crochets, puis par l'élimination des éléments restants placés après une virgule. Par exemple l'entrée :
 	
 	\begin{quotation}
 		Sainte-Menehould, Sancta Manalhidis [Marne]
@@ -1207,7 +1207,7 @@
 		\end{tabular}
 	\end{center}
 	
-	Le repérage des département s'est ici confronté à deux difficultés. Tout d'abord un certain nombre d'entre eux sont mentionnés sous une forme abrégée comme \og Tarn-et-G.\fg{} ou \og Seine-Mme\fg{}. Nous les avons donc développés au fur et à mesure de la découverte de ces formes abrégées. Une autre difficulté repose sur les quelques évolutions administratives qui ont lieu depuis la parution de l'index. Ainsi le département \og Côtes-du-Nord\fg{} a par exemple changé de nom pour devenir \og Côtes-d'Armor\fg{}. Nous avons donc opéré la transformation automatiquement. Une situation plus complexe est celle de la réorganisation en 1968 des départements de la \og Seine\fg{} et \og Seine-et-Oise\fg{} pour former les 7 départements qui composent, avec la ville de Paris, l'actuelle région Île-de-France. Faute de pouvoir attribuer automatiquement un de ces nouveaux départements, nous avons conservé les anciens au sein du référentiel.
+	Le repérage des départements s'est ici confronté à deux difficultés. Tout d'abord un certain nombre d'entre eux sont mentionnés sous une forme abrégée comme \og Tarn-et-G.\fg{} ou \og Seine-Mme\fg{}. Nous les avons donc développés au fur et à mesure de la découverte de ces formes abrégées. Une autre difficulté repose sur les quelques évolutions administratives qui ont lieu depuis la parution de l'index. Ainsi le département \og Côtes-du-Nord\fg{} a par exemple changé de nom pour devenir \og Côtes-d'Armor\fg{}. Nous avons donc opéré la transformation automatiquement. Une situation plus complexe est celle de la réorganisation en 1968 des départements de la \og Seine\fg{} et \og Seine-et-Oise\fg{} pour former les 7 départements qui composent, avec la ville de Paris, l'actuelle région Île-de-France. Faute de pouvoir attribuer automatiquement un de ces nouveaux départements, nous avons conservé les anciens au sein du référentiel.
 	
 	Certaines entrées disposent également d'une indication à propos de l'arrondissement (marquée par \og ar.\fg{}). Cette indication, celle du canton et celle de la commune peuvent parfois être factorisées lorsque la ville concernée est la même :
 	
@@ -1236,7 +1236,7 @@
 	
 	\noindent Nous avons donc développés ces formes à la main (ici \og Labastide-de-Lévis\fg{}) pour disposer de la donnée entière. Lorsqu'elle est présente, cette forme actuelle a été utilisée comme valeur de l'attribut \og nom\_normalise\fg{}. Si la commune n'est pas précisée, nous avons aussi fait le choix d'entrer d'office la valeur de cet attribut dans l'attribut \og Commune\fg{}.
 	
-	Nous avons également dû prendre en compte un nombre conséquent de toponymes étrangers. Pour cette raison, nous avons ajouté un élément \og Country\fg{} dont la valeur est systématiquement \og France\fg{} sauf indication contraire. Nous avons créé un référentiel de pays, puis avons opéré une conversion au moment de l'import dans Heurist pour que le nom corresponde aux entités prédéfinies dans la plateforme. Certaines localités sont situées dans des pays qui ont cessé d'exister depuis (par exemple la Yougoslavie), mais leur nombre était assez faible pour que nous puissions chercher leur situation actuelle manuellement. Ces toponymes étrangers sont parfois agrémentés d'une précision sur la province où ils se situent (marquée par \og prov.\fg{}) ou sur le comté (marqué \og co.\fg{}) s'il s'agit d'un lieu en Grande-Bretagne\footnote{Ces toponymes étant au nombre de 12, leur existence nous avait échappée au moment de la rédaction de notre script. La segmentation de cet élément a donc été réalisée manuellement a posteriori.}.
+	Nous avons également dû prendre en compte un nombre conséquent de toponymes étrangers. Pour cette raison, nous avons ajouté un élément \og Country\fg{} dont la valeur est systématiquement \og France\fg{} sauf indication contraire. Nous avons créé un référentiel de pays, puis avons opéré une conversion au moment de l'import dans Heurist pour que le nom corresponde aux entités prédéfinies dans la plateforme. Certaines localités sont situées dans des pays qui ont cessé d'exister depuis (par exemple la Yougoslavie), mais leur nombre était assez faible pour que nous puissions chercher leur situation actuelle manuellement. Ces toponymes étrangers sont parfois agrémentés d'une précision sur la province où ils se situent (marquée par \og prov.\fg{}) ou sur le comté (marqué \og co.\fg{}) s'il s'agit d'un lieu en Grande-Bretagne\footnote{Ces toponymes étant au nombre de 12, leur existence nous avait échappé au moment de la rédaction de notre script. La segmentation de cet élément a donc été réalisée manuellement a posteriori.}.
 	
 	Un dernier problème se pose à partir des toponymes qui ne sont pas situés en un seul lieu. C'est le cas par exemple de certaines localités à cheval sur deux communes ou englobant deux communes, comme par exemple :
 	
@@ -1250,7 +1250,7 @@
 		Le Maréchal (ferme qui fut à Richard) [près de Rouen]
 	\end{quotation}
 	
-	\noindent Ces indications ne sont cependant pas suffisantes pour que l'on puisse retrouver précisément le lieu ou aligner ces données avec d'autres référentiels. Pour cette raison, nous avons conservé les attributs \og Note\fg{} et \og Short summary\fg{} décrits précédemment afin de conserver l'ensemble des indications portées par l'index. Dans un dernier cas, le toponyme n'a pas pu être identifié avec certitude et plusieurs propositions sont formulées :
+	\noindent Ces indications ne sont cependant pas suffisantes pour que l'on puisse retrouver précisément le lieu où aligner ces données avec d'autres référentiels. Pour cette raison, nous avons conservé les attributs \og Note\fg{} et \og Short summary\fg{} décrits précédemment afin de conserver l'ensemble des indications portées par l'index. Dans un dernier cas, le toponyme n'a pas pu être identifié avec certitude et plusieurs propositions sont formulées :
 	
 	\begin{quotation}
 		Angles [Angle, Charente-Maritime, con Aulnay, cne Blanzay-sur-Boutonne, ou Anglas, Charente-Maritime, con Aulnay, cne Nuaillé-sur-Boutonne]
@@ -1260,38 +1260,227 @@
 	
 	\subsection{Modéliser les lieux non-identifiés}
 	
-	Cette dernière situation a largement participé au questionnement que nous avons évoqué plus haut sur la modélisation d'une table pour les entrées d'index qui servirait d'interface entre les entités et les actes. Les propositions de localisation sont en effet des éléments qui ne sont pas superposables aux toponymes qui constituent l'entrée d'index, pourtant elles ne sont formulées que pour accompagner cette entrée toponymiques. Nous avions imaginé un moment créer une table pour les lieux et une pour les localisations, mais il a finalement été convenu que chacune de ces propositions devienne une entité à part entière et distincte de celle formée à partir de l'entrée. Ces entités ont la particularité de ne pas être directement une entrée d'index et de n'être liées à aucun acte, elles sont simplement liées à leur entité de référence via une relation Lieu-Lieu. Nous n'avons malheureusement pas eu le temps de formaliser cette modélisation et les propositions de localisation sont encore à importer dans la base de données. Pour être complet dans la numérisation des indications de l'index, il faudrait également prendre en compte les marques d'incertitude dans les entrées d'index (généralement un \og ?\fg{}, nous les avons marqués dans le fichier CSV par une colonne \og incertitude\fg{}) et les reporter comme attribut de la relation entre l'entité correspondante de la base de données et l'acte auquel l'entrée d'index renvoi.
+	Cette dernière situation a largement participé au questionnement que nous avons évoqué plus haut sur la modélisation d'une table pour les entrées d'index qui servirait d'interface entre les entités et les actes. Les propositions de localisation sont en effet des éléments qui ne sont pas superposables aux toponymes qui constituent l'entrée d'index, pourtant elles ne sont formulées que pour accompagner cette entrée toponymique. Nous avions imaginé un moment créer une table pour les lieux et une pour les localisations, mais il a finalement été convenu que chacune de ces propositions devienne une entité à part entière et distincte de celle formée à partir de l'entrée. Ces entités ont la particularité de ne pas être directement une entrée d'index et de n'être liées à aucun acte, elles sont simplement liées à leur entité de référence via une relation Lieu-Lieu. Contrairement aux cas de coordonnées multiples générés par l'alignement avec les référentiels externes, les propositions multiples de localisation présentes dans l'index sont encore à importer dans la base de données. Pour être complet dans la numérisation des indications de l'index, il faudrait également prendre en compte les marques d'incertitude dans les entrées d'index (généralement un \og ?\fg{}, nous les avons marqués dans le fichier CSV par une colonne \og incertitude\fg{}) et les reporter comme attribut de la relation entre l'entité correspondante de la base de données et l'acte auquel l'entrée d'index renvoi.
 	
 	\section*{Conclusion}
 	
 	Par ce chapitre, nous avons abordé le processus de transformation du fichier TEI contenant les entrées d'index en une base de données relationnelle. Nous avons pour cela décrit dans un premier temps les étapes de préparation de ce travail par la transformation préalable du fichier TEI en un fichier au format CSV puis Excel et par la description des attributs des tables. Nous avons ensuite décrit la mise en place du modèle relationnel à travers la modélisation de la table et le travail d'import. Pour finir, nous avons exposé le cas spécifique des entrées toponymiques au travers des problèmes de segmentation et de modélisation des lieux non-identifiés.
 	
-	La création de cette base de données relationnelle constitue donc une forme d'aboutissement de notre travail de stage puisqu'elle prend en compte tous les éléments que nous avons décris auparavant. Nous verrons cependant aux chapitres suivants comment ce travail a pu être enrichi par l'ajout de lien avec les autres données du projet et avec des ontologies web. Avec cette base de données, nous disposons donc d'un référentiel complet mis en ligne sur la plateforme Heurist et librement utilisable pour la suite de ce travail. Le choix de la plateforme permet également de favoriser la publication de ce travail, mais aussi son accroissement futur par l'ajout de nouvelles entrées au sein du référentiel.
+	La création de cette base de données relationnelle constitue donc une forme d'aboutissement de notre travail de stage puisqu'elle prend en compte tous les éléments que nous avons décrit auparavant. Nous verrons cependant aux chapitres suivants comment ce travail a pu être enrichi par l'ajout de lien avec les autres données du projet et avec des ontologies web. Avec cette base de données, nous disposons donc d'un référentiel complet mis en ligne sur la plateforme Heurist et librement utilisable pour la suite de ce travail. Le choix de la plateforme permet également de favoriser la publication de ce travail, mais aussi son accroissement futur par l'ajout de nouvelles entrées au sein du référentiel.
 	
 	\chapter*{Conclusion partielle}
 	
-	Après une première partie consacrée au contexte de travail dans lequel nous avons réalisé notre stage, cette seconde partie nous a permis d'exposer toutes les étapes de la construction du référentiel d'entités nommées destiné à produire les données d'entraînement pour l'apprentissage du liage d'entités. Notre développement a commencé par un premier chapitre consacré au travail de compréhension des \textit{legacy data} constituées par l'index et aux difficultés liées à leur traitement numérique. Ensuite, nous avons dédié un second chapitre aux différentes relations qui caractérisent les entrées d'index et à leur prise en compte dans la construction du référentiel. Nous avons enfin terminé cet exposé par une troisième partie portant sur la modélisation et la concrétisation du référentiel sous la forme d'une base de données relationnelle. Nous disposons donc aujourd'hui d'un ensemble d'entités prêtes à être utilisées pour le liage avec les entités nommées présents dans les registres concernés.
+	Après une première partie consacrée au contexte de travail dans lequel nous avons réalisé notre stage, cette seconde partie nous a permis d'exposer toutes les étapes de la construction du référentiel d'entités nommées destiné à produire les données d'entraînement pour l'apprentissage du liage d'entités. Notre développement a commencé par un premier chapitre consacré au travail de compréhension des \textit{legacy data} constituées par l'index et aux difficultés liées à leur traitement numérique. Ensuite, nous avons dédié un second chapitre aux différentes relations qui caractérisent les entrées d'index et à leur prise en compte dans la construction du référentiel. Nous avons enfin terminé cet exposé par une troisième partie portant sur la modélisation et la concrétisation du référentiel sous la forme d'une base de données relationnelle. Nous disposons donc aujourd'hui d'un ensemble d'entités prêtes à être utilisées pour le liage avec les entités nommées présentes dans les registres concernés.
 	
 	Ce long travail nous a permis de voir que la réutilisation de \textit{legacy data} dans un cadre numérique est associée à certain nombre de problématiques qui freinent largement ce processus. Chaque étape doit en effet prendre en compte un grand nombre d'exceptions, qu'elles viennent de l'ouvrage en lui-même ou d'erreurs réalisées au cours de la chaîne de traitement. Ces problématiques sont à l'origine d'une réduction conséquente de l'ambition du stage. Nous avions en effet envisagé dans un premier temps poursuivre ce travail de transformation des index avec ceux des inventaires des registres JJ 65 à JJ 79B puis avec ceux des inventaires géographiques. Au vu du temps consacré à la transformation du premier ouvrage, il a été décidé de se concentrer sur celui-ci pour aller le plus loin possible et fournir une base de travail aux prochains travaux sur ce corpus.
 	
-	\parttext{Si la constitution d'un référentiel à partir d'entrées d'index constitue l'objectif premier du stage, ce travail n'est pas suffisant pour fournir un outil pertinent afin d'étudier le contenu du Trésor des chartes. Les données constituées, pour être utiles, doivent en effet pouvoir rejoindre et compléter les différentes ontologies web déjà disponibles. Nous consacrerons donc cette troisième et dernière partie à la mise en lien et à l'utilisation du référentiel construit afin de participer aux connaissances générales sur les documents historiques. Pour cela, nous décrirons dans un premier chapitre le processus d'enrichissement du référentiel par son alignement avec des ontologies web. Puis nous dédierons un second chapitre à la mise à disposition du référentiel et aux liens réalisés avec les autres données du corpus. Enfin, nous consacrerons un troisième chapitre aux différents essais réalisés pour la mise en œuvre du liage d'entités.}
+	\parttext{Si la constitution d'un référentiel à partir d'entrées d'index constitue l'objectif premier du stage, ce travail n'est pas suffisant pour fournir un outil pertinent afin d'étudier le contenu du Trésor des chartes. Les données constituées, pour être utiles, doivent en effet pouvoir rejoindre et compléter les différentes ontologies web déjà disponibles. Nous consacrerons donc cette troisième et dernière partie à la création de liens à partir du référentiel et à ses utilisations. L'objectif étant de l'insérer dans les connaissances générales disponibles sur les documents historiques. Pour cela, nous décrirons dans un premier chapitre le processus d'enrichissement du référentiel par son alignement avec des ontologies web. Puis nous dédierons un second chapitre à la mise à disposition du référentiel et aux liens réalisés avec les autres données du corpus. Enfin, nous consacrerons un troisième chapitre aux différents essais réalisés pour la mise en œuvre du liage d'entités.}
 	
 	\part{Alignement, diffusion et utilisation du référentiel}
 	
-	Vérifier l'entrée originelle pour Abban hein ! Pareil pour Agarne d'ailleurs !
-	
-	Ne pas oublier la relecture générale de la troisième partie !
-	
 	\chapter{Enrichir les données à l’aide d’un référentiel externe}
 	
-	On parlera ici de la segmentation des toponymes pour en extraire les différentes parties comme on a segmenté les entrées. + du problèmes des tirets pour les noms composés.
+	Nous disposons à l'heure actuelle d'une table au format CSV contenant les toponymes identifiés dans les registres JJ 37 à JJ 50 du Trésor des chartes. Nous avons pour cela utilisé l'index de l'inventaire analytique de ces registres. De plus, nous avons segmenté les différents éléments présents dans ces entrées toponymiques de l'index et en avons notamment extrait les circonscriptions administratives qu'elles contiennent. Il manque cependant un élément pour localiser précisément ces entités : des coordonnées. Celles-ci ne sont en effet pas présentes dans l'index, nous devons donc aller les chercher dans un référentiel externe pour permettre l'enrichissement des toponymes contenus dans notre base de données.
 	
-	Pour la suite, sur le chapitre sur l'alignement d'entités géographiques avec Geonames et DicoTopo, ça peut être intéressant et sur le parsing des noms de lieux : https://hal.archives-ouvertes.fr/hal-02141257
-	-> + ça parle aussi du lien noms personnes / lieux et des difficultés avec les lieux non-anglais et non-modernes
+	Ce chapitre sera donc consacré au travail d'alignement entre les données de l'index et plusieurs référentiels en ligne pour permettre la sélection de coordonnées et enrichir ces données. Pour cela, nous présenterons dans un premier temps les interfaces que nous avons utilisés. Puis nous exposerons le processus de construction des requêtes utilisé pour obtenir les coordonnées. Enfin, nous décrirons différents cas spécifiques qui se sont présentés à nous au cours de ce travail.
 	
-	Oubli (oups) : actualiser les départements d'IDF dans la procédure d'alignement + parler rivières et régions historiques et étrangères -> Alignement manuel car graaaaaave relou !
+	\section{Présentation des référentiels utilisés}
 	
-	\chapter{Mise à disposition d'un nouveau référentiel ?}
+	\subsection{GeoNames}
+	
+	Parmi les référentiels géographiques mobilisables pour enrichir des toponymes de coordonnées, GeoNames (\url{https://www.geonames.org/}) dispose de plusieurs qualités essentielles pour notre travail : les données sont libres de droit, elles couvrent le monde entier et chaque entité dispose d'un identifiant unique permettant de le retrouver en cas de besoin. Outre l'interface web permettant de naviguer parmi les localités, le site dispose également d'une API pour faciliter la récupération automatique d'information\footnote{\url{https://www.geonames.org/export/web-services.html}.}. Cette API est un service client qui nécessite de s'inscrire sur le site pour disposer d'un compte utilisateur. Ce compte permet ensuite d'adresser des requêtes qui retournent la donnée correspondante sous format XML (\textit{cf}. figure \ref{API_geonames}). Quelques limites sont à prendre en considération pour les comptes gratuits : la taille des réponses est limitée à 500 lignes et le nombre de requêtes à 1 000 par heure et 20 000 par jour. Les besoins de notre travail permettent de s'accommoder assez facilement de ces contraintes, notamment par l'ajout d'un minuteur lorsque le retour d'une requête indique que la limite est dépassée. La fonction python \og time.sleep\fg{} permet de mettre l'exécution du programme en pause le temps nécessaire.
+	
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Images/Result_geonames.png}
+		\caption{Exemple de retour de l'API GeoNames.}
+		\label{API_geonames}
+	\end{figure}
+	
+	
+	GeoNames est donc l'outil le plus complet pour travailler sur des localités françaises et étrangères. Les subdivisions administratives et leur code sont respectivement encodées dans des balises <adminName[N]> et <adminCode[N]> où [N] est le rang de la subdivision. Cette méthode permet de disposer d'un encodage unique pour toutes les localités et facilité la navigation d'un pays à un autre. Néanmoins, ces balises ne sont pas accompagnées d'un attribut permettant de savoir à quelle entité administrative correspond chaque donnée (département, région, conté, province, ...), ce qui limite la précision des recherches pour certains pays.
+	
+	\subsection{DicoTopo}
+	
+	Le \textit{Dictionnaire topographique de la France} est un projet mené depuis 1859 par le CTHS. Son objectif est de collecter l'ensemble des noms de lieu français dans leur graphie ancienne et moderne. Publié sous la forme d'un volume par département, ce travail encore inachevé a permis de rendre disponible un ensemble conséquent de données sur les localités situées dans 35 départements français. Depuis 2010, le CTHS a entrepris de rendre disponible ces données sous format numérique à l'aide d'une application dédiée (\url{https://dicotopo.cths.fr/}). Elle fournit donc à ce jour l'outil disponible le plus précis pour chercher des localités à l'échelle infra-communale et des formes anciennes de toponyme. L'application DicoTopo dispose elle aussi d'une API librement utilisable à l'aide de requêtes qui retournent un résultat au format JSON (\textit{cf}. figure \ref{API_dicotopo}).
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Images/Result_dicotopo.png}
+		\caption{Exemple de retour de l'API DicoTopo.}
+		\label{API_dicotopo}
+	\end{figure}
+	
+	Contrairement à GeoNames, l'API de DicoTopo ne dispose d'aucune limite dans son utilisation\footnote{\url{https://dicotopo.cths.fr/documentation}.}. De plus, la présence de localités infra-communales et de formes anciennes rendent cet outil plus adapté que GeoNames pour retrouver les lieux mentionnés dans le Trésor des chartes. La principale limite de l'application réside donc dans le caractère inachevé du travail de collecte. Pour cette raison, nous avons fait le choix d'utiliser en priorité DicoTopo pour les lieux situés dans les départements couverts par l'application et d'utiliser GeoNames pour ceux situés hors de France ou dans les département non-couverts.
+	
+	\section{Construction de la requête}
+	
+	\subsection{Choisir le nom à chercher}
+	
+	La recherche des toponymes a donc été réalisée à l'aide d'un algorithme python permettant d'écrire les requêtes en fonction des situations\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Index/geonames.py}. Lire aussi \cite{reignier_lindex_2022}.}. Une étape centrale consiste à vérifier si le toponyme est situé dans un département couvert par DicoTopo car elle détermine la suite de la procédure. Le cas échéant, la requête est construite à partir de l'url \og https://dicotopo.cths.fr/api/1.0/search?query=label: \fg{} suivie du nom du lieu recherché. La réponse comprend toutes les entités du référentiel contenant ce nom. Des filtres sont donc opérés pour trier ces entités en fonction du département ou de la commune s'ils sont indiqués par l'index. Si aucune commune n'est indiquée, toutes les entités portant ce nom dans le département sont conservées comme des localisation potentielles. Par la suite, toutes les entités retenues sont transformées sous la forme d'un élément liste contenant leurs codes insee, leurs coordonnées et leurs identifiants dans DicoTopo.
+	
+	Si le toponyme n'est pas situé dans un département couvert par DicoTopo, la recherche est effectuée sur l'API GeoNames. La requête est construite différemment : au lieu de filtrer les entités contenues dans la réponse en fonction du département ou de la commune, nous avons mis en place les filtres dès la requête afin de prendre en compte les limites posées par l'interface. La requête est construite sous la forme : \og http://api.geonames.org/ search?style=FULL\&name=[NAME]\&username=[USERNAME]\fg{} où [NAME] correspond au nom du toponyme et [USERNAME] à l'identifiant du compte utilisateur. Les arguments supplémentaires sont ensuite \og country=[COUNTRY]\fg{} où [COUNTRY] correspond au pays et \og adminCode2=[NUM]\fg{}. Dans le contexte d'un toponyme français, [NUM] correspond au numéro du département. Des filtres sont néanmoins opérés pour vérifier que le nom correspond bien à celui recherché ou au moins à un élément du nom\footnote{Il arrive parfois que des parties du nom de la commune soient modifiées au cours du temps. Par exemple la ville de Mantes-la-Jolie actuellement dans les Yvelines s'appelait simplement Mantes au moment de la parution de l'index.} (la comparaison est également étendue au contenu des balises <alternateName>) et pour ne garder qu'une seule entité par commune. Comme avec DicoTopo, les entités retenues sont ensuite transformées sous la forme d'un élément liste contenant leurs codes insee, leurs coordonnées et leurs identifiants GeoNames. Pour les localités dont le département renseigné correspond à \og Seine\fg{} ou \og Seine-et-Oise\fg{}, la recherche doit être adaptée au contexte actuel. Les communes des deux anciens départements ayant été réparties entre les 6 nouveaux (Yvelines, Val-d'Oise, Essonne, Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne)\footnote{A l'exception de la commune de Paris qui forme une collectivité autonome.}, les requêtes doivent être démultipliées pour chercher le toponyme dans chacun des départements correspondants.
+	
+	Il faut également prendre en compte des ambiguïtés parfois présentes entre l'entrée de l'index, la forme actualisée du nom et la commune. Malgré les catégorisations que nous avons présentées au chapitre 6, il est parfois délicat de différencier automatiquement des formulations similaires :
+	
+	\begin{quotation}
+		Mauves-sur-Huine [Orne, con Mortagne]
+	\end{quotation}
+
+	\begin{quotation}
+		Mauvers [Tarn-et-Garonne, con Verdun, cne Aucamville]
+	\end{quotation}
+
+	\begin{quotation}
+		Mazis-Bocquet (Les) [Les Mazis, Seine-Maritime, con Neufchâtel, cne Saint-Saire]
+	\end{quotation}
+
+	\begin{quotation}
+		Molerie [Molières, Tarn-et-Garonne, ar. Montauban] , homines et universitas
+	\end{quotation}
+	
+	
+	\noindent Dans le premier cas, Mauves-sur-Huine correspond à une commune dans l'Orne. Dans le second cas, Mauvers est une localité située dans la commune d'Aucamville dans le Tarn-et-Garonne. Dans le troisième cas, Les Mazis Bocquet est une forme ancienne de la localité Les Mazis située dans la commune de Saint-Serre en Seine-Maritime. Dans le troisième cas, Molerie est une forme ancienne de la commune de Molières dans le Tarn-et-Garonne. On peut donc voir que la place du mot comme entrée index ou comme premier élément entre crochet ne suffit pas à définir sa sémantique. Il faut donc réaliser plusieurs tests successifs pour s'assurer que la recherche sur les API trouve la bonne localité ou aligner le toponyme avec la commune dans laquelle il est situé en cas d'absence dans le référentiel.
+	
+	Pour cela, nous avons établis une recherche préliminaire basée sur la commune lorsqu'elle est renseignée afin de disposer de ses coordonnées. Cette recherche est effectuée sur l'API GeoNames car celle-ci dispose d'un argument de recherche dédié aux entités disposant d'un code postal : \og postalCodeSearch? \fg{}. La recherche s'effectue ensuite de la même manière que celle décrite précédemment, a ceci près que la réponse ne contient pas l'identifiant GeoNames de l'entité. Il faut donc construire une nouvelle requête à partir du résultat de la dernière sur le modèle \og http://api.geonames.org/search?style=FULL \&q=[POSTALCODE]\&name=[NAME]\&username=[USERNAME]\fg{} pour obtenir toutes les indications voulue sur la commune. Ici, l'utilisation de [POSTALCODE] permet de s'assurer que la commune contenue dans le retour est bien la même que celle trouvée avec la requête précédente. Si jamais la commune n'est pas trouvée dans GeoNames et qu'elle se situe dans un département couvert par DicoTopo, alors une tentative est également effectuée via son API.
+	
+	Cette étape permet ainsi de prendre en compte les différents éléments contenus dans les entrées. La recherche par toponyme est ainsi réalisée uniquement s'il est différent du nom de la commune. Si jamais la réponse ne contient pas de résultat satisfaisant, une nouvelle recherche est effectuée à partir de l'élément \og nom\_normalise \fg{}. Si aucune des deux ne permettent d'obtenir un résultat, alors les éléments extraits de la recherche par commune sont conservées pour enrichir le toponyme.
+	
+	\subsection{Récupération des coordonnées}
+	
+	Le résultat de ce processus est ensuite enregistré dans un fichier CSV qui reprend les éléments contenus dans le fichier formé à partir de la segmentation des entrées toponymiques (\textit{cf}. Chapitre 6) accompagné de colonnes supplémentaires pour y insérer le code insee, la latitude, la longitude et l'identifiant de l'entité dans le référentiel utilisé. De plus, le résultat des requêtes a été complété par une série de messages d'erreur permettant de suivre certains résultats associés aux différentes étapes du processus. Ces indications nous ont permis d'améliorer la rédaction de notre algorithme par le suivi de certaines variables et de leur adéquation avec les données sources.
+	
+	Dans la plupart des cas, le résultat de ce processus permet d'associer chaque entrée d'index à une série complète de données supplémentaires. Mais quelques cas spécifiques peuvent se présenter : les localités étrangères ne disposent pas de code insee et quelques entités renseignées par DicoTopo ne disposent pas de coordonnées. Il arrive également que certaines localités ne disposent pas de coordonnées propre et s'étendent sur plusieurs communes :
+	
+	\begin{quotation}
+		Canteloup (fief de) [Calvados, ar. et con Lisieux, cnes Marolles et Fumichon]
+	\end{quotation}
+
+	Dans ce cas, les coordonnées associées au toponyme sont celles des deux communes Marolles et Fumichon. Cette situation est ici à distinguer des situations d'incertitude : dans ce dernier cas la multiplication des coordonnées correspond à la présence d'hypothèses différentes pour situer le lieu. Au contraire, la présence de coordonnées multiples signifie ici que l'entité s'étend sur la surface de plusieurs entités dans le référentiel utilisé. Nous avons donc ajouté une colonne \og étendue\fg{} afin de pouvoir opérer cette distinction. Au moment de l'import des données dans Heurist, les coordonnées retenues des toponymes correspondant à cette situation sont calculées à partir de la moyenne des valeurs présentes dans les colonnes \og latitude\fg{} et \og longitude\fg{}. Dans le cas où ce sont des communes, tous les codes insee sont importés dans Heurist.
+	
+	Comme exposé au chapitre 5, les sous-entrées dépendant d'entrées toponymiques n'ont pas pu être différenciées les unes des autres et ont toutes été catégorisées comme relevant du type \og lieu \fg{}. En suivant cette logique, nous avons systématiquement enrichi chacune de ces sous-entrées avec les coordonnées de l'entité donc elles dépendent. Il arrive cependant que quelques unes de ces sous-entrées correspondent à des entités qui disposent de coordonnées propres :
+	
+	\begin{quotation}
+		Bacqueville [Eure, con Fieury-sur-Andelle] , — forêt [Eure, con
+		Fleury-sur-Andelle, cnes Bacqueville et Radepont]
+	\end{quotation}
+	
+	Comme nous ne les avions pas identifiés au moment de la création du fichier CSV préliminaire au travail d'alignement, nous les avons repérés \textit{a posteriori} par la présence de crochets après le séparateur \og , — \fg{} et avons procédé manuellement à leur alignement avec les référentiels GeoNames et DicoTopo. Dans cette situation, ces coordonnées ont été préférées à celles de l'entrée générale au moment de l'import dans Heurist.
+	
+	\section{Gestion des cas spécifiques}
+	
+	\subsection{Résoudre les ambiguïtés}
+	
+	Comme nous l'avons vu, la prise en compte des différentes possibilités de composition des entrées nous a poussé à tester plusieurs scénarios au moment de la construction des requêtes. Nous avons ainsi dû arbitrer entre une récupération large de résultats pour s'assurer de trouver la bonne entité et des filtres efficaces afin de limiter la présence d'entités superflues. Malgré nos efforts, un certain nombre de reprises ont été effectuées. C'est le cas notamment des requêtes opérées sur DicoTopo dont les retours contiennent régulièrement des doublons que nous avons dû éliminer. Quant à GeoNames, le retour des requête contient parfois plusieurs résultats pour une même entité. C'est le cas par exemple des communes françaises qui sont référencées à la fois comme des lieux d'habitation et comme des circonscriptions administratives (\textit{cf}. figure \ref{Double_retour_GeoNames}). Nous avons fait ici le choix d'éliminer systématiquement les circonscriptions administratives lorsqu'il existe une autre entité portant le même nom. Cette situation se retrouve également pour un certain nombre de grandes villes étrangères dont le nom est le même que celui de l'entité administrative qui la contient (par exemple la ville de Milan est le chef-lieu de la ville métropolitaine de Milan qui contient 134 communes).
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=8cm]{Images/town_on_geonames.png}
+		\caption{La recherche pour la commune \og Devesset\fg{} dans GeoNames renvoie deux entités : une pour la ville et une pour la circonscription administrative}
+		\label{Double_retour_GeoNames}
+	\end{figure}
+	
+	 D'autres ambiguïtés sont présentes à partir de certaines rivières dont le nom est présent dans celui de plusieurs communes riveraines ou dans le nom d'un département (par exemple la rivière Allier donne son nom au département éponyme ainsi qu'à la commune Varennes-sur-Allier). De la même manière le nom de certaines régions historiques est encore porté dans celui de quelques communes (par exemple Laurac-en-Vivarais, située dans le Vivarais historique). Pour éviter les ambiguïtés, nous avons repris manuellement l'ensemble de ces entrées (repérées par la présence de mots-clefs comme \og pays\fg{}, \og rivière\fg{}, \og région\fg{}, ...) pour vérifier que les entités avec lesquelles elles ont été alignées correspondent bien à celles voulues. Une fois ce travail accompli, il reste encore quelques ambiguïtés issus du processus d'alignement qui n'ont pas pu être résolues de manière automatique ou semi-automatique\footnote{A ce propos, v. aussi \cite{reignier_lindex_2022}.}. Nous avons donc conservé chacune des entités issus du processus d'alignement et les avons considérés de la même manière que les propositions de localisation formulées par l'index au moment de l'import dans Heurist\footnote{\textit{Cf}. chapitre 6.}.
+	
+	\subsection{Les régions historiques}
+	
+	Parmi les cas particuliers présents dans notre corpus, les régions historiques sont particulièrement difficiles à aligner avec des coordonnées\footnote{A ce propos, v. aussi \cite{mcdonough_named_2019}.}. Si certaines d'entre elles sont présentes en tant que telles dans GeoNames ou DicoTopo (par exemple l'Armagnac, GeoNames ID 3036926), d'autres ont été alignées avec la commune qui constituait le chef-lieu :
+	
+	\begin{quotation}
+		Termenès [pays de l'Aude dont Termes était le chef-lieu] ,
+		juge
+	\end{quotation}
+
+	\noindent L'entité \og Termenès\fg{} a été dotée d'un attribut \og Name chosen\fg{} avec pour valeur \og Termes\fg{} et les coordonnées choisies pour l'entité  sont celles du chef-lieu. Nous avons également pu trouver quelques coordonnées supplémentaires dans Wikidata comme par exemple pour le Léon (Wikidata ID  Q12178). Un dernier cas spécifique est celui des régions historiques situées à cheval entre plusieurs pays actuels :
+	
+	\begin{quotation}
+		Quatre-Métiers (les) [partie de la Flandre relevant de l'Empire
+		et composée des paroisses d'Hulst (Pays-Bas, prov. Zélande), Axel (idem),
+		Bouchaute (Belgique, prov. Flandre orientale) et Assenede (idem)]
+	\end{quotation}
+
+	\noindent Cette région est présente dans Wikidata (Q2789324), mais ne dispose pas de coordonnées. Nous avons donc aligné l'entité avec cet identifiant, ainsi qu'avec celui des communes d'Hulst, Axel, Bouchate et Assenede dans GeoNames et nous avons calculé des coordonnées à partir de la moyenne des coordonnées de ces communes.
+	
+	Nous avons également été confronté à quelques ambiguïtés dans les formulations proposées par l'index :
+	
+	\begin{quotation}
+		Dunois (le) [région de Dun, Ariège, con Mirepoix] ,
+		châtelain
+	\end{quotation}
+
+	\begin{quotation}
+		Rabonitum [Ariège, région Pamiers]
+	\end{quotation}
+
+	\noindent Si la première entrée correspond sans conteste à une région dont le chef-lieu est Dun, la second correspond \textit{a priori} à une localité située près de Pamiers sans que la distinction entre les deux possibilités ne puisse être définie de manière certaine.
+	
+	\section*{Conclusion}
+	
+	Ce chapitre nous a permis d'aborder les différentes étapes du travail d'alignement entre les entités créées à partir de l'index et plusieurs référentiels en ligne disposant de coordonnées. Nous avons pour cela présenté les caractéristiques des deux principaux outils que nous avons utilisés, puis nous avons décrit le processus de construction de la requête à partir des différents noms à chercher et le choix des coordonnées récupérées, enfin nous avons exposé les différents cas spécifiques qui se sont présentés au cours de notre travail.
+	
+	Cette étape constitue donc la dernière de la mise en place du référentiel d'entités nommées destiné à nourrir l'entrainement d'un modèle de liage d'entités sur les actes du Trésor des chartes. Les données toponymiques ainsi enrichies ont pu compléter les éléments importés sur Heurist. Ces coordonnées permettent également d'envisager de dépasser le simple cadre du travail sur le liage d'entités. Les données ainsi localisées permettent en effet de dresser un certain nombre de visualisations cartographiques à partir des données du Trésor des chartes et utilisables à des fins multiples.
+	
+		
+	\chapter{Mise à disposition d'un nouveau référentiel}
+	
+	Une fois constituée, la base de données Heurist contenant les entités décrites par l'index accompagnant l'inventaire analytique des registres JJ 37 à JJ 50 du Trésor des chartes peuvent être utilisées pour plusieurs usages. Si certains sont liés directement aux techniques de lecture automatique des textes, d'autres concernent plus directement le contenu des documents. Cet outil permet par exemple de faire des études croisées sur l'utilisation d'une notion ou de visualiser l'évolution du lien entre le pouvoir royal et une région au cours de la période. Il paraît donc nécessaire de rendre ces données disponibles aux usagers qui sont intéressés par le contenu de ces archives et qui souhaiteront les réutiliser dans leurs propres recherches.
+	
+	Ce chapitre sera donc consacré au travail de mise à disposition des données manipulées pendant le stage afin de faciliter leur usage pour la suite du projet et pour la communauté scientifique. Pour cela, nous détaillerons dans un premier temps les éléments mis en ligne pendant le stage et les liens visibles entre les différents fichiers. Puis nous présenterons les différentes visualisations cartographiques permises par la présence de coordonnées. Enfin, nous rendrons compte du travail préparatoire à la suite du projet par l'import des données sur Arkindex.
+	
+	\section{Mise en ligne des données collectées}
+	
+	\subsection{Des compléments au dépôt Github}
+	
+	Le travail réalisé au cours du stage à partir de l'index nous a permis d'enrichir les données déjà en ligne sur le dépôt Github du projet Himanis (\url{https://github.com/oriflamms/himanis}). Nous y avons notamment ajouté le fichier XML final contenant les entrées d'index\footnote{\url{https://github.com/oriflamms/himanis/blob/master/Inventories/Systematic/Paris_AN_JJ_inventaire_JJ37-50_index.xml}.}. Ce fichier permet notamment de montrer un état intermédiaire de la transformation de l'index car il est construit de manière linéaire et contient l'ensemble des éléments présents dans la publication papier. De plus, chaque entrée utilisée par la suite dispose d'un identifiant unique et de liens visibles avec les autres entrées avec laquelle elle est associée. Nous avons également ajouté dans le même dépôt le fichier Excel utilisé pour l'import des données dans Heurist\footnote{\url{https://github.com/oriflamms/himanis/blob/master/Inventories/Systematic/Paris_AN_JJ_inventaire_JJ37-50_index.xlsx}.}.
+	
+	Ce travail a également été l'occasion de mettre à jour le fichier XML contenant les entrées de l'inventaire\footnote{\url{https://github.com/oriflamms/himanis/blob/master/Inventories/Systematic/Paris_AN_JJ_inventaire_JJ37-50.xml}.}. Nous avons en effet décrit au chapitre 3 le travail de mise à plat des entrées d'index au sein de l'inventaire qui avait été réalisé dans les précédentes étapes du projet (\textit{cf}. figure \ref{index_in_inventaire}). Nous avons donc procédé à l'élimination systématique des entrées d'index ajoutées dans les entrées d'inventaire. Nous avons cependant conservé un certain nombre d'éléments de type \og subject \fg{} car ils ne sont pas directement issus de ce travail de mise à plat mais de l'exploitation d'un tableau produit par les Archives Nationales. Ces entrées ont été transformées de manière différentes et des comparaisons pourront être réalisées avec les éléments contenus dans la base de données. Le résultat prend la forme d'une balise <index> au contenu allégé comme présenté par la figure \ref{Subjects_in_inventory}.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Images/Subects_in_inventaire.png}
+		\caption{Exemple d'entrées d'index insérées dans une entrée d'inventaire après suppression des éléments issus du fichier XML pour ne laisser que ceux issus du tableau des Archives Nationales.}
+		\label{Subjects_in_inventory}
+	\end{figure}
+	
+	\subsection{Des liens visibles entre les données}
+	
+	La mise en ligne de la base de données sur la plateforme Heurist permet d'envisager la diffusion du référentiel à large échelle et la démultiplication de ses usages. Cependant, les données manipulées ne forment pas actuellement l'état final visé\footnote{Nous avons formulé quelques propositions d'amélioration au sein de l'annexe C.}. Leur publication est donc encore à l'état de projet. Nous avons toutefois pensé les données importés dans Heurist en fonction de cette mise à disposition future. Pour cette raison, un attribut \og Index reference\fg{} a été ajouté aux entités Place, Person et Subject pour les associer aux entrées d'index au sein des fichiers de travail. Cet attribut est construit à partir du nom du fichier contenant cette entrée d'index et de l'identifiant de l'entrée en question, sous la forme :
+	
+	
+	\begin{quotation}
+		Paris\_AN\_JJ\_inventaire\_JJ37-50\_index.xlsx\#d1e132079
+	\end{quotation}
+	
+	De la même manière, les entrées de la table Act disposent d'un attribut \og Inventory Reference\fg{} qui contient le nom du fichier contenant cette entrée d'inventaire et le numéro de l'acte dans le même inventaire sous la forme :
+	
+	\begin{quotation}
+		Paris\_AN\_JJ\_inventaire\_JJ37-50.xml\#433
+	\end{quotation}
+	
+	\noindent Ces éléments permettent de faciliter le suivi des données depuis les documents sources vers la base de données afin de retracer les différentes étapes de sa transformation et de retrouver les incohérences qui pourraient s'y être glissées. Ce suivi paraît particulièrement pertinent en cas d'ouverture de la base de données au \textit{crowdsourcing} car il permettra à chacun de vérifier la cohérence des données avec les documents sources et de proposer les ajouts ou corrections qu'il jugera nécessaire.
+	
+	\section{Un résultat direct : visualiser les lieux mentionnés dans les volumes JJ 37-60}
+	
+	\subsection{Visualisation des entités de la table Place sous forme d'une carte de chaleur}
+	
+	Oui en fait j'ai aussi publié une carte -> Commenter le code utilisé !
+	
+	\subsection{Cartographie intégrée à Heurist via leaflet}
+	
+	Mais ici je peux commenter l'intérêt d'utiliser Heurist
+	
+	\section{Import des actes sur Arkindex}
+	
+	\subsection{Comprendre une plateforme complexe}
+	
+	\subsection{L’objectif : Mettre en lien tous les éléments connus sur les actes et les images concernées}
+	
+	\section*{Conclusion}
+	
+	
+	Du coup bah pour exploiter il faut que ce soit librement disponible, on va donc parler de Link Open Data !
+	https://recherchemid.wordpress.com/2013/11/11/vous-avez-dit-linked-open-data/
 	
 	Parler du fait que tout est en lien : fichier du github, arkindex et heurist avec des id tout beau tout bien pour les identifiants et les actes !
 	
@@ -1316,39 +1505,13 @@
 	
 	Faire attention à l'emploi du "nous" -> Plus mettre en valeur ce que j'ai fait et mes choix dans le stage
 	
-	\chapter{Un autre chapitre}
-	
-	\section{Structuration du mémoire}
-	
-	Le mémoire se structure en plusieurs parties :
-	\begin{enumerate}
-		\item tout d'abord, les pièces liminaires : page de titre, résumé, remerciements, bibliographie, introduction
-		\item ensuite, le corps du texte, suivi d'une conclusion
-		\item après, les annexes (documentation, extraits de code, etc.)
-		\item enfin, les pièces finales : index (si besoin), glossaire (si besoin) ; tables (des figures et des tables, si nécessaire) ; table des matières
-	\end{enumerate}
-	
-	Ce mémoire s'accompagne d'une autre partie très importante : les \textbf{données}.
-	
-	\section{Les données}
-	
-	Elles constituent une partie primordiale du travail à rendre. Ce sont :
-	\begin{itemize}
-		\item les données traitées (textes, images, vidéos, BDD, etc.)
-		\item les scripts de traitement
-		\item la documentation associée aux données et au script
-		\item tout autre document qui semble nécessaire au traitement du sujet.
-	\end{itemize}
-	
-	Ces données doivent être ordonnées et accompagnées d'un fichier \texttt{lisezMoi} (format \texttt{.txt} ou \texttt{.md}), présent à la racine du dossier contenant les données. Ce fichier doit décrire l'arborescence des fichiers et dossiers et la fonction de chacun des fichiers.
-	
-	Le principe important à retenir est celui de la \textbf{reproductibilité} du travail.
+	Dire aussi que j'ai fait un billet de blog et qu'on peut le lire en complément du mémoire
 	
 	%les annexes
 	\appendix
 	\chapter{Les sous-entrées de \og Paris\fg{}}
 	
-	Comme on peut le voir dans les Figures \ref{Paris_sous_entrée_1} et \ref{Paris_sous_entrée_2}, les sous-entrées de Paris sont complexes à interpréter de manière automatique. En effet, les séparateurs utilisés sont les mêmes au sein d'un même bloc, que celui-ci soit formé comme un ensemble de sous-sous-entrées dépendant d'une même sous-entrée ou tout simplement comme un ensemble de sous-entrées successives.
+	Comme on peut le voir dans les figures \ref{Paris_sous_entrée_1} et \ref{Paris_sous_entrée_2}, les sous-entrées de Paris sont complexes à interpréter de manière automatique. En effet, les séparateurs utilisés sont les mêmes au sein d'un même bloc, que celui-ci soit formé comme un ensemble de sous-sous-entrées dépendant d'une même sous-entrée ou tout simplement comme un ensemble de sous-entrées successives.
 	
 	\begin{figure}
 		\centering
@@ -1366,7 +1529,7 @@
 	
 	\chapter{Les erreurs natives dans l'index}
 	
-	Nous reportons ici différentes erreurs rencontrées au cours de notre travail. Les Figures \ref{Parenthèses_pour_crochets} et \ref{Irregularité_crochets} sont des erreurs de typographie liées à l'absence d'un caractère ou à l'utilisation d'un caractère pour un autre. Les Figures \ref{Marquage_non_systématique} et \ref{Erreur_alphabétique} sont des erreurs dans la systématicité des données liées à l'usage indifférent de plusieurs caractères pour signifier une même chose ou à l'ordonnancement des entrées.
+	Nous reportons ici différentes erreurs rencontrées au cours de notre travail. Les figures \ref{Parenthèses_pour_crochets} et \ref{Irregularité_crochets} sont des erreurs de typographie liées à l'absence d'un caractère ou à l'utilisation d'un caractère pour un autre. Les figures \ref{Marquage_non_systématique} et \ref{Erreur_alphabétique} sont des erreurs dans la systématicité des données liées à l'usage indifférent de plusieurs caractères pour signifier une même chose ou à l'ordonnancement des entrées.
 	
 	\pagebreak
 	
@@ -1398,21 +1561,34 @@
 		\label{Erreur_alphabétique}
 	\end{figure}
 	
-	\chapter{Suggestions pour améliorer le référentiel}
+	\chapter{Suggestions pour l'amélioration du contenu de la base de données publiée sur Heurist}
 	
-	Faire ça bien au moment de la relecture de la deuxième partie + y faire référence au moment de la conclusion générale
+	Malgré notre travail, la durée du stage ne nous a pas permis d'aller au bout de la formalisation du référentiel constitué à partir des entrées d'index. Pour que celui-ci soit pleinement utilisable, il faudrait encore améliorer certains éléments. Voici la liste de nos propositions : 
 	
-	1 - Mieux repérer les noms de lieux (chapitre 4)
-	
-	2 - Qualifier les relations
-	
-	3 - Rendre effectif le modèle précisé en fin de chapitre 6. Je ne sais pas pourquoi mais ça ne marche pas.
-	
-	4 - Utiliser les autres index
-	
-	5 - Reporter les marques d'incertitude
-	
-	\chapter{Bon du coup ce billet de blog j'en fais quoi là ?}
+	\begin{enumerate}
+		\item Les nom des entités issues de sous-entrées de l'index sont actuellement sous la forme \og Abandons , — spontanés au roi\fg{}. Si le séparateur \og  , — \fg{} nous a permis de repérer facilement ces entrées et de travailler sur leurs spécificités, ces noms pourraient être simplifié par son élimination systématique.
+		
+		\item Un tableau a été produit par les Archives Nationales à partir de la mise à plat de l'index des sujets. Dans le cadre de l'étape précédente, on peut envisager son usage comme référence pour les noms de sujet et proposer une fonction de comparaison automatique.
+		
+		\item Certaines marques de renvoi n'ont pas été prises en compte par les traitements réalisés, comme par exemple \og Agnès du Bois, femme de Guillaume de Flavacourt\fg{}. Guillaume de Flavacourt dispose bien d'une entrée à son nom dans l'index, mais la relation entre les deux entités reste à réaliser.
+		
+		\item La discrimination entre les éléments de la table Place et ceux de la table Person n'a pas pu être définie de manière parfaite. Il est donc probable qu'il demeure quelques incohérences parmi ces entrées.
+		
+		\item Les relations entre sous-entrées et entrées générales n'ont été qualifiés que pour la table des sujets. Pour la table des lieux et personnes, les sous-entrées dépendant d'entrées catégorisées comme des lieux ont toutes été transformées de la même façon indépendamment de leur contenu. Elles forment donc toutes des entrées de la table Place. De la même manière, toutes les sous-entrées dépendant d'entrées catégorisées comme des personnes ont été transformées comme des description de la relation entre l'entrée principale et les entrées d'inventaire associées à ces sous-entrées. La catégorisation de ces sous-entrées permettrait donc d'améliorer largement l'utilisation de ces données.
+		
+		\item Lorsque les circonscriptions administratives auxquelles sont rattachés les éléments de la table Place disposent elles aussi d'une entrée dans cette même table, il serait envisageable de créer une relation entre ces deux entrées.
+		
+		\item Certaines entrées de la table Place disposant de plusieurs propositions de localisation sont en réalité des erreurs. Par exemple l'entrée \og Bruetel (maison de) [région de Marigny, Seine-Maritime, con Gournay, cne Dampierre]\fg{} a été aligné avec les deux communes nommées Dampierre dans le département de la Seine-Maritime alors que l'une d'elle n'est pas située dans le canton de Gournay et aurait pu être éliminée des propositions de localisations. Ces données comme le script utilisé pour l'alignement peuvent donc être améliorés à cet effet.
+		
+		\item Les marques d'incertitude qui sont décrits dans la colonne \og incertitude\fg{} du fichier geonames\_final.csv n'ont pas été reportés dans la base de données. La prise en compte de ces incertitudes, ainsi que des marques présentes dans les autres types d'entrées (notamment les \og ?\fg{}) est donc encore à réaliser.
+		
+		\item Les entrées pour lesquelles l'index propose plusieurs localisation ont été dédoublées dans le fichier geonames\_final.csv. Mais seule l'une des propositions a été importée dans la base de données. L'import des autres propositions reste donc à réaliser.
+		
+		\item Les éléments insérés parmi les renvois vers les entrées d'inventaire, comme par exemple les références à la section \og Additions et corrections\fg{}, n'ont pour le moment pas été pris en compte.
+		
+		\item Actualiser le nom de départements des entités situées dans les anciens départements de la Seine et Seine-et-Oise.
+		
+	\end{enumerate}
 	
 	\backmatter
 	\phantomsection
