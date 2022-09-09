@@ -1,0 +1,3 @@
+# Mise en oeuvre de l'entity linking
+
+Ce dossier contient les fichiers de travail utilisés pour réaliser des tests de liage d'entités à partir de données du Trésor des chartes et de données créées pour l'occasion. Les scripts sont directement inspirés de [celui](https://github.com/explosion/projects/blob/master/nel-emerson/scripts/el_tutorial.py) qui a été mis en ligne dans le cadre du [tutoriel](https://spacy.io/universe/project/video-entity-linking) qui nous a servi de guide.
