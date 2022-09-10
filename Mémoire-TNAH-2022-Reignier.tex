@@ -1237,7 +1237,7 @@
 	
 	\noindent Nous avons donc développés ces formes à la main (ici \og Labastide-de-Lévis\fg{}) pour disposer de la donnée entière. Lorsqu'elle est présente, cette forme actuelle a été utilisée comme valeur de l'attribut \og nom\_normalise\fg{}. Si la commune n'est pas précisée, nous avons aussi fait le choix d'entrer d'office la valeur de cet attribut dans l'attribut \og Commune\fg{}.
 	
-	Nous avons également dû prendre en compte un nombre conséquent de toponymes étrangers. Pour cette raison, nous avons ajouté un élément \og Country\fg{} dont la valeur est systématiquement \og France\fg{} sauf indication contraire. Nous avons créé un référentiel de pays, puis avons opéré une conversion au moment de l'import dans Heurist pour que le nom corresponde aux entités prédéfinies dans la plateforme. Certaines localités sont situées dans des pays qui ont cessé d'exister depuis (par exemple la Yougoslavie), mais leur nombre était assez faible pour que nous puissions chercher leur situation actuelle manuellement. Ces toponymes étrangers sont parfois agrémentés d'une précision sur la province où ils se situent (marquée par \og prov.\fg{}) ou sur le comté (marqué \og co.\fg{}) s'il s'agit d'un lieu en Grande-Bretagne\footnote{Ces toponymes étant au nombre de 12, leur existence nous avait échappé au moment de la rédaction de notre script. La segmentation de cet élément a donc été réalisée manuellement a posteriori.}.
+	Nous avons également dû prendre en compte un nombre conséquent de toponymes étrangers. Pour cette raison, nous avons ajouté un élément \og Country\fg{} dont la valeur est systématiquement \og France\fg{} sauf indication contraire. Nous avons créé un référentiel de pays, puis avons opéré une conversion au moment de l'import dans Heurist pour que le nom corresponde aux entités prédéfinies dans la plateforme. Certaines localités sont situées dans des pays qui ont cessé d'exister depuis (par exemple la Yougoslavie), mais leur nombre était assez faible pour que nous puissions chercher leur situation actuelle manuellement. Ces toponymes étrangers sont parfois agrémentés d'une précision sur la province où ils se situent (marquée par \og prov.\fg{}) ou sur le comté (marqué \og co.\fg{}) s'il s'agit d'un lieu en Grande-Bretagne\footnote{Ces toponymes étant au nombre de 12, leur existence nous avait échappé au moment de la rédaction de notre script. La segmentation de cet élément a donc été réalisée manuellement \textit{a posteriori}.}.
 	
 	Un dernier problème se pose à partir des toponymes qui ne sont pas situés en un seul lieu. C'est le cas par exemple de certaines localités à cheval sur deux communes ou englobant deux communes, comme par exemple :
 	
@@ -1279,7 +1279,7 @@
 	
 	\part{Alignement, diffusion et utilisation du référentiel}
 	
-	\chapter{Enrichir les données à l’aide d’un référentiel externe}
+	\chapter{Enrichir les données à l’aide de référentiels externes}
 	
 	Nous disposons à ce stade d'une table au format CSV contenant les toponymes identifiés dans les registres JJ 37 à JJ 50 du Trésor des chartes. Nous avons pour cela utilisé l'index de l'inventaire analytique de ces registres. De plus, nous avons segmenté les différents éléments présents dans ces entrées toponymiques de l'index et en avons notamment extrait les circonscriptions administratives qu'elles contiennent. Il manque cependant un élément pour localiser précisément ces entités : des coordonnées. Celles-ci ne sont en effet pas présentes dans l'index, nous devons donc les extraire depuis un référentiel externe pour permettre l'enrichissement des toponymes contenus dans notre base de données.
 	
@@ -1348,7 +1348,7 @@
 	
 	Cette étape permet ainsi de prendre en compte les différents éléments contenus dans les entrées. La recherche par toponyme est ainsi réalisée uniquement s'il est différent du nom de la commune. Si la réponse ne contient pas de résultat satisfaisant, une nouvelle recherche est effectuée à partir de l'élément \og nom\_normalise \fg{}. Si aucune des deux ne permettent d'obtenir un résultat, alors les éléments extraits de la recherche par commune sont conservés pour enrichir le toponyme.
 	
-	\subsection{Récupération des coordonnées}
+	\subsection{Extraction des coordonnées}
 	
 	Le résultat de ce processus est ensuite enregistré dans un fichier CSV qui reprend les éléments contenus dans le fichier formé à partir de la segmentation des entrées toponymiques (\textit{cf}. Chapitre 6) accompagné de colonnes supplémentaires pour y insérer le code INSEE, la latitude, la longitude et l'identifiant de l'entité dans le référentiel utilisé. De plus, le résultat des requêtes a été complété par une série de messages d'erreur permettant de suivre certains résultats associés aux différentes étapes du processus. Ces indications nous ont permis d'améliorer la rédaction de notre algorithme par le suivi de certaines variables et de leur adéquation avec les données sources.
 	
@@ -1635,39 +1635,76 @@
 	
 	Nous avons donc rédigé un script python calqué sur celui proposé par le tutoriel afin de mettre en application les fonctionnalités décrites pour notre contexte de travail. Nous avons réalisé des tests à partir de deux modèles différents : le modèle \og fr\_core\_news\_md\fg{} fourni par spaCy et dédié au traitement des textes en français et le modèle \og multi-home-c3po4-LOC-model-best\fg{} utilisé par Teklia pour réaliser de la REN sur le Trésor des chartes et notamment pour les textes en latin. La première difficulté que nous avons rencontré concerne l'interopérabilité des modèles avec notre environnement de travail : le premier a été entraîné avec la version 3.4.0 de spaCy et le second avec une version 2.3 qui elle-même nécessite d'installer python en version 3.7.
 	
-	Nous avons ensuite réalisé un script python à partir de celui proposé par le tutoriel pour mettre en application ces deux modèles. 
-	
-	
-	Mais du coup pour ça j'ai fait des tests à partir d'un modèle pour voir s'il fonctionnait, sauf que bof. Du coup bon bah j'ai pas fait grand chose d'utile quoi :-/
-	
-	
-	2 - Ce que j'ai fait effectivement : utilisation de spacy + limites du modèle utilisé
+	Nous avons ensuite réalisé un script python à partir de celui proposé par le tutoriel pour mettre en application ces deux modèles. Cet algorithme met en œuvre plusieurs fichiers que nous avons créés pour l'occasion\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/tree/main/Scripts/Entity_linking/input}.}. Nous avons centré notre test sur la reconnaissance de deux groupes entités porteuses d'ambiguïtés. Le premier groupe concerne la chaîne \og Vienne\fg{} qui est présente dans 4 toponymes de la table Place dans la base de données Heurist (Mesnil-sous-Vienne dans l'Eure, Aixe-sur-Vienne dans la Haute-Vienne, Vienne dans l'Isère et Vienne dans la Seine-et-Marne). Le second groupe concerne la chaîne \og France\fg{} présent dans 2 toponymes (France, le territoire correspondant au pays actuel et la ville de Saint-Denis-en-France, ancien nom de Sain-Denis dans l'actuelle Seine-Saint-Denis). Ces entités sont rassemblées dans un fichier \og kb\_Vienne.csv\fg{} qui est ensuite chargé pour nourrir les entités de la base de connaissances. Ce fichier est complété par un autre fichier \og alias.csv\fg{} qui contient les toponymes sous la forme par laquelle ils sont renseignés et sous une forme simplifiée sur le mot ambigu dans le cas des mots composés (France pour Saint-Denis-en-France et Vienne pour Mesnil-sous-Vienne et Aixe-sur-Vienn), à chaque fois associés à leur identifiant. Trois alias ont été ensuite rajoutés pour l'entité France afin de tenter la lecture de morceaux de textes issus du Trésor des chartes : francorum, france et fancie. Deux lots de textes contenant des données avec des entités nommées reconnues et liés aux entités du référentiel sont ensuite constitués. Le fichier \og 
+	entites\_vienne.csv\fg{} contient des textes inventés contenant une mention de la ville de Vienne tandis que le fichier \og extrait\_français\_france.csv\fg{} contient des textes extraits du Trésor des chartes.
 	
 	\subsection{Analyse des résultats}
 	
-	\section{Quelles perspectives ?}
+	L'objectif de ce travail est de pouvoir tester le rendu des modèles utilisés sur des données simples afin de prendre en main les fonctionnalités de spaCy avant de monter en puissance dans leur utilisation. \og multi-home-c3po4-LOC-model-best\fg{} a ici posé quelques difficultés au moment de l'initiation de la base de connaissances et au moment de l'ajout du liage d'entités au modèle. En effet, il ne dispose pas d'un vecteur de mots pouvant être utilisé au moment de l'initiation de la fonction KnowledgeBase, ce qui réduit les performances du modèle. De plus, la documentation spaCy spécifie que l'ajout d'un vecteur de mots \textit{a posteriori} nuit grandement à son efficacité\footnote{\url{https://spacy.io/usage/embeddings-transformers}.}. De la même manière, l'ajout du liage d'entité comme fonctionnalité du modèle a nécessité l'ajout préalable d'une fonction \og sentencizer\fg{} permettant la segmentation des phrases. Ces éléments n'ont pas empêché la réalisation du processus en entier mais ils sont probablement à l'origine de la faiblesse des résultats obtenus. 
 	
-	3 - Ce qu'on pourrait faire pour faire fonctionner ça : idées et bilan de mes pauvres tentatives
+	Nous avons donc commencé par un premier essai à partir de données d'entraînement vides\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Entity_linking/scripts/el_Himanis_without_gold_entity.py}.}. Cet essai nous a permis d'observer les limites de l'utilisation du modèle \og fr\_core\_news\_md\fg{} dans le traitement des textes anciens : le liage d'entités reposant sur le reconnaissance préalable des entités nommées, le liage d'entités sur les extraits proposés du Trésor des chartes s'est trouvé inopérant faute de trouver les bons mots à lier. Pour ce qui est du modèle \og multi-home-c3po4-LOC-model-best\fg{}, cet essai a permis de montrer qu'il pouvait lier une entité nommée reconnue à l'entité correspondante à la condition que cette entité soit composée exactement de la même chaîne de caractère qu'un des alias renseigné dans la base de connaissance. Par exemple pour l'extrait :
 	
-	\subsection{Amélioration du modèle}
+	\begin{quotation}
+		philippus dei gratia francorum rex notum facimus universis tam presentibus quam futuris nos infrascriptas litteras vidisse formam
+	\end{quotation}
+
+	\noindent la chaîne \og francorum\fg{} a bien été reconnue, étiquetée comme un lieu et identifié comme correspondant à l'entité France.
 	
-	\subsection{Intégration de nouvelles données}
+	Un second essai a ensuite été réalisé pour intégrer des données d'entraînement dans l'ajout du liage d'entités comme fonctionnalité du modèle\footnote{\url{https://github.com/virgile-reignier/Memoire-TNAH-2022-Reignier/blob/main/Scripts/Entity_linking/scripts/el_Himanis.py}.}. Le modèle \og fr\_core\_news\_md\fg{} s'est ici trouvé confronté aux mêmes limites d'analyse du langage que pour l'essai précédent. Quant au modèle, \og multi-home-c3po4-LOC-model-best\fg{} son utilisation pour le traitement des données d'entrainement génère une erreur de langue. Notre stage s'étant achevé, nous n'avons pas eu l'occasion d'approfondir plus avant les raisons de cette erreur ni de proposer un moyen de la résoudre. Nous pouvons résumer l'état de nos travaux par le tableau suivant :
+	
+	\begin{center}
+		\begin{tabular}{|p{7cm}|p{4cm}|p{4cm}|}
+			\hline
+			Modèle utilisé & fr\_core\_news\_md & multi-home-c3po4-LOC-model-best\\
+			\hline
+			Vecteur de mots & Oui & Non \\ \hline
+			REN sur le Trésor des chartes & Non & Oui \\ \hline
+			Liage d'entité sans entraînement & Oui & Oui \\ \hline
+			Intégration de données d'entrainement & Oui & Non \\ \hline
+		\end{tabular}
+	\end{center}
+	
+	\section{Quelles perspectives d'amélioration ?}
+	
+	\subsection{Entraîner un nouveau modèle}
+	
+	Nos difficultés dans la mise en œuvre du liage d'entités provient ici en bonne partie d'un problème d'interopérabilité entre le modèle que nous avons utilisé et les fonctions proposées par spaCy. Une des principales voies d'amélioration serait donc d'entraîner un nouveau modèle qui dispose dès l'origine des caractéristiques nécessaires à la mise en place du liage d'entités. De plus, les résultats du modèle sur la REN pour le Trésor des chartes est assez mitigé. Par exemple le texte dont nous avons proposé un extrait ci-dessus contient d'autres noms de lieux, mais seul \og francorum\fg{} a été reconnu comme tel\footnote{Cette chaîne de caractère constitue à elle seule 24 759 des 48 954 entités nommées reconnues dans le corpus Arkindex \og Himanis | TEKLIA processing\fg{}, soit 51\%.}.
+	
+	Une piste pour l'entraînement d'un nouveau modèle serait d'utiliser le corpus HOME-Alcar produit au sein du projet HOME  pour entraîner des modèles de NER à partir d'archives datées entre le XII\ieme{} et le XIV\ieme{} siècles\footnote{\url{https://zenodo.org/record/5600884\#.Yt5NT3VBzUQ}.}. Une fois l'entraînement réalisé, le modèle pourrait être testé sur le corpus Arkindex \og Himanis | TEKLIA processing\fg{} et les résultats comparés à ceux déjà existants. Nous avons a ce titre réalisé un export du projet sous la forme d'une base de données SQLite\footnote{\url{https://doc.arkindex.org/howto/export}.} afin de former une table à partir des entités nommées déjà reconnues dans le corpus. Cet export nous a également permis de repérer quelques transcriptions réalisées à partir du modèle \og Kaldi IAM\fg{} spécialisé dans la lecture de textes anglais. Les résultats de ce modèle étant incohérents, nous avons listé les textes concernés et transmis ces informations à Teklia.
+	
+	\subsection{Vers d'autres horizons}
+	
+	Une fois le modèle entraîné pour la REN et apte à intégrer le liage d'entités parmi ses fonctionnalités, les entités contenues dans la base de données Heurist pourront être exportées au sein d'une table et former la base de connaissances dans spaCy. Plusieurs voies d'améliorations se dessinent ensuite : outre un travail sur la formulation et la description des entités déjà importées dans Heurist \footnote{\textit{Cf}. Annexe C.}, d'autres données peuvent être ajoutées au référentiel. L'ouvrage que nous avons utilisés ne constitue en effet qu'une partie des instruments de recherche disponibles pour décrire le contenu du Trésor des chartes que nous avons présentés au chapitre 2. Il est donc possible d'augmenter encore la quantité de données utilisées pour l'entraînement en intégrant l'ensemble du contenu des inventaires analytiques : les volumes décrivant les registres JJ 37 à JJ 91 disposent tous d'un index à l'exception des deux volumes imprimés décrivant les registres JJ 50 à JJ 64 pour lesquels un index des noms de lieu est en préparation. D'autres données encore peuvent être extraites à partir des inventaires thématiques et géographiques ainsi que de quelques travaux préparatoires. 
+	
+	Une des difficultés de ce travail réside dans l'alignement systématique entre les entités de l'index et leur manifestation dans les textes. Les seuls données que nous avons à notre disposition concernent en effet les actes au sein desquels chaque entité est présente, mais sans que nous ne connaissions avec exactitude le segment de texte concerné. Il est donc possible que la transformation des données exportées depuis Heurist en données d'entraînement nécessite plusieurs étapes. Il est en effet difficilement envisageable de faire correspondre le nom des entités avec des chaînes de caractères présentes dans les textes car ils sont mentionnés dans des formes latines ou vernaculaires et selon des graphies qui peuvent varier d'un texte à l'autre. Un premier enjeu consiste donc à faire cohabiter ces différentes graphies comme autant d'alias potentiels repérés grâce à la REN. La préparation manuelle d'une première série de donnée devrait cependant permettre d'intégrer cette partie de l'apprentissage et de faciliter l'alignement entre le contenu des registres indexés et les entités de la base de connaissances.
+	
+	Il est à ce titre possible que les fonctionnalités offertes par spaCy ne suffisent pas à cet usage. On pourra à ce titre se tourner vers les outils et modèles développés par les chercheurs travaillant sur le liage d'entités multi-langue\footnote{A ce sujet, v. notamment \cite{linhares_pontes_linking_2020} et \cite{rijhwani_zero-shot_2019}.}. Les entités sont en effet décrites en français alors que les textes sont tous en latin ou en vernaculaire. Mais il existe cependant quelques entrées pour lesquelles la langue d'origine est utilisée en complément ou à la place de la version française et qui pourront être utilisées pour l'entraînement du modèle. De plus, certaines entités sont décrites par un ensemble de mots qui peut contenir d'autres entités (par exemple \og rex Francorum et Navarre\fg{} contient les entités France et Navarre mais désigne également la personne qui en règne à ce moment) et peuvent poser problèmes pour la reconnaissance comme pour le liage\footnote{Sur le sujet, v. \cite{mcdonough_named_2019}.}. Il faut également envisager que la NER permette de dévoiler de nouvelles entités qu'il faudra alors soit associer à un autre référentiel soit intégrer à Heurist. Pour cette raison, les essais que nous avons réalisés et que nous envisagions de poursuivre concernaient uniquement les noms de lieux car leur identification manuelle est facilitée par la présence de référentiels complets pour la période actuelle.
+	
+	Une autre voie à explorer concerne la prise en compte des relations entre les entités. Cette fonctionnalité n'est en effet pas permise par spaCy alors qu'elle constitue le principal atout du référentiel que nous avons constitué. Les relations connues entre les entités permettent en effet de prédire de probables co-occurrences. Par exemple Agnès du Bois est déjà connue comme étant la femme de Guillaume de Flavacourt. La mention de ce dernier dans un texte augmente donc la probabilité que sa femme le soit aussi, notamment si le texte contient le mot \og Agnès\fg{}. Ces co-occurrences peuvent également être déterminantes pour former les alias des entités. Dans le cas précédent, la même Agnès du Bois peut être mentionnée par l'expression \og femme de Guillaume de Flavacourt\fg{}. Un autre élément parfois présent dans les textes politique est le phénomène de métonymie entre une entité dotée d'un pouvoir et un lieu ou une idée qui lui est associé. Cette figure de style est par exemple employée dans le langage courant lorsqu'on dit \og Londres a déclaré la guerre à Buenos Aires le 2 avril 1982\fg{}. Les deux villes ne sont pas mentionnées comme des acteurs directs de la guerre mais comme les lieux de pouvoir des Etats britanniques et argentins. La connaissance du lien entre les entités peut ainsi aider à déceler ces expressions métonymiques. 
+	
+	Pour finir, la mise en œuvre du liage d'entités doit également prendre en compte la possible intégration d'éléments nouveaux repérés par le modèle. Ces éléments concernent en premier lieu les entités NIL qui désignent des entités nommées identifiées comme étant absente de la base de connaissances. Il est alors possible d'étudier ces entités et d'envisager leur intégration dans notre référentiel. Des recherches récentes permettent également d'envisager l'extraction des relations entre les entités\footnote{A ce propos, v. \cite[p. 169--180]{dupont_structuration_2017}.}. Ces relations peuvent également être utilisées pour enrichir la base de données d'éléments nouveaux. Cette opération est assez importante dans le cadre de l'utilisation du modèle sur les textes non-indexés du Trésor des chartes. Il est en effet probable que plus les textes à partir desquels on tente d'opérer le liage d'entités sont éloignés géographiquement et chronologiquement des textes utilisés pour établir la base de connaissances, plus le nombre d'entités NIL sera important (notamment pour les noms de personnes). On peut donc envisager de procéder par étape afin d'intégrer progressivement ces entités NIL à la base de données et permettre leur reconnaissance dans les textes suivants.
 	
 	\section*{Conclusion}
+	
+	Ce chapitre nous a permis de présenter les différents éléments relatifs à la mise en œuvre du liage d'entités à partir du corpus du projet Himanis et de la base de données que nous avons constituée. Pour cela, nous avons dans un premier présenté les fonctionnalités offertes par spaCy et son usage pour le liage d'entités. Puis nous avons décrit les différents essais que nous avons réalisés et les résultats que obtenus. Enfin, nous avons proposé des perspectives d'amélioration par l'entraînement d'un nouveau modèle et par la mise en œuvre de plusieurs techniques.
+	
+	Cette étape de notre travail présente donc un bilan mitigé puisqu'elle n'a pas permis de mettre en œuvre le liage d'entités à proprement parler. Cependant, nos balbutiements ont d'aborder différents aspects de cette technique et de prendre la mesure des besoins du modèle souhaité. Pour être pleinement opérationnel, celui-ci soit en effet être interopérable avec les outils utilisés et proposer de bons résultats en REN. La reconnaissances des entités est en effet primordiale pour envisager de les lier à une base de connaissances. Nous espérons ainsi que ces essais permettrons de baliser les travaux futurs et d'offrir quelques perspectives à la mise en œuvre du liage d'entités pour envisager l'indexation automatique du Trésor des chartes.
+	
+	\chapter*{Conclusion partielle}
+	
+	
+	Cette dernière partie a été l'occasion d'aborder les différents aspects liés à l'utilisation et à la mise en relation du référentiel que nous avons constitué. Notre développement s'est d'abord concentré sur l'enrichissement des entités toponymiques à l'aide de référentiels externes afin d'y ajouter des coordonnées. Nous avons ensuite exposé l'intérêt de la mise en ligne des données que nous avons manipulées, que ce soit pour compléter les dépôts déjà constitués ou pour offrir des éléments de visualisation. Pour finir, nous avons présenté nos essais de mise en œuvre du liage d'entités et les différentes perspectives disponibles malgré nos résultats mitigés.
+	
+	Ces éléments nous ont permis d'aborder différentes problématiques liées à l'interopérabilité et à l'accessibilité des données. L'utilisation des entrées de l'index pour un alignement avec un autre référentiel nécessite en effet de caractériser précisément le contenu de chaque élément. Le fait de réutiliser des données déjà traitées au préalable ajoute à ce titre une difficulté puisque cela nécessite de comprendre au le sens de chaque élément. Cette difficulté a également été présente au moment de la mise en œuvre du liage d'entités et a participé à notre proposition d'entrainer d'un nouveau modèle qui intègre dès le début toutes les fonctionnalités nécessaires à cette étape. C'est dans ce même objectif que nous avons pris le temps d'insérer dans chaque entrée de la base de données des indications permettant de la retrouver dans les fichiers de travail mis en ligne. Le suivi des différentes étapes de traitement par ce biais facilitera ainsi de l'appropriation des données pour d'autres usages et la compréhension des actions antérieures.
 	
 	
 	\chapter*{Conclusion générale}
 	
-	Pensée pour l'intro : dire que notre développement n'est pas linéaire car nous avons fait de nombreux aller-retour sur les étapes de notre travail en fonction que nous comprenions la complexité des données + certaines ont été anticipées. Du coup j'ai préféré un développement thématique
+	Ce stage s'est inscrit dans le cadre du développement de techniques de lecture automatique développées à partir du Trésor des chartes. Après des travaux sur la REM et la REN, l'objectif était de poursuivre sur le liage d'entités afin d'associer chaque entité nommée reconnue dans les textes à une référence et de résoudre les ambiguïtés présentes. Pour mener à bien ce projet, nous avons commencé par préparer des données afin de servir de référence au moment de la réalisation du liage d'entités. Ces données sont issues des entrées d'index décrites par l'index du premier volume de l'inventaire analytique des registres du Trésor des chartes relatif aux cotes JJ 37 à JJ 50. Cette étape avait été initialement conçue comme la première d'un long processus visant à l'intégration d'un grand nombre de données issues des instruments de travail décrivant le contenu du Trésor des chartes. Mais ce premier travail s'est avéré beaucoup plus complexe que nous l'avions initialement pensé, à tel point qu'il a absorbé la quasi-totalité de notre temps de stage. Le traitement des autres instruments de recherche a donc été abandonné afin de pouvoir consacrer un peu de temps à la mise en œuvre du liage d'entités. Malgré ce choix, les tests effectués à cet effet ont été très réduits et n'ont pas abouti à des résultats. De même, le référentiel mis en ligne pourrait encore être amélioré par d'autres traitements sur les entrées issues de l'index.
 	
-	Faire attention à l'emploi du "nous" -> Plus mettre en valeur ce que j'ai fait et mes choix dans le stage
+	Mais ces difficultés ont été l'occasion d'étudier la structure des données contenues dans l'ouvrage utilisé et nous ont fourni de nombreux apprentissages dans le traitement automatique des \textit{legacy data}. Nous avons donc commencé notre développement par un exposé du contexte de travail dans lequel nous nous sommes insérés. Nous avons pour cela développé l'état de la recherche sur le liage d'entités, présenté l'état des données traitées sous l'impulsion du projet Himanis et détaillé l'utilisation possible d'instruments de recherche comme \textit{legacy metadata} pour décrire le contenu des registres du Trésor des chartes. Nous avons ensuite consacré notre seconde partie au développement du référentiel destiné à être utilisé pour le liage d'entités à partir de l'index retenu. Pour cela, nous avons commencé par rendre compte des difficultés que nous avons rencontrées dans le traitement automatique de ces données, puis nous avons présenté les problématiques propres à la prise en compte des relations entre les entités, enfin nous avons décris la transformation de ces données en une base de données relationnelle. La troisième partie de notre développement s'est consacrée à l'utilisation du référentiel constitué pour l'enrichir de coordonnées, mettre son contenu à disposition et engager l'entraînement du liage d'entités. Pour cela, nous avons présenté le processus d'alignement mis en œuvre entre les entrées d'index et des référentiels en ligne, puis nous avons décrit différents aspect de la mise en ligne des données par l'augmentation des dépôts disponibles, l'utilisation d'outils cartographiques et leur insertion dans la plateforme Arkindex, enfin nous avons présenté les différents essais effectué à partir de la librairie python spaCy et les perspectives envisageables pour approfondir ce travail.
 	
-	Dire aussi que j'ai fait un billet de blog et qu'on peut le lire en complément du mémoire
-	
-	
-	Conseil : Tu peux créer des liens directement vers les parties mentionnées (ou sous-parties ?) en ajoutant un \ref ici et un \label après le titre du chapitre 4. C'est un peu fastidieux à faire mais ça fonctionne assez bien (avec le package hypersetup ou hyperref (les deu x fonctionnent) ;)
-	
-	Idée pour le chapitre 6 : faire un diagramme de flux pour illustrer le processus de construction de la BDR (à mettre dans une annexe ?) + pareil pour le chapitre 7 et l'utilisation de DicoTopo et GeoNames
+	Notre travail a donc entraîné la mise en ligne d'un grand nombre de données qui sont autant de moyens d'approfondir la connaissance sur le contenu des registres du Trésor des chartes. Une fois la publication de la base de données effectuée, son contenu pourra également être réutilisé pour d'autres recherches. De surcroît, nous avons eu l'occasion d'initier quelques analyses sur l'utilisation du liage d'entités dans le cadre du projet en proposant dans un premier temps un tour d'horizon des travaux sur le sujet. Cette synthèse a ainsi servi de base aux différentes propositions que nous avons suggérées pour tirer parti des essais réalisés et utiliser le liage d'entités sur les registres du Trésor des chartes. Pour finir, nous avons mis en place un processus de travail en plusieurs étapes que nous avons décrites dans notre développement et illustré par nos scripts de travail mis en ligne sur Github. Ce processus de travail est ainsi largement réutilisable pour intégrer les données des autres instruments de recherche au référentiel ou de manière générale pour traiter automatiquement des données issus d'ouvrages papier décrivant des documents d'archives.
 	
 	%les annexes
 	\appendix
@@ -1723,7 +1760,7 @@
 		\label{Erreur_alphabétique}
 	\end{figure}
 	
-	\chapter{Suggestions pour l'amélioration du contenu de la base de données publiée sur Heurist}
+	\chapter{Suggestions pour l'amélioration du contenu de la base de données mise en ligne sur Heurist}
 	
 	Malgré notre travail, la durée du stage ne nous a pas permis d'aller au bout de la formalisation du référentiel constitué à partir des entrées d'index. Pour que celui-ci soit pleinement utilisable, il faudrait encore améliorer certains éléments. Voici la liste de nos propositions : 
 	
@@ -1753,6 +1790,21 @@
 		\item Charger les attributs \og Provisory\_index\_3\fg{} dans les entités Act sur Heurist.
 		
 	\end{enumerate}
+
+	\chapter{Reste à faire}
+	
+	Pensée pour l'intro : dire que notre développement n'est pas linéaire car nous avons fait de nombreux aller-retour sur les étapes de notre travail en fonction que nous comprenions la complexité des données + certaines ont été anticipées. Du coup j'ai préféré un développement thématique
+	
+	Faire attention à l'emploi du "nous" -> Plus mettre en valeur ce que j'ai fait et mes choix dans le stage
+	
+	Dire aussi que j'ai fait un billet de blog et qu'on peut le lire en complément du mémoire
+	
+	
+	Conseil : Tu peux créer des liens directement vers les parties mentionnées (ou sous-parties ?) en ajoutant un \ref ici et un \label après le titre du chapitre 4. C'est un peu fastidieux à faire mais ça fonctionne assez bien (avec le package hypersetup ou hyperref (les deu x fonctionnent) ;)
+	
+	Idée pour le chapitre 6 : faire un diagramme de flux pour illustrer le processus de construction de la BDR (à mettre dans une annexe ?) + pareil pour le chapitre 7 et l'utilisation de DicoTopo et GeoNames
+	
+	Intégrer la description des deux scripts restant dans le développement
 	
 	\backmatter
 	\phantomsection
